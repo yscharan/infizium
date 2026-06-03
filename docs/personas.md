@@ -1,81 +1,98 @@
 # Personas
 
-## 1. Parent — Lakshmi
+## 1. Parent — Lakshmi, 38, Mother
 
-**Who she is**
-Mother of two children in a private school in Hyderabad. Works as a tailor from home. Has a smartphone with WhatsApp. Does not speak English well. Checks WhatsApp many times a day.
+**Background**
+Mother of two children in a private school in Hyderabad. Works as a tailor from home. Has a smartphone with WhatsApp. Does not speak English well. Checks WhatsApp many times a day. Does not want to download another school app.
 
 **Goals**
 - Know if her child reached school safely.
+- Be consulted before anything important is decided about her child.
 - See homework so she can remind her child to complete it.
-- Approve or reject school trips and activities without going to school in person.
-- Trust that no one can share her child's information without her knowing.
+- Approve or reject school trips without going to school in person.
+- Not be flooded with irrelevant notifications.
 
-**Frustrations**
+**Pain Points**
+- Currently gets information only at PTMs (twice a year).
 - Misses important notices buried in a 200-member school WhatsApp group.
 - Has to take half a day off work to sign a form at school.
-- Does not know her child's attendance until the term report is sent home.
+- No visibility into homework or test schedules.
 
-**Infizium value**
-Real-time WhatsApp alerts for attendance and notices. One-tap approvals on WhatsApp. Telugu language support.
+**How Lakshmi Uses Infizium**
+- Receives attendance alerts within minutes of her child being marked absent.
+- Replies "YES" or "1" on WhatsApp to approve a field trip — no app needed.
+- Gets weekly academic summaries as a WhatsApp message.
+- Controls what data is shared and which features are active for her child.
 
 ---
 
-## 2. Teacher — Ravi
+## 2. Teacher — Ravi, 34, Mathematics Teacher
 
-**Who he is**
-Class teacher for Grade 8, teaches Mathematics. Has been teaching for 12 years. Comfortable with a smartphone but not with complex software. Uses WhatsApp and Google Forms occasionally.
+**Background**
+Class teacher for Grade 8, teaches Mathematics. Has been teaching for 12 years. Comfortable with a smartphone but not complex software. Spends two hours a day on non-teaching work — attendance, filling registers, WhatsApp replies to parents. Wants to teach better but lacks time.
 
 **Goals**
 - Mark attendance quickly at the start of each period.
-- Assign homework and track who has submitted.
-- Send a message to parents of students who are falling behind.
-- Spend less time on administrative paperwork.
+- Identify struggling students early — before the terminal exam.
+- Communicate with parents without it becoming a second job.
+- Give meaningful feedback without spending hours on correction.
 
-**Frustrations**
+**Pain Points**
 - Attendance register is a physical book that gets lost or damaged.
-- Has to remind the office every time a parent needs to be contacted.
-- No easy way to share class-level performance summaries with the principal.
+- Parent messages arrive at all hours with no structure or boundaries.
+- No easy way to track which students are falling behind across subjects.
 
-**Infizium value**
-Mobile-friendly attendance marking. Homework assignment with automatic parent notification. Direct parent messaging through the platform.
+**How Ravi Uses Infizium**
+- Marks attendance on mobile in under two minutes per class.
+- Creates homework assignments; parents are notified automatically.
+- Views a class-level summary to spot students who need attention.
+- Sends structured parent updates through the platform, not his personal WhatsApp.
 
 ---
 
-## 3. Student — Arjun
+## 3. Student — Arjun, 15, Grade 9
 
-**Who he is**
-Grade 9 student, 15 years old. Has access to his parent's smartphone occasionally. Studies in a private English-medium school. Aspirational — wants to crack JEE.
+**Background**
+Studies in a private English-medium school in Hyderabad. Has access to his parent's smartphone occasionally. Strong in Maths, struggles with English writing. Aspirational — wants to crack JEE. Spends evenings on YouTube.
 
 **Goals**
 - Know what homework is due and when.
-- Catch up on announcements he missed.
-- Get help on topics he does not understand (future: AI tutor).
+- Understand concepts, not just pass tests.
+- Get feedback without feeling judged.
+- Catch up on announcements he missed when absent.
 
-**Frustrations**
-- Forgets homework assignments that were verbally given in class.
-- Misses notices when he is absent.
+**Pain Points**
+- Forgets homework assignments that were given verbally in class.
+- Doubts go unanswered until the next class.
+- Does not know how to study — just re-reads notes.
+- Feels anxious before exams because progress is invisible.
 
-**Infizium value**
-Homework feed. Announcement history. (Later: AI tutor via Bedrock.)
+**How Arjun Uses Infizium**
+- Checks his homework feed to stay on top of due dates.
+- (Later) Asks the AI tutor questions he is too shy to raise in class.
+- (Later) Tracks his own progress on a personal dashboard.
 
 ---
 
-## 4. School Administrator — Priya
+## 4. School Administrator — Priya, 48, Vice Principal
 
-**Who she is**
-Vice Principal of a school with 800 students. Manages day-to-day operations. Reports to the Principal and the school trust. Handles parent queries, staff coordination, and government compliance.
+**Background**
+Manages day-to-day operations of a school with 800 students in Hyderabad. Reports to the Principal and school trust. Handles parent queries, staff coordination, and government compliance. Comfortable with spreadsheets but not technical tools. Currently works across WhatsApp groups, paper files, and Excel.
 
 **Goals**
-- See school-wide attendance in real time.
-- Send circulars to all parents instantly.
+- See school-wide attendance in real time without calling each class teacher.
+- Send circulars to all parents instantly with a delivery record.
 - Collect signed consent forms without chasing parents for weeks.
-- Keep a digital record of all parent communications.
+- Build trust with parents as a transparent institution.
 
-**Frustrations**
-- Current tools are a mix of spreadsheets, WhatsApp groups, and paper files.
+**Pain Points**
+- No single view of school-wide attendance or performance.
+- Parent complaints arrive without context or history.
 - No audit trail when parents claim they never received a notice.
 - Fee reminders require calling each parent individually.
 
-**Infizium value**
-Broadcast announcements with read receipts via WhatsApp. Digital form collection with approval tracking. School-wide attendance dashboard.
+**How Priya Uses Infizium**
+- Views school-wide attendance dashboard each morning.
+- Broadcasts announcements via WhatsApp to all parents with read tracking.
+- Creates consent forms; tracks approval status per student from one screen.
+- Generates board-ready reports without building Excel files manually.

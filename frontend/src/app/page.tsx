@@ -6,6 +6,7 @@ import { APP_VERSION } from "@/lib/version";
 import { useState, useEffect } from "react";
 import { DemoShowcase } from "@/components/demo-showcase";
 import { HeroCanvas } from "@/components/hero-canvas";
+import { SponsorChat } from "@/components/sponsor-chat";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -505,6 +506,129 @@ export default function Home() {
               See the MVP →
             </a>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Sponsorship Platform */}
+      <section className="py-28 px-4 relative overflow-hidden" style={{ background: "linear-gradient(180deg, #020818 0%, #100a04 50%, #020818 100%)" }}>
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="orb-1 absolute top-1/3 right-1/4 w-[500px] h-[500px] rounded-full blur-[120px]" style={{ background: "rgba(251,191,36,0.05)" }} />
+          <div className="orb-2 absolute bottom-1/3 left-1/4 w-[400px] h-[400px] rounded-full blur-[100px]" style={{ background: "rgba(249,115,22,0.05)" }} />
+        </div>
+
+        <div className="max-w-6xl mx-auto relative">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={stagger}
+            className="text-center mb-16"
+          >
+            <motion.div
+              variants={fadeUp}
+              className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6"
+              style={{ background: "rgba(251,191,36,0.1)", border: "1px solid rgba(251,191,36,0.25)" }}
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+              <span className="text-xs font-mono font-semibold tracking-widest uppercase text-amber-400">Sponsorship &amp; Donations</span>
+            </motion.div>
+            <motion.h2 variants={fadeUp} className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-4 leading-tight">
+              Be the reason a student<br />
+              <span style={{ background: "linear-gradient(135deg, #fbbf24, #f97316)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                doesn&apos;t quit.
+              </span>
+            </motion.h2>
+            <motion.p variants={fadeUp} className="text-white/35 max-w-xl mx-auto leading-relaxed">
+              Donors give directly to verified students — as pocket money only the student controls, as school fee paid straight to the school, or as an education loan repaid when they earn.
+            </motion.p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            {/* Left: Three flow types */}
+            <motion.div
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-80px" }}
+              variants={stagger}
+              className="space-y-4"
+            >
+              {[
+                {
+                  icon: "💰", title: "Pocket Money", neon: "#fbbf24",
+                  desc: "Goes directly to the student's private wallet. Parents cannot see the balance or transactions. The student decides how to spend it.",
+                  note: "Parent access: None",
+                },
+                {
+                  icon: "🏫", title: "School Fees", neon: "#3b82f6",
+                  desc: "Paid directly to the school's verified account. School principal confirms receipt. Student and parent both receive a confirmation.",
+                  note: "School-verified payment",
+                },
+                {
+                  icon: "🎓", title: "Education Loan", neon: "#7c3aed",
+                  desc: "Student receives now, repays when earning — starting 1 year after first employment. No interest. Repayments fund the next student.",
+                  note: "Social contract · No interest",
+                },
+              ].map(m => (
+                <motion.div
+                  key={m.title}
+                  variants={fadeUp}
+                  className="flex gap-4 p-5 rounded-2xl"
+                  style={{ background: `${m.neon}08`, border: `1px solid ${m.neon}20` }}
+                >
+                  <div className="text-2xl flex-shrink-0 mt-0.5">{m.icon}</div>
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <h3 className="font-bold text-white">{m.title}</h3>
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-full" style={{ background: `${m.neon}18`, color: m.neon, border: `1px solid ${m.neon}30` }}>{m.note}</span>
+                    </div>
+                    <p className="text-sm text-white/35 leading-relaxed">{m.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+
+              {/* Interaction spectrum */}
+              <motion.div
+                variants={fadeUp}
+                className="rounded-2xl p-5"
+                style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)" }}
+              >
+                <p className="text-xs font-mono text-white/30 tracking-widest uppercase mb-4">Donor privacy spectrum</p>
+                <div className="flex items-center gap-3 text-xs text-white/40 mb-3">
+                  <span className="font-semibold text-white/60">Anonymous</span>
+                  <div className="flex-1 h-px" style={{ background: "linear-gradient(90deg, rgba(251,191,36,0.6), rgba(249,115,22,0.6))" }} />
+                  <span className="font-semibold text-white/60">Direct</span>
+                </div>
+                {["Anonymous — student never knows your identity", "Codename — student can message your chosen alias", "Direct — full identity revealed, live interaction"].map((t, i) => (
+                  <div key={i} className="flex items-center gap-2 text-xs text-white/30 mb-1.5">
+                    <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: i === 0 ? "#fbbf24" : i === 1 ? "#f97316" : "#ef4444" }} />
+                    {t}
+                  </div>
+                ))}
+              </motion.div>
+            </motion.div>
+
+            {/* Right: Live interaction demo */}
+            <motion.div
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: EASE, delay: 0.2 }}
+              className="space-y-4"
+            >
+              <div className="text-xs font-mono text-white/25 tracking-widest uppercase mb-2">Live interaction preview</div>
+              <SponsorChat />
+              <div className="text-center pt-4">
+                <Link
+                  href="/sponsor"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-sm transition-all duration-200 hover:scale-[1.02]"
+                  style={{ background: "rgba(251,191,36,0.15)", border: "1px solid rgba(251,191,36,0.4)", color: "#fbbf24", boxShadow: "0 0 30px rgba(251,191,36,0.1)" }}
+                >
+                  Browse students to sponsor →
+                </Link>
+                <p className="text-xs text-white/20 mt-3">All profiles verified by school principals · 100% reaches the student</p>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 

@@ -194,6 +194,53 @@ export default function StudentDashboard() {
           </ul>
         </motion.div>
 
+        {/* Pocket Money Wallet */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.5, ease: EASE }}
+          className="rounded-2xl p-5 border border-amber-500/20 overflow-hidden relative"
+          style={{ background: "linear-gradient(135deg, rgba(251,191,36,0.08), rgba(249,115,22,0.06))" }}
+        >
+          <div className="absolute top-0 right-0 w-32 h-32 rounded-full blur-[50px]" style={{ background: "rgba(251,191,36,0.12)" }} />
+          <div className="relative">
+            <div className="flex items-start justify-between mb-4">
+              <div>
+                <p className="text-xs font-mono text-amber-400/70 tracking-widest uppercase mb-1">My Wallet</p>
+                <p className="text-3xl font-bold text-white">₹1,250</p>
+                <p className="text-xs text-white/30 mt-0.5">Private balance · Parents cannot see this</p>
+              </div>
+              <div className="text-2xl">💰</div>
+            </div>
+            <div className="space-y-2">
+              {[
+                { from: "Anonymous Donor", amount: "+₹500", note: "JEE practice papers", time: "Jun 3" },
+                { from: "Codename: StarGazer", amount: "+₹750", note: "Keep studying!", time: "May 28" },
+              ].map((t, i) => (
+                <div key={i} className="flex items-center gap-3 text-xs p-2.5 rounded-xl" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                  <div className="w-7 h-7 rounded-lg flex items-center justify-center text-sm flex-shrink-0" style={{ background: "rgba(251,191,36,0.12)" }}>💎</div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-white/70 font-medium truncate">{t.from}</p>
+                    <p className="text-white/30">{t.note}</p>
+                  </div>
+                  <div className="text-right flex-shrink-0">
+                    <p className="font-bold text-amber-400">{t.amount}</p>
+                    <p className="text-white/25">{t.time}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-3 flex gap-2">
+              <Link href="/sponsor" className="flex-1 text-center text-xs py-2 rounded-xl font-semibold text-amber-400/70 border border-amber-500/15 hover:bg-amber-500/10 transition-colors">
+                Get more support →
+              </Link>
+              <button className="flex-1 text-center text-xs py-2 rounded-xl font-semibold text-white/30 border border-white/8 hover:bg-white/5 transition-colors">
+                Send thank-you note
+              </button>
+            </div>
+          </div>
+        </motion.div>
+
         {/* AI Tutor teaser */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { APP_VERSION } from "@/lib/version";
+import { useState, useEffect } from "react";
+import { DemoShowcase } from "@/components/demo-showcase";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -175,6 +177,9 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      {/* Product showcase */}
+      <DemoShowcase />
 
       {/* Stats bar */}
       <motion.section

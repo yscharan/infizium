@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { StudentAnimatedBg } from "@/components/student-bg";
+import { DashboardNav } from "@/components/dashboard-nav";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -45,7 +46,28 @@ export default function StudentDashboard() {
         </div>
       </motion.header>
 
-      <div className="max-w-4xl mx-auto px-4 py-8 space-y-5">
+      <div className="max-w-4xl mx-auto px-4 py-6 space-y-5">
+
+        {/* Nav */}
+        <DashboardNav
+          tabs={[
+            { id: "overview", label: "Overview", icon: "🏠", href: "/dashboard/student" },
+            { id: "progress", label: "Progress", icon: "📈", href: "/dashboard/student/progress" },
+          ]}
+          accentColor="#10b981"
+          theme="dark"
+        />
+
+        {/* Greeting */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="rounded-xl px-4 py-3 text-sm"
+          style={{ background: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.18)", color: "rgba(52,211,153,0.9)" }}
+        >
+          Good morning, Arjun! 🔥 5-day streak. <span className="font-semibold">2 assignments due this week.</span> Term exam in 12 days.
+        </motion.div>
 
         {/* Hero profile — animated canvas background */}
         <motion.div

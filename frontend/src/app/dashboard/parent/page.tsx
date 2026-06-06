@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { DashboardNav } from "@/components/dashboard-nav";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -48,7 +49,28 @@ export default function ParentDashboard() {
         </div>
       </motion.header>
 
-      <div className="max-w-4xl mx-auto px-4 py-8 space-y-5">
+      <div className="max-w-4xl mx-auto px-4 py-6 space-y-5">
+
+        {/* Nav */}
+        <DashboardNav
+          tabs={[
+            { id: "overview", label: "Overview", icon: "🏠", href: "/dashboard/parent" },
+            { id: "permissions", label: "Permissions", icon: "🔐", href: "/dashboard/parent/permissions" },
+          ]}
+          accentColor="#f97316"
+          theme="light"
+        />
+
+        {/* Greeting */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="rounded-xl px-4 py-3 text-sm text-orange-700/80"
+          style={{ background: "rgba(249,115,22,0.06)", border: "1px solid rgba(249,115,22,0.12)" }}
+        >
+          Good morning, Lakshmi. ✅ Arjun is in school today. <span className="font-medium text-orange-600">1 form needs your approval.</span>
+        </motion.div>
 
         {/* Child status card — big and reassuring */}
         <motion.div

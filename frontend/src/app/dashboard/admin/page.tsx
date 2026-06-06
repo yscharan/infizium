@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { DashboardNav } from "@/components/dashboard-nav";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -50,7 +51,28 @@ export default function AdminDashboard() {
         </div>
       </motion.header>
 
-      <div className="max-w-5xl mx-auto px-4 py-8 space-y-5">
+      <div className="max-w-5xl mx-auto px-4 py-6 space-y-5">
+
+        {/* Nav */}
+        <DashboardNav
+          tabs={[
+            { id: "overview", label: "Overview", icon: "🏠", href: "/dashboard/admin" },
+            { id: "reports", label: "Reports", icon: "📊", href: "/dashboard/admin/reports" },
+          ]}
+          accentColor="#7c3aed"
+          theme="dark"
+        />
+
+        {/* Greeting */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="rounded-xl px-4 py-3 text-sm"
+          style={{ background: "rgba(124,58,237,0.08)", border: "1px solid rgba(124,58,237,0.2)", color: "rgba(167,139,250,0.9)" }}
+        >
+          Good morning, Priya. School-wide attendance is <span className="font-semibold text-violet-300">88%</span> today. 47 parents haven&apos;t responded to the Field Trip form — deadline is Jun 8.
+        </motion.div>
 
         {/* KPI row */}
         <motion.div

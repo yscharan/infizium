@@ -271,6 +271,9 @@ export default function Home() {
               <p className="text-green-100/80 text-sm leading-relaxed max-w-xl">
                 Over 90% of parents in Telangana are already on WhatsApp. Attendance alerts, homework reminders, and approval requests arrive as WhatsApp messages — parents reply right there.
               </p>
+              <Link href="/whatsapp" className="inline-flex items-center gap-1.5 text-xs font-semibold text-green-200/80 hover:text-white transition-colors mt-3">
+                See the full WhatsApp flow →
+              </Link>
             </div>
           </div>
         </div>

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { DashboardNav } from "@/components/dashboard-nav";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -63,7 +64,28 @@ export default function TeacherDashboard() {
         </div>
       </motion.header>
 
-      <div className="max-w-4xl mx-auto px-4 py-8 space-y-5">
+      <div className="max-w-4xl mx-auto px-4 py-6 space-y-5">
+
+        {/* Nav */}
+        <DashboardNav
+          tabs={[
+            { id: "overview", label: "Today", icon: "📅", href: "/dashboard/teacher" },
+            { id: "students", label: "Students", icon: "👥", href: "/dashboard/teacher" },
+          ]}
+          accentColor="#3b82f6"
+          theme="light"
+        />
+
+        {/* Greeting */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="rounded-xl px-4 py-3 text-sm text-blue-700/80"
+          style={{ background: "rgba(59,130,246,0.06)", border: "1px solid rgba(59,130,246,0.12)" }}
+        >
+          Good morning, Ravi. Period 3 starts in <span className="font-medium text-blue-600">20 minutes.</span> Bhavya and Harini haven&apos;t had parent confirmation for yesterday&apos;s absence.
+        </motion.div>
 
         {/* Today's schedule */}
         <motion.div

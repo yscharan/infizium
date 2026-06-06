@@ -91,23 +91,23 @@ const stats = [
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-full bg-white">
+    <div className="flex flex-col min-h-full" style={{ background: "#09090b" }}>
 
       {/* Nav */}
       <motion.nav
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: EASE }}
-        className="glass fixed top-0 left-0 right-0 z-50 border-b border-gray-100/80"
+        className="glass-dark fixed top-0 left-0 right-0 z-50 border-b border-white/8"
       >
         <div className="max-w-6xl mx-auto px-5 h-14 flex items-center justify-between">
-          <span className="font-bold text-[17px] tracking-tight text-gray-900">Infizium</span>
+          <span className="font-bold text-[17px] tracking-tight text-white">Infizium</span>
           <div className="flex items-center gap-6">
-            <Link href="#personas" className="text-sm text-gray-500 hover:text-gray-900 transition-colors hidden sm:block">Who it&apos;s for</Link>
-            <Link href="#modules" className="text-sm text-gray-500 hover:text-gray-900 transition-colors hidden sm:block">Features</Link>
+            <Link href="#personas" className="text-sm text-white/50 hover:text-white transition-colors hidden sm:block">Who it&apos;s for</Link>
+            <Link href="#modules" className="text-sm text-white/50 hover:text-white transition-colors hidden sm:block">Features</Link>
             <Link
               href="/login"
-              className="text-sm bg-gray-900 text-white px-4 py-1.5 rounded-full hover:bg-gray-700 transition-all duration-200 hover:scale-[1.03]"
+              className="text-sm bg-white text-gray-900 px-4 py-1.5 rounded-full hover:bg-white/90 transition-all duration-200 hover:scale-[1.03] font-medium"
             >
               Sign in
             </Link>
@@ -119,9 +119,9 @@ export default function Home() {
       <section className="relative overflow-hidden pt-32 pb-28 px-4 min-h-[92vh] flex items-center">
         {/* Animated orbs */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="orb-1 absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-indigo-200/30 rounded-full blur-[80px]" />
-          <div className="orb-2 absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-violet-200/30 rounded-full blur-[80px]" />
-          <div className="orb-3 absolute bottom-1/4 left-1/3 w-[350px] h-[350px] bg-purple-100/30 rounded-full blur-[80px]" />
+          <div className="orb-1 absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-indigo-500/15 rounded-full blur-[80px]" />
+          <div className="orb-2 absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-violet-500/12 rounded-full blur-[80px]" />
+          <div className="orb-3 absolute bottom-1/4 left-1/3 w-[350px] h-[350px] bg-purple-500/10 rounded-full blur-[80px]" />
         </div>
 
         <div className="max-w-3xl mx-auto text-center relative">
@@ -129,17 +129,17 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 bg-indigo-50 border border-indigo-100 rounded-full px-4 py-1.5 mb-8"
+            className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/20 rounded-full px-4 py-1.5 mb-8"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
-            <span className="text-xs font-semibold tracking-widest uppercase text-indigo-600">Telangana&apos;s School Operating System</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
+            <span className="text-xs font-semibold tracking-widest uppercase text-indigo-400">Telangana&apos;s School Operating System</span>
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
-            className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 leading-[1.08] tracking-tight mb-6"
+            className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-[1.08] tracking-tight mb-6"
           >
             Prepare students{" "}
             <span className="gradient-text">for life,</span>
@@ -150,7 +150,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.25, ease: EASE }}
-            className="text-lg text-gray-500 mb-10 max-w-xl mx-auto leading-relaxed"
+            className="text-lg text-white/40 mb-10 max-w-xl mx-auto leading-relaxed"
           >
             Infizium connects parents, teachers, students, and admins through a single platform — with WhatsApp as the primary channel for every parent.
           </motion.p>
@@ -163,14 +163,14 @@ export default function Home() {
           >
             <Link
               href="/login"
-              className="inline-flex items-center justify-center gap-2 bg-gray-900 text-white px-7 py-3.5 rounded-xl font-medium hover:bg-gray-700 transition-all duration-200 hover:scale-[1.02] hover:shadow-xl hover:shadow-gray-900/10"
+              className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 px-7 py-3.5 rounded-xl font-medium hover:bg-white/90 transition-all duration-200 hover:scale-[1.02] hover:shadow-xl hover:shadow-white/10"
             >
               Explore the platform
-              <span className="text-gray-400">→</span>
+              <span className="text-gray-500">→</span>
             </Link>
             <a
               href="#personas"
-              className="inline-flex items-center justify-center gap-2 border border-gray-200 text-gray-700 px-7 py-3.5 rounded-xl font-medium hover:bg-gray-50 transition-all duration-200 hover:border-gray-300"
+              className="inline-flex items-center justify-center gap-2 border border-white/15 text-white/70 px-7 py-3.5 rounded-xl font-medium hover:bg-white/5 transition-all duration-200 hover:border-white/25"
             >
               See who it&apos;s for
             </a>
@@ -187,13 +187,14 @@ export default function Home() {
         whileInView="show"
         viewport={{ once: true, margin: "-80px" }}
         variants={stagger}
-        className="border-y border-gray-100 bg-gray-50/60 py-10 px-4"
+        className="border-y border-white/8 py-10 px-4"
+        style={{ background: "rgba(255,255,255,0.03)" }}
       >
         <div className="max-w-5xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((s) => (
             <motion.div key={s.label} variants={fadeUp} className="text-center">
-              <p className="text-3xl font-bold text-gray-900 mb-1">{s.value}</p>
-              <p className="text-sm text-gray-500">{s.label}</p>
+              <p className="text-3xl font-bold text-white mb-1">{s.value}</p>
+              <p className="text-sm text-white/40">{s.label}</p>
             </motion.div>
           ))}
         </div>
@@ -230,8 +231,8 @@ export default function Home() {
             variants={fadeUp}
             className="text-center mb-14"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-3 tracking-tight">Built for everyone in the school</h2>
-            <p className="text-gray-400 text-base">Click a card to preview that role&apos;s experience.</p>
+            <h2 className="text-4xl font-bold text-white mb-3 tracking-tight">Built for everyone in the school</h2>
+            <p className="text-white/30 text-base">Click a card to preview that role&apos;s experience.</p>
           </motion.div>
 
           <motion.div
@@ -311,10 +312,175 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Student Life Platform — future vision */}
+      <section className="py-28 px-4 relative overflow-hidden" style={{ background: "linear-gradient(180deg, #09090b 0%, #0d0515 50%, #09090b 100%)" }}>
+        {/* Background */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="orb-1 absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-violet-500/6 rounded-full blur-[100px]" />
+          <div className="orb-2 absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-pink-500/5 rounded-full blur-[100px]" />
+        </div>
+
+        <div className="max-w-6xl mx-auto relative">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={stagger}
+            className="text-center mb-16"
+          >
+            <motion.div variants={fadeUp} className="inline-flex items-center gap-2 bg-violet-500/10 border border-violet-500/20 rounded-full px-4 py-1.5 mb-6">
+              <span className="text-xs font-bold tracking-widest uppercase text-violet-400">The bigger vision</span>
+            </motion.div>
+            <motion.h2 variants={fadeUp} className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-4 leading-tight">
+              Prepare students for life,<br />
+              <span style={{ background: "linear-gradient(135deg, #a78bfa, #f472b6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                not just exams.
+              </span>
+            </motion.h2>
+            <motion.p variants={fadeUp} className="text-white/40 max-w-xl mx-auto leading-relaxed">
+              Infizium is building toward a complete student life platform — academics, wellness, financial literacy, emotional intelligence, and family guidance in one place.
+            </motion.p>
+          </motion.div>
+
+          {/* Life module grid */}
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={stagger}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6"
+          >
+            {[
+              {
+                phase: "Phase 4",
+                icon: "🏋️",
+                title: "Fitness & Wellness",
+                desc: "Daily activity tracking, PE class integration, and personalised health goals for each student.",
+                color: "from-rose-500/10 to-red-500/5",
+                border: "border-rose-500/20",
+                badge: "bg-rose-500/15 text-rose-400",
+                glow: "rose",
+              },
+              {
+                phase: "Phase 4",
+                icon: "🥗",
+                title: "Nutrition & Food",
+                desc: "Healthy eating guidance, school canteen awareness, and weekly nutrition tips for parents.",
+                color: "from-green-500/10 to-emerald-500/5",
+                border: "border-green-500/20",
+                badge: "bg-green-500/15 text-green-400",
+                glow: "green",
+              },
+              {
+                phase: "Phase 4",
+                icon: "💰",
+                title: "Pocket Money",
+                desc: "Financial literacy for students — saving goals, spending habits, and parent-controlled allowances.",
+                color: "from-amber-500/10 to-yellow-500/5",
+                border: "border-amber-500/20",
+                badge: "bg-amber-500/15 text-amber-400",
+                glow: "amber",
+              },
+              {
+                phase: "Phase 4",
+                icon: "📅",
+                title: "Daily Routine",
+                desc: "Morning and evening routine builder, habit tracker, and study schedule planner.",
+                color: "from-blue-500/10 to-indigo-500/5",
+                border: "border-blue-500/20",
+                badge: "bg-blue-500/15 text-blue-400",
+                glow: "blue",
+              },
+              {
+                phase: "Phase 5",
+                icon: "🧘",
+                title: "Emotional Intelligence",
+                desc: "Guided exercises for patience, stress management, mood tracking, and building resilience.",
+                color: "from-violet-500/10 to-purple-500/5",
+                border: "border-violet-500/20",
+                badge: "bg-violet-500/15 text-violet-400",
+                glow: "violet",
+              },
+              {
+                phase: "Phase 5",
+                icon: "🗂️",
+                title: "Organised Life",
+                desc: "Goal setting, task management, and life planning tools that build real-world executive skills.",
+                color: "from-cyan-500/10 to-teal-500/5",
+                border: "border-cyan-500/20",
+                badge: "bg-cyan-500/15 text-cyan-400",
+                glow: "cyan",
+              },
+              {
+                phase: "Phase 5",
+                icon: "👨‍👩‍👧",
+                title: "Parent Guidance",
+                desc: "Family conversation prompts, parenting tips by age, and shared goal-setting between parent and child.",
+                color: "from-orange-500/10 to-amber-500/5",
+                border: "border-orange-500/20",
+                badge: "bg-orange-500/15 text-orange-400",
+                glow: "orange",
+              },
+              {
+                phase: "Phase 5",
+                icon: "🌱",
+                title: "Future Readiness",
+                desc: "Career exploration, life skills curriculum, and real-world preparation for students beyond Class 10.",
+                color: "from-pink-500/10 to-rose-500/5",
+                border: "border-pink-500/20",
+                badge: "bg-pink-500/15 text-pink-400",
+                glow: "pink",
+              },
+            ].map((m, i) => (
+              <motion.div
+                key={m.title}
+                variants={fadeUp}
+                className={`group relative bg-gradient-to-br ${m.color} border ${m.border} rounded-2xl p-5 flex flex-col gap-3 transition-all duration-300 hover:scale-[1.02]`}
+              >
+                {/* Lock overlay */}
+                <div className="absolute top-3 right-3">
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${m.badge}`}>{m.phase}</span>
+                </div>
+                <span className="text-2xl group-hover:scale-110 transition-transform duration-300">{m.icon}</span>
+                <div>
+                  <h3 className="font-semibold text-white mb-1 text-sm">{m.title}</h3>
+                  <p className="text-xs text-white/40 leading-relaxed">{m.desc}</p>
+                </div>
+                <div className="mt-auto flex items-center gap-1.5 text-white/20 text-xs">
+                  <span>🔒</span>
+                  <span>Coming soon</span>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Phase callout strip */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: EASE }}
+            className="border border-white/8 rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left"
+            style={{ background: "rgba(255,255,255,0.03)" }}
+          >
+            <div className="text-4xl">🎓</div>
+            <div className="flex-1">
+              <p className="font-semibold text-white mb-1">MVP first. Life platform second.</p>
+              <p className="text-sm text-white/40 leading-relaxed">
+                We&apos;re starting with attendance, homework, and parent communication — the urgent needs of Telangana schools today. Life skills modules unlock once the foundation is trusted by pilot schools.
+              </p>
+            </div>
+            <a href="#personas" className="flex-shrink-0 border border-white/15 text-white/60 text-sm px-5 py-2.5 rounded-xl hover:bg-white/5 transition-colors">
+              See the MVP →
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="py-28 px-4 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="orb-1 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-100/40 rounded-full blur-[100px]" />
+          <div className="orb-1 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/10 rounded-full blur-[100px]" />
         </div>
         <motion.div
           initial="hidden"
@@ -323,33 +489,33 @@ export default function Home() {
           variants={stagger}
           className="max-w-xl mx-auto text-center relative"
         >
-          <motion.h2 variants={fadeUp} className="text-4xl font-bold text-gray-900 mb-4 tracking-tight">
+          <motion.h2 variants={fadeUp} className="text-4xl font-bold text-white mb-4 tracking-tight">
             Get your school on Infizium
           </motion.h2>
-          <motion.p variants={fadeUp} className="text-gray-500 mb-8 leading-relaxed">
+          <motion.p variants={fadeUp} className="text-white/40 mb-8 leading-relaxed">
             We&apos;re onboarding pilot schools in Telangana. Setup takes under 2 hours.
           </motion.p>
           <motion.div variants={fadeUp}>
             <Link
               href="/login"
-              className="inline-flex items-center gap-2 bg-gray-900 text-white px-8 py-4 rounded-xl font-medium hover:bg-gray-700 transition-all duration-200 hover:scale-[1.02] hover:shadow-xl hover:shadow-gray-900/10"
+              className="inline-flex items-center gap-2 bg-white text-gray-900 px-8 py-4 rounded-xl font-medium hover:bg-white/90 transition-all duration-200 hover:scale-[1.02] hover:shadow-xl hover:shadow-white/10"
             >
               Start with a demo
-              <span className="text-gray-400">→</span>
+              <span className="text-gray-500">→</span>
             </Link>
           </motion.div>
         </motion.div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-100 py-8 px-4">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-400">
-          <span className="font-semibold text-gray-700">Infizium</span>
+      <footer className="border-t border-white/8 py-8 px-4">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-white/30">
+          <span className="font-semibold text-white/60">Infizium</span>
           <span>Telangana&apos;s school operating system</span>
           <span className="flex items-center gap-2">
             <span>infizium.com</span>
-            <span className="text-gray-300">·</span>
-            <span className="font-mono text-xs text-gray-400">v{APP_VERSION}</span>
+            <span className="text-white/15">·</span>
+            <span className="font-mono text-xs text-white/20">v{APP_VERSION}</span>
           </span>
         </div>
       </footer>

@@ -1,117 +1,218 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
+
+const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
 const homework = [
-  { subject: "Mathematics", title: "Ch 5 — Quadratic Equations", teacher: "Ravi Sir", due: "Tomorrow", urgent: true },
-  { subject: "English", title: "Essay: My Favourite Festival", teacher: "Meena Ma'am", due: "Jun 7", urgent: false },
-  { subject: "Science", title: "Lab diagram — Plant Cell", teacher: "Suresh Sir", due: "Jun 10", urgent: false },
-  { subject: "Social Studies", title: "Map work — Rivers of India", teacher: "Anitha Ma'am", due: "Jun 12", urgent: false },
+  { subject: "Mathematics", title: "Ch 5 — Quadratic Equations", teacher: "Ravi Sir", due: "Tomorrow", urgent: true, done: false },
+  { subject: "English", title: "Essay: My Favourite Festival", teacher: "Meena Ma'am", due: "Jun 7", urgent: false, done: false },
+  { subject: "Science", title: "Lab diagram — Plant Cell", teacher: "Suresh Sir", due: "Jun 10", urgent: false, done: true },
+  { subject: "Social Studies", title: "Map work — Rivers of India", teacher: "Anitha Ma'am", due: "Jun 12", urgent: false, done: false },
 ];
 
 const announcements = [
-  { from: "Principal Priya", time: "Today 9:00 AM", text: "School will remain closed on June 9 for the state board inspection. Regular classes resume June 10.", tag: "Holiday" },
-  { from: "Class Teacher Ravi", time: "Yesterday", text: "PTM scheduled for June 15, 10 AM – 1 PM. Your parents have been notified.", tag: "Notice" },
-  { from: "Sports Dept.", time: "Mon", text: "Selections for the district-level football team will be held on June 8 at 4 PM on the ground.", tag: "Sports" },
+  { from: "Principal Priya", time: "Today 9:00 AM", text: "School closed June 9 — state board inspection.", tag: "Holiday", tagStyle: "bg-red-500/20 text-red-300" },
+  { from: "Class Teacher Ravi", time: "Yesterday", text: "PTM scheduled June 15, 10 AM – 1 PM. Your parents have been notified.", tag: "Notice", tagStyle: "bg-blue-500/20 text-blue-300" },
+  { from: "Sports Dept.", time: "Mon", text: "Football team selections — June 8 at 4 PM on the ground.", tag: "Sports", tagStyle: "bg-emerald-500/20 text-emerald-300" },
 ];
 
-const tagColor: Record<string, string> = {
-  Holiday: "bg-red-100 text-red-600",
-  Notice: "bg-blue-100 text-blue-600",
-  Sports: "bg-green-100 text-green-600",
-};
+const streakDays = [true, true, true, false, true, true, false];
+const dayLabels = ["M", "T", "W", "T", "F", "S", "S"];
 
 export default function StudentDashboard() {
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b border-gray-100 sticky top-0 z-10">
-        <div className="max-w-4xl mx-auto px-4 h-14 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <span className="font-bold text-gray-900">Infizium</span>
-            <span className="text-gray-300">|</span>
-            <span className="text-sm text-green-600 font-medium">Student — Arjun</span>
-          </div>
-          <Link href="/login" className="text-xs text-gray-400 hover:text-gray-700">Sign out</Link>
-        </div>
-      </header>
+  const completed = homework.filter(h => h.done).length;
+  const total = homework.length;
 
-      <div className="max-w-4xl mx-auto px-4 py-8 space-y-6">
-        {/* Profile bar */}
-        <div className="bg-green-50 border border-green-200 rounded-xl p-5 flex items-center gap-5">
-          <div className="w-12 h-12 rounded-full bg-green-200 flex items-center justify-center text-2xl">🧑‍🎓</div>
-          <div className="flex-1">
-            <p className="font-semibold text-gray-800">Arjun — Grade 9, Section A</p>
-            <p className="text-sm text-gray-500">St. Joseph&apos;s High School · Roll No. 01</p>
+  return (
+    <div className="min-h-screen bg-[#0c0c0e] text-white">
+      {/* Header */}
+      <motion.header
+        initial={{ opacity: 0, y: -16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="border-b border-white/8 glass-dark sticky top-0 z-10"
+      >
+        <div className="max-w-4xl mx-auto px-5 h-14 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <span className="font-bold text-white">Infizium</span>
+            <span className="text-white/20">|</span>
+            <span className="text-sm text-emerald-400 font-medium">Student</span>
           </div>
-          <div className="flex gap-4 text-center">
-            <div>
-              <p className="text-xl font-bold text-green-600">87%</p>
-              <p className="text-xs text-gray-400">Attendance</p>
-            </div>
-            <div>
-              <p className="text-xl font-bold text-orange-500">3</p>
-              <p className="text-xs text-gray-400">Due soon</p>
-            </div>
-          </div>
+          <Link href="/login" className="text-xs text-white/30 hover:text-white/70 transition-colors">Sign out</Link>
         </div>
+      </motion.header>
+
+      <div className="max-w-4xl mx-auto px-4 py-8 space-y-5">
+
+        {/* Hero profile */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: EASE }}
+          className="relative overflow-hidden rounded-2xl border border-white/8 p-6"
+          style={{ background: "linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%)" }}
+        >
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-[60px]" />
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-violet-500/10 rounded-full blur-[60px]" />
+          </div>
+          <div className="relative flex items-center gap-5">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-2xl shadow-lg shadow-indigo-500/30">
+              🧑‍🎓
+            </div>
+            <div className="flex-1">
+              <p className="font-bold text-white text-lg">Arjun</p>
+              <p className="text-sm text-white/40">Grade 9 · Section A · Roll No. 01</p>
+              <p className="text-xs text-white/30 mt-0.5">St. Joseph&apos;s High School, Hyderabad</p>
+            </div>
+            <div className="text-right">
+              <p className="text-3xl font-bold text-emerald-400">87%</p>
+              <p className="text-xs text-white/40">Attendance</p>
+            </div>
+          </div>
+
+          {/* Streak */}
+          <div className="relative mt-5 pt-5 border-t border-white/8">
+            <p className="text-xs text-white/40 mb-3 uppercase tracking-widest">This week</p>
+            <div className="flex gap-2">
+              {streakDays.map((active, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: 0.3 + i * 0.06, duration: 0.4 }}
+                  className="flex flex-col items-center gap-1"
+                >
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold ${active ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/30" : "bg-white/5 text-white/20"}`}>
+                    {active ? "✓" : dayLabels[i]}
+                  </div>
+                  <span className="text-[10px] text-white/30">{dayLabels[i]}</span>
+                </motion.div>
+              ))}
+              <div className="ml-auto flex items-center gap-1.5">
+                <span className="text-orange-400 text-lg">🔥</span>
+                <div>
+                  <p className="text-sm font-bold text-white">5 day streak</p>
+                  <p className="text-[10px] text-white/30">Keep it up!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Motivational quote */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="bg-gradient-to-r from-indigo-600/20 to-violet-600/20 border border-indigo-500/20 rounded-2xl px-5 py-4"
+        >
+          <p className="text-sm text-indigo-300 font-medium">&ldquo;Success is not final, failure is not fatal — it is the courage to continue that counts.&rdquo;</p>
+          <p className="text-xs text-white/30 mt-1">Keep pushing, Arjun. JEE is within reach. 🎯</p>
+        </motion.div>
 
         {/* Homework */}
-        <div className="bg-white rounded-xl border border-gray-100 p-5">
-          <h2 className="font-semibold text-gray-800 mb-4 flex items-center gap-2"><span>📚</span> Homework</h2>
-          <ul className="space-y-3">
-            {homework.map((h, i) => (
-              <li key={i} className="flex items-start gap-3 text-sm border-b border-gray-50 last:border-0 pb-3 last:pb-0">
-                <span className="mt-0.5 text-lg">📖</span>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    <p className="font-medium text-gray-800">{h.title}</p>
-                    {h.urgent && (
-                      <span className="text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded-full">Due tomorrow</span>
-                    )}
-                  </div>
-                  <p className="text-xs text-gray-400">{h.subject} · {h.teacher}</p>
-                </div>
-                <span className="text-xs text-gray-400 whitespace-nowrap">{h.due}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Announcements */}
-        <div className="bg-white rounded-xl border border-gray-100 p-5">
-          <h2 className="font-semibold text-gray-800 mb-4 flex items-center gap-2"><span>📢</span> Announcements</h2>
-          <ul className="space-y-4">
-            {announcements.map((a, i) => (
-              <li key={i} className="text-sm border-b border-gray-50 last:border-0 pb-4 last:pb-0">
-                <div className="flex items-center justify-between mb-1">
-                  <div className="flex items-center gap-2">
-                    <span className="font-medium text-gray-700">{a.from}</span>
-                    <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${tagColor[a.tag]}`}>{a.tag}</span>
-                  </div>
-                  <span className="text-xs text-gray-400">{a.time}</span>
-                </div>
-                <p className="text-gray-600 leading-relaxed">{a.text}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* AI tutor coming soon */}
-        <div className="bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-100 rounded-xl p-5">
-          <div className="flex items-start gap-4">
-            <span className="text-3xl">🤖</span>
-            <div>
-              <h3 className="font-semibold text-gray-800 mb-1">AI Tutor — Coming in Phase 3</h3>
-              <p className="text-sm text-gray-500">
-                Ask questions, get essay feedback, and practice problems — powered by Amazon Bedrock.
-                Your parent can enable or disable it at any time.
-              </p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15, duration: 0.5, ease: EASE }}
+          className="bg-white/5 border border-white/8 rounded-2xl p-5"
+        >
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="font-semibold text-white flex items-center gap-2 text-sm">
+              <span>📚</span> Homework
+            </h2>
+            <div className="flex items-center gap-2">
+              <div className="flex-1 w-24 bg-white/10 rounded-full h-1.5 overflow-hidden">
+                <motion.div
+                  initial={{ width: 0 }}
+                  animate={{ width: `${(completed / total) * 100}%` }}
+                  transition={{ delay: 0.5, duration: 0.8, ease: EASE }}
+                  className="h-1.5 bg-emerald-400 rounded-full"
+                />
+              </div>
+              <span className="text-xs text-white/40">{completed}/{total} done</span>
             </div>
           </div>
-        </div>
+          <ul className="space-y-2">
+            {homework.map((h, i) => (
+              <motion.li
+                key={i}
+                initial={{ opacity: 0, x: -16 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 + i * 0.07, duration: 0.4 }}
+                className={`flex items-start gap-3 p-3 rounded-xl border text-sm transition-all ${
+                  h.done
+                    ? "bg-white/3 border-white/5 opacity-40"
+                    : h.urgent
+                    ? "bg-red-500/8 border-red-500/20"
+                    : "bg-white/3 border-white/8"
+                }`}
+              >
+                <div className={`w-5 h-5 rounded-md border flex-shrink-0 mt-0.5 flex items-center justify-center ${h.done ? "bg-emerald-500 border-emerald-500 text-white" : "border-white/20"}`}>
+                  {h.done && <span className="text-[10px]">✓</span>}
+                </div>
+                <div className="flex-1">
+                  <p className={`font-medium ${h.done ? "line-through text-white/30" : "text-white"}`}>{h.title}</p>
+                  <p className="text-xs text-white/30 mt-0.5">{h.subject} · {h.teacher}</p>
+                </div>
+                <div className="text-right flex-shrink-0">
+                  {h.urgent && !h.done && (
+                    <span className="text-xs bg-red-500/20 text-red-400 px-2 py-0.5 rounded-full border border-red-500/20">Tomorrow</span>
+                  )}
+                  {!h.urgent && <span className="text-xs text-white/30">{h.due}</span>}
+                </div>
+              </motion.li>
+            ))}
+          </ul>
+        </motion.div>
 
-        <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-4 text-sm text-indigo-600 text-center">
-          Demo preview — Student dashboard. All data is illustrative.
-          <br />
-          <Link href="/" className="underline text-indigo-700 mt-1 inline-block">← Back to home</Link>
+        {/* Announcements */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25, duration: 0.5, ease: EASE }}
+          className="bg-white/5 border border-white/8 rounded-2xl p-5"
+        >
+          <h2 className="font-semibold text-white mb-4 flex items-center gap-2 text-sm"><span>📢</span> Announcements</h2>
+          <ul className="space-y-3">
+            {announcements.map((a, i) => (
+              <li key={i} className="border-b border-white/5 last:border-0 pb-3 last:pb-0">
+                <div className="flex items-center justify-between mb-1">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium text-white/80">{a.from}</span>
+                    <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${a.tagStyle}`}>{a.tag}</span>
+                  </div>
+                  <span className="text-xs text-white/25">{a.time}</span>
+                </div>
+                <p className="text-sm text-white/50 leading-relaxed">{a.text}</p>
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+
+        {/* AI Tutor teaser */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.35, duration: 0.5 }}
+          className="relative overflow-hidden rounded-2xl border border-violet-500/20 p-5"
+          style={{ background: "linear-gradient(135deg, #1e1b4b, #2e1065)" }}
+        >
+          <div className="absolute top-0 right-0 w-32 h-32 bg-violet-500/10 rounded-full blur-[40px]" />
+          <div className="relative flex gap-4">
+            <div className="w-10 h-10 bg-violet-500/20 border border-violet-500/30 rounded-xl flex items-center justify-center text-xl">🤖</div>
+            <div>
+              <p className="font-semibold text-white mb-1">AI Tutor — Coming Phase 3</p>
+              <p className="text-sm text-violet-300/60 leading-relaxed">Ask doubts you&apos;re too shy to raise in class. Get feedback on essays. Practice with past papers. Powered by Amazon Bedrock.</p>
+            </div>
+          </div>
+        </motion.div>
+
+        <div className="text-center">
+          <Link href="/" className="text-xs text-white/20 hover:text-white/50 transition-colors">← Back to home</Link>
         </div>
       </div>
     </div>

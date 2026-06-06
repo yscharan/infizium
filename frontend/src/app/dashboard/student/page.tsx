@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { StudentAnimatedBg } from "@/components/student-bg";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -46,19 +47,19 @@ export default function StudentDashboard() {
 
       <div className="max-w-4xl mx-auto px-4 py-8 space-y-5">
 
-        {/* Hero profile */}
+        {/* Hero profile — animated canvas background */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: EASE }}
-          className="relative overflow-hidden rounded-2xl border border-white/8 p-6"
-          style={{ background: "linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%)" }}
+          className="relative overflow-hidden rounded-2xl border border-indigo-500/20 shadow-2xl shadow-indigo-950/60"
+          style={{ background: "#070b18" }}
         >
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-[60px]" />
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-violet-500/10 rounded-full blur-[60px]" />
-          </div>
-          <div className="relative flex items-center gap-5">
+          {/* Live canvas bg */}
+          <StudentAnimatedBg />
+          {/* Gradient overlay for readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#070b18]/85 via-[#070b18]/40 to-[#070b18]/70 pointer-events-none" />
+          <div className="relative z-10 p-6 flex items-center gap-5">
             <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-2xl shadow-lg shadow-indigo-500/30">
               🧑‍🎓
             </div>
@@ -74,7 +75,7 @@ export default function StudentDashboard() {
           </div>
 
           {/* Streak */}
-          <div className="relative mt-5 pt-5 border-t border-white/8">
+          <div className="relative z-10 mx-6 mb-6 pt-4 border-t border-white/10">
             <p className="text-xs text-white/40 mb-3 uppercase tracking-widest">This week</p>
             <div className="flex gap-2">
               {streakDays.map((active, i) => (

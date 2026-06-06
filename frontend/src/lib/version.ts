@@ -1,3 +1,3 @@
 // Bump this on every release. Matches root /VERSION and CHANGELOG.md.
-export const APP_VERSION = "0.3.3";
+export const APP_VERSION = "0.3.4";
 export const APP_VERSION_DATE = "2026-06-06";

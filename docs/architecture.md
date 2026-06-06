@@ -40,11 +40,14 @@ v2                    photos)   notifications)
 
 ## Services
 
-### Frontend — Next.js on AWS Amplify
+### Frontend — Next.js on Vercel
 - Server-side rendering for authenticated pages.
 - Static generation for public pages (landing, login).
-- Amplify handles deployments, custom domains, and environment variables.
+- Vercel handles deployments, custom domains, TLS, and environment variables.
+- Auto-deploy on push to `master` via GitHub integration.
+- Custom domain: `infizium.com` (DNS managed by Vercel nameservers).
 - No native mobile app in MVP — the web app is mobile-responsive and installable as a PWA.
+- See `docs/decisions/001-vercel-over-amplify.md` for rationale.
 
 ### API — API Gateway + Lambda
 - One API Gateway (REST) with resource-based routing.

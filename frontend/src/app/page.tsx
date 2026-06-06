@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { APP_VERSION } from "@/lib/version";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -340,7 +341,11 @@ export default function Home() {
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-400">
           <span className="font-semibold text-gray-700">Infizium</span>
           <span>Telangana&apos;s school operating system</span>
-          <span>infizium.com</span>
+          <span className="flex items-center gap-2">
+            <span>infizium.com</span>
+            <span className="text-gray-300">·</span>
+            <span className="font-mono text-xs text-gray-400">v{APP_VERSION}</span>
+          </span>
         </div>
       </footer>
     </div>

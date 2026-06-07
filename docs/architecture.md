@@ -1,6 +1,20 @@
 # Architecture
 
-## Overview
+> **Current (MVP dev):** Vercel + Supabase + Railway + Telegram bot. Production target remains AWS below.
+
+## Current Stack (v0.3.8)
+
+| Layer | Technology |
+|---|---|
+| Frontend | Next.js 16.2.7 on Vercel — infizium.com |
+| Database | Supabase PostgreSQL — Mumbai region |
+| API | Express + Node.js on Railway |
+| GraphQL | Supabase pg_graphql — `/graphql/v1` |
+| AI bot | Claude Haiku + Anthropic API (tool-use loop) |
+| Chat test | Telegram bot (→ WhatsApp Business when pilot ready) |
+| MCP | @modelcontextprotocol/sdk — 7 tools over Supabase |
+
+## Production Target (AWS)
 
 Infizium is a serverless, cloud-native application on AWS. The frontend is a Next.js app hosted on Amplify. All business logic runs in Lambda functions behind API Gateway. Data is stored in Aurora PostgreSQL Serverless v2. Authentication is handled by Cognito. WhatsApp is the primary outbound communication channel.
 

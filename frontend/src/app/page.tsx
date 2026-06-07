@@ -442,6 +442,41 @@ export default function Home() {
             </motion.p>
           </motion.div>
 
+          {/* Travel Buddy — live feature */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: EASE }}
+            className="rounded-2xl p-5 mb-6 flex flex-col sm:flex-row gap-5 items-center"
+            style={{ background: "rgba(245,158,11,0.06)", border: "1px solid rgba(245,158,11,0.2)" }}
+          >
+            <div className="text-5xl flex-shrink-0">🚌</div>
+            <div className="flex-1 text-center sm:text-left">
+              <div className="flex items-center gap-2 justify-center sm:justify-start mb-2">
+                <p className="font-bold text-white text-lg">Travel Buddy &amp; Commute</p>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ background: "rgba(16,185,129,0.15)", color: "#10b981", border: "1px solid rgba(16,185,129,0.3)" }}>
+                  Live now
+                </span>
+              </div>
+              <p className="text-sm text-white/40 leading-relaxed mb-3">
+                Live GPS tracking on every school bus. Parent car pools, auto buddies, walk groups — all verified by school. Smart Band wristband or hidden bag Tag for students who travel alone. SOS with one press.
+              </p>
+              <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
+                {["School bus GPS", "Parent car pool", "Auto buddy", "Walk group", "Smart Band / Tag", "SOS alert"].map(f => (
+                  <span key={f} className="text-xs px-2.5 py-1 rounded-full" style={{ background: "rgba(245,158,11,0.1)", color: "#f59e0b", border: "1px solid rgba(245,158,11,0.2)" }}>{f}</span>
+                ))}
+              </div>
+            </div>
+            <Link
+              href="/commute"
+              className="flex-shrink-0 text-sm px-5 py-2.5 rounded-xl font-semibold transition-all hover:scale-[1.02]"
+              style={{ background: "rgba(245,158,11,0.12)", border: "1px solid rgba(245,158,11,0.35)", color: "#f59e0b" }}
+            >
+              See it live →
+            </Link>
+          </motion.div>
+
           <motion.div
             initial="hidden"
             whileInView="show"

@@ -132,6 +132,67 @@ create table if not exists conversations (
   unique(user_a_id, user_b_id)
 );
 
+-- ─── Forms (consent forms, field trips, PTM, etc.) ─────────────
+create type form_status as enum ('draft', 'active', 'closed');
+
+create table if not exists forms (
+  id              uuid primary key default uuid_generate_v4(),
+  school_id       uuid references schools(id) on delete cascade,
+  created_by      uuid references users(id),
+  title           text not null,
+  description     text,
+  target_grades   text[],                  -- null = all grades
+  deadline        date,
+  status          form_status not null default 'active',
+  created_at      timestamptz default now()
+);
+
+create index if not exists forms_school_idx on forms(school_id, created_at desc);
+
+-- ─── Form responses (parent approvals) ──────────────────────────
+create type form_response_value as enum ('approved', 'declined', 'pending');
+
+create table if not exists form_responses (
+  id              uuid primary key default uuid_generate_v4(),
+  form_id         uuid references forms(id) on delete cascade,
+  student_id      uuid references students(id) on delete cascade,
+  parent_user_id  uuid references users(id),
+  response        form_response_value not null default 'pending',
+  note            text,                    -- parent can add a note with decline
+  responded_at    timestamptz,
+  created_at      timestamptz default now(),
+  unique(form_id, student_id)
+);
+
+create index if not exists form_responses_form_idx on form_responses(form_id);
+create index if not exists form_responses_parent_idx on form_responses(parent_user_id);
+
+-- ─── User permissions (DPDP-compliant consent storage) ───────────
+create table if not exists user_permissions (
+  id              uuid primary key default uuid_generate_v4(),
+  user_id         uuid references users(id) on delete cascade,
+  school_id       uuid references schools(id) on delete cascade,
+  permission_key  text not null,           -- e.g. 'whatsapp_attendance', 'location_sharing'
+  granted         boolean not null default true,
+  granted_via     text not null default 'app',  -- 'app', 'whatsapp', 'admin'
+  updated_at      timestamptz default now(),
+  created_at      timestamptz default now(),
+  unique(user_id, permission_key)
+);
+
+create index if not exists user_permissions_user_idx on user_permissions(user_id);
+
+-- Permission audit log — every change recorded for DPDP compliance
+create table if not exists permission_audit_log (
+  id              uuid primary key default uuid_generate_v4(),
+  user_id         uuid references users(id) on delete cascade,
+  permission_key  text not null,
+  old_value       boolean,
+  new_value       boolean not null,
+  changed_via     text not null default 'app',
+  created_at      timestamptz default now()
+);
+
 -- ─── Seed: demo school + users ───────────────────────────────────
 insert into schools (name, district, state, whatsapp_number)
 values ('St. Joseph''s High School', 'Hyderabad', 'Telangana', '+919876543210')

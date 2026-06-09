@@ -1,8 +1,11 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { DashboardNav } from "@/components/dashboard-nav";
+import { getSession, clearSession } from "@/lib/session";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -37,11 +40,25 @@ const classes = [
 ];
 
 export default function TeacherDashboard() {
+  const router = useRouter();
+  const [name, setName] = useState("Ravi");
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const s = getSession();
+    if (!s || s.role !== "teacher") { router.replace("/login"); return; }
+    setName(s.name);
+    setReady(true);
+  }, [router]);
+
+  function signOut() { clearSession(); router.push("/login"); }
+
   const absent = students.filter(s => s.status === "absent").length;
+
+  if (!ready) return <div className="min-h-screen bg-[#f8f9fc]" />;
 
   return (
     <div className="min-h-screen bg-[#f8f9fc]">
-      {/* Header */}
       <motion.header
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -53,20 +70,19 @@ export default function TeacherDashboard() {
           <div className="flex items-center gap-3">
             <span className="font-bold text-gray-900">Infizium</span>
             <span className="text-gray-300">|</span>
-            <span className="text-sm text-blue-600 font-medium">Ravi — Mathematics</span>
+            <span className="text-sm text-blue-600 font-medium">{name} — Mathematics</span>
           </div>
           <div className="flex items-center gap-3">
             <span className="text-xs bg-amber-100 text-amber-700 px-2.5 py-1 rounded-full font-medium border border-amber-200">
               Period 3 in progress
             </span>
-            <Link href="/login" className="text-xs text-gray-400 hover:text-gray-700 transition-colors">Sign out</Link>
+            <button onClick={signOut} className="text-xs text-gray-400 hover:text-gray-700 transition-colors">Sign out</button>
           </div>
         </div>
       </motion.header>
 
       <div className="max-w-4xl mx-auto px-4 py-6 space-y-5">
 
-        {/* Nav */}
         <DashboardNav
           tabs={[
             { id: "overview", label: "Today", icon: "📅", href: "/dashboard/teacher" },
@@ -76,7 +92,6 @@ export default function TeacherDashboard() {
           theme="light"
         />
 
-        {/* Greeting */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -84,10 +99,9 @@ export default function TeacherDashboard() {
           className="rounded-xl px-4 py-3 text-sm text-blue-700/80"
           style={{ background: "rgba(59,130,246,0.06)", border: "1px solid rgba(59,130,246,0.12)" }}
         >
-          Good morning, Ravi. Period 3 starts in <span className="font-medium text-blue-600">20 minutes.</span> Bhavya and Harini haven&apos;t had parent confirmation for yesterday&apos;s absence.
+          Good morning, {name}. Period 3 starts in <span className="font-medium text-blue-600">20 minutes.</span> Bhavya and Harini haven&apos;t had parent confirmation for yesterday&apos;s absence.
         </motion.div>
 
-        {/* Today's schedule */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -119,7 +133,6 @@ export default function TeacherDashboard() {
           </div>
         </motion.div>
 
-        {/* Attendance marking */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -164,7 +177,6 @@ export default function TeacherDashboard() {
           </div>
         </motion.div>
 
-        {/* Homework tracker */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -200,7 +212,6 @@ export default function TeacherDashboard() {
           </ul>
         </motion.div>
 
-        {/* Quick actions */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

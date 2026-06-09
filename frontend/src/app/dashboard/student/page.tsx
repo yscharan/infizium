@@ -1,9 +1,12 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { StudentAnimatedBg } from "@/components/student-bg";
 import { DashboardNav } from "@/components/dashboard-nav";
+import { getSession, clearSession } from "@/lib/session";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -24,12 +27,26 @@ const streakDays = [true, true, true, false, true, true, false];
 const dayLabels = ["M", "T", "W", "T", "F", "S", "S"];
 
 export default function StudentDashboard() {
+  const router = useRouter();
+  const [name, setName] = useState("Arjun");
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const s = getSession();
+    if (!s || s.role !== "student") { router.replace("/login"); return; }
+    setName(s.name);
+    setReady(true);
+  }, [router]);
+
+  function signOut() { clearSession(); router.push("/login"); }
+
   const completed = homework.filter(h => h.done).length;
   const total = homework.length;
 
+  if (!ready) return <div className="min-h-screen bg-[#0c0c0e]" />;
+
   return (
     <div className="min-h-screen bg-[#0c0c0e] text-white">
-      {/* Header */}
       <motion.header
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -42,13 +59,12 @@ export default function StudentDashboard() {
             <span className="text-white/20">|</span>
             <span className="text-sm text-emerald-400 font-medium">Student</span>
           </div>
-          <Link href="/login" className="text-xs text-white/30 hover:text-white/70 transition-colors">Sign out</Link>
+          <button onClick={signOut} className="text-xs text-white/30 hover:text-white/70 transition-colors">Sign out</button>
         </div>
       </motion.header>
 
       <div className="max-w-4xl mx-auto px-4 py-6 space-y-5">
 
-        {/* Nav */}
         <DashboardNav
           tabs={[
             { id: "overview", label: "Overview", icon: "🏠", href: "/dashboard/student" },
@@ -58,7 +74,6 @@ export default function StudentDashboard() {
           theme="dark"
         />
 
-        {/* Greeting */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -66,10 +81,9 @@ export default function StudentDashboard() {
           className="rounded-xl px-4 py-3 text-sm"
           style={{ background: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.18)", color: "rgba(52,211,153,0.9)" }}
         >
-          Good morning, Arjun! 🔥 5-day streak. <span className="font-semibold">2 assignments due this week.</span> Term exam in 12 days.
+          Good morning, {name}! 🔥 5-day streak. <span className="font-semibold">2 assignments due this week.</span> Term exam in 12 days.
         </motion.div>
 
-        {/* Hero profile — animated canvas background */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -77,16 +91,14 @@ export default function StudentDashboard() {
           className="relative overflow-hidden rounded-2xl border border-indigo-500/20 shadow-2xl shadow-indigo-950/60"
           style={{ background: "#070b18" }}
         >
-          {/* Live canvas bg */}
           <StudentAnimatedBg />
-          {/* Gradient overlay for readability */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#070b18]/85 via-[#070b18]/40 to-[#070b18]/70 pointer-events-none" />
           <div className="relative z-10 p-6 flex items-center gap-5">
             <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-2xl shadow-lg shadow-indigo-500/30">
               🧑‍🎓
             </div>
             <div className="flex-1">
-              <p className="font-bold text-white text-lg">Arjun</p>
+              <p className="font-bold text-white text-lg">{name}</p>
               <p className="text-sm text-white/40">Grade 9 · Section A · Roll No. 01</p>
               <p className="text-xs text-white/30 mt-0.5">St. Joseph&apos;s High School, Hyderabad</p>
             </div>
@@ -96,7 +108,6 @@ export default function StudentDashboard() {
             </div>
           </div>
 
-          {/* Streak */}
           <div className="relative z-10 mx-6 mb-6 pt-4 border-t border-white/10">
             <p className="text-xs text-white/40 mb-3 uppercase tracking-widest">This week</p>
             <div className="flex gap-2">
@@ -125,7 +136,6 @@ export default function StudentDashboard() {
           </div>
         </motion.div>
 
-        {/* Motivational quote */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -133,10 +143,9 @@ export default function StudentDashboard() {
           className="bg-gradient-to-r from-indigo-600/20 to-violet-600/20 border border-indigo-500/20 rounded-2xl px-5 py-4"
         >
           <p className="text-sm text-indigo-300 font-medium">&ldquo;Success is not final, failure is not fatal — it is the courage to continue that counts.&rdquo;</p>
-          <p className="text-xs text-white/30 mt-1">Keep pushing, Arjun. JEE is within reach. 🎯</p>
+          <p className="text-xs text-white/30 mt-1">Keep pushing, {name}. JEE is within reach. 🎯</p>
         </motion.div>
 
-        {/* Homework */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -192,7 +201,6 @@ export default function StudentDashboard() {
           </ul>
         </motion.div>
 
-        {/* Announcements */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -216,54 +224,6 @@ export default function StudentDashboard() {
           </ul>
         </motion.div>
 
-        {/* Pocket Money Wallet */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5, ease: EASE }}
-          className="rounded-2xl p-5 border border-amber-500/20 overflow-hidden relative"
-          style={{ background: "linear-gradient(135deg, rgba(251,191,36,0.08), rgba(249,115,22,0.06))" }}
-        >
-          <div className="absolute top-0 right-0 w-32 h-32 rounded-full blur-[50px]" style={{ background: "rgba(251,191,36,0.12)" }} />
-          <div className="relative">
-            <div className="flex items-start justify-between mb-4">
-              <div>
-                <p className="text-xs font-mono text-amber-400/70 tracking-widest uppercase mb-1">My Wallet</p>
-                <p className="text-3xl font-bold text-white">₹1,250</p>
-                <p className="text-xs text-white/30 mt-0.5">Private balance · Parents cannot see this</p>
-              </div>
-              <div className="text-2xl">💰</div>
-            </div>
-            <div className="space-y-2">
-              {[
-                { from: "Anonymous Donor", amount: "+₹500", note: "JEE practice papers", time: "Jun 3" },
-                { from: "Codename: StarGazer", amount: "+₹750", note: "Keep studying!", time: "May 28" },
-              ].map((t, i) => (
-                <div key={i} className="flex items-center gap-3 text-xs p-2.5 rounded-xl" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                  <div className="w-7 h-7 rounded-lg flex items-center justify-center text-sm flex-shrink-0" style={{ background: "rgba(251,191,36,0.12)" }}>💎</div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-white/70 font-medium truncate">{t.from}</p>
-                    <p className="text-white/30">{t.note}</p>
-                  </div>
-                  <div className="text-right flex-shrink-0">
-                    <p className="font-bold text-amber-400">{t.amount}</p>
-                    <p className="text-white/25">{t.time}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="mt-3 flex gap-2">
-              <Link href="/sponsor" className="flex-1 text-center text-xs py-2 rounded-xl font-semibold text-amber-400/70 border border-amber-500/15 hover:bg-amber-500/10 transition-colors">
-                Get more support →
-              </Link>
-              <button className="flex-1 text-center text-xs py-2 rounded-xl font-semibold text-white/30 border border-white/8 hover:bg-white/5 transition-colors">
-                Send thank-you note
-              </button>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* AI Tutor teaser */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

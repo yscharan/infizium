@@ -1,8 +1,11 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { DashboardNav } from "@/components/dashboard-nav";
+import { getSession, clearSession } from "@/lib/session";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -29,9 +32,23 @@ const forms = [
 const quickActions = ["Broadcast announcement", "Create consent form", "Export attendance", "Add student", "Invite teacher", "View all parents", "School settings", "Board report"];
 
 export default function AdminDashboard() {
+  const router = useRouter();
+  const [name, setName] = useState("Priya");
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const s = getSession();
+    if (!s || s.role !== "admin") { router.replace("/login"); return; }
+    setName(s.name);
+    setReady(true);
+  }, [router]);
+
+  function signOut() { clearSession(); router.push("/login"); }
+
+  if (!ready) return <div className="min-h-screen bg-[#09090b]" />;
+
   return (
     <div className="min-h-screen bg-[#09090b]">
-      {/* Header */}
       <motion.header
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -42,18 +59,17 @@ export default function AdminDashboard() {
           <div className="flex items-center gap-3">
             <span className="font-bold text-white">Infizium</span>
             <span className="text-white/20">|</span>
-            <span className="text-sm text-violet-400 font-medium">Admin — Priya</span>
+            <span className="text-sm text-violet-400 font-medium">Admin — {name}</span>
           </div>
           <div className="flex items-center gap-3">
             <span className="text-xs bg-white/8 text-white/50 px-2.5 py-1 rounded-full border border-white/10">St. Joseph&apos;s High School</span>
-            <Link href="/login" className="text-xs text-white/30 hover:text-white/60 transition-colors">Sign out</Link>
+            <button onClick={signOut} className="text-xs text-white/30 hover:text-white/60 transition-colors">Sign out</button>
           </div>
         </div>
       </motion.header>
 
       <div className="max-w-5xl mx-auto px-4 py-6 space-y-5">
 
-        {/* Nav */}
         <DashboardNav
           tabs={[
             { id: "overview", label: "Overview", icon: "🏠", href: "/dashboard/admin" },
@@ -63,7 +79,6 @@ export default function AdminDashboard() {
           theme="dark"
         />
 
-        {/* Greeting */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -71,10 +86,9 @@ export default function AdminDashboard() {
           className="rounded-xl px-4 py-3 text-sm"
           style={{ background: "rgba(124,58,237,0.08)", border: "1px solid rgba(124,58,237,0.2)", color: "rgba(167,139,250,0.9)" }}
         >
-          Good morning, Priya. School-wide attendance is <span className="font-semibold text-violet-300">88%</span> today. 47 parents haven&apos;t responded to the Field Trip form — deadline is Jun 8.
+          Good morning, {name}. School-wide attendance is <span className="font-semibold text-violet-300">88%</span> today. 47 parents haven&apos;t responded to the Field Trip form — deadline is Jun 8.
         </motion.div>
 
-        {/* KPI row */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -101,7 +115,6 @@ export default function AdminDashboard() {
           ))}
         </motion.div>
 
-        {/* Attendance bars */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -130,7 +143,6 @@ export default function AdminDashboard() {
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {/* Announcements */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -164,7 +176,6 @@ export default function AdminDashboard() {
             </ul>
           </motion.div>
 
-          {/* Forms */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -203,7 +214,6 @@ export default function AdminDashboard() {
           </motion.div>
         </div>
 
-        {/* Quick actions */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

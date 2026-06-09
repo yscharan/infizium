@@ -1,8 +1,11 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { DashboardNav } from "@/components/dashboard-nav";
+import { getSession, clearSession } from "@/lib/session";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -29,9 +32,23 @@ const forms = [
 ];
 
 export default function ParentDashboard() {
+  const router = useRouter();
+  const [name, setName] = useState("Lakshmi");
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const s = getSession();
+    if (!s || s.role !== "parent") { router.replace("/login"); return; }
+    setName(s.name);
+    setReady(true);
+  }, [router]);
+
+  function signOut() { clearSession(); router.push("/login"); }
+
+  if (!ready) return <div className="min-h-screen" style={{ background: "#faf7f4" }} />;
+
   return (
     <div className="min-h-screen" style={{ background: "#faf7f4" }}>
-      {/* Header */}
       <motion.header
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -43,15 +60,14 @@ export default function ParentDashboard() {
           <div className="flex items-center gap-3">
             <span className="font-bold text-gray-900">Infizium</span>
             <span className="text-gray-300">|</span>
-            <span className="text-sm text-orange-600 font-medium">Lakshmi</span>
+            <span className="text-sm text-orange-600 font-medium">{name}</span>
           </div>
-          <Link href="/login" className="text-xs text-gray-400 hover:text-gray-700 transition-colors">Sign out</Link>
+          <button onClick={signOut} className="text-xs text-gray-400 hover:text-gray-700 transition-colors">Sign out</button>
         </div>
       </motion.header>
 
       <div className="max-w-4xl mx-auto px-4 py-6 space-y-5">
 
-        {/* Nav */}
         <DashboardNav
           tabs={[
             { id: "overview", label: "Overview", icon: "🏠", href: "/dashboard/parent" },
@@ -61,7 +77,6 @@ export default function ParentDashboard() {
           theme="light"
         />
 
-        {/* Greeting */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -69,10 +84,9 @@ export default function ParentDashboard() {
           className="rounded-xl px-4 py-3 text-sm text-orange-700/80"
           style={{ background: "rgba(249,115,22,0.06)", border: "1px solid rgba(249,115,22,0.12)" }}
         >
-          Good morning, Lakshmi. ✅ Arjun is in school today. <span className="font-medium text-orange-600">1 form needs your approval.</span>
+          Good morning, {name}. ✅ Arjun is in school today. <span className="font-medium text-orange-600">1 form needs your approval.</span>
         </motion.div>
 
-        {/* Child status card — big and reassuring */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -113,15 +127,12 @@ export default function ParentDashboard() {
               ))}
             </div>
           </div>
-
-          {/* WhatsApp hint */}
           <div className="bg-orange-100/60 border-t border-orange-200/40 px-6 py-3 flex items-center gap-2">
             <span className="text-base">📱</span>
             <p className="text-xs text-orange-700/70">Attendance alerts sent to your WhatsApp within 10 minutes of class starting.</p>
           </div>
         </motion.div>
 
-        {/* Attendance alerts */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -150,7 +161,6 @@ export default function ParentDashboard() {
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {/* Homework */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -171,7 +181,6 @@ export default function ParentDashboard() {
             </ul>
           </motion.div>
 
-          {/* Announcements */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -190,7 +199,6 @@ export default function ParentDashboard() {
           </motion.div>
         </div>
 
-        {/* Forms */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

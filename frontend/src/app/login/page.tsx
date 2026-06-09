@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { createClient } from "@supabase/supabase-js";
+import { setSession, UserRole } from "@/lib/session";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -37,9 +38,9 @@ export default function LoginPage() {
 
   const role = roles.find(r => r.id === selectedRole);
 
-  // Demo bypass — works without Supabase for UI testing
   function demoLogin() {
     if (!selectedRole) return;
+    setSession(selectedRole as UserRole, undefined, true);
     router.push(role!.dash);
   }
 
@@ -76,6 +77,7 @@ export default function LoginPage() {
         result = await supabase.auth.verifyOtp({ email, token: otp, type: "email" });
       }
       if (result.error) throw result.error;
+      setSession(selectedRole as UserRole, result.data.user?.email, false);
       router.push(role!.dash);
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : "Invalid OTP");
@@ -92,6 +94,7 @@ export default function LoginPage() {
         }
         throw error;
       }
+      setSession(selectedRole as UserRole, email, false);
       router.push(role!.dash);
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : "Login failed");

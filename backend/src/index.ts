@@ -7,6 +7,7 @@ import { announcementsRouter } from "./routes/announcements";
 import { usersRouter } from "./routes/users";
 import { chatRouter } from "./routes/chat";
 import { whatsappRouter } from "./routes/whatsapp";
+import { authRouter } from "./routes/auth";
 
 const app = express();
 const PORT = process.env.PORT ?? 4000;
@@ -18,6 +19,7 @@ app.get("/health", (_req, res) => {
   res.json({ status: "ok", version: "0.1.0", ts: new Date().toISOString() });
 });
 
+app.use("/api/auth", authRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/attendance", attendanceRouter);
 app.use("/api/homework", homeworkRouter);

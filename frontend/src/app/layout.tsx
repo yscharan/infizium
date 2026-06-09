@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter, Space_Mono } from "next/font/google";
 import "./globals.css";
+import { AuthProvider } from "@/lib/auth/context";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -42,7 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${spaceGrotesk.variable} ${inter.variable} ${spaceMono.variable} h-full`}
     >
       <body className="min-h-full flex flex-col font-body antialiased subpixel-antialiased">
-        {children}
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );

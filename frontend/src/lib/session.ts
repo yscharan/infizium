@@ -4,6 +4,7 @@ export interface AppSession {
   role: UserRole;
   name: string;
   demo: boolean;
+  email?: string;
 }
 
 const KEY = "infizium_session";
@@ -22,9 +23,9 @@ export const ROLE_DASHBOARD: Record<UserRole, string> = {
   admin: "/dashboard/admin",
 };
 
-export function setSession(role: UserRole, name?: string, demo = true) {
+export function setSession(role: UserRole, email?: string, demo = true) {
   if (typeof window === "undefined") return;
-  const s: AppSession = { role, name: name ?? DEMO_NAMES[role], demo };
+  const s: AppSession = { role, name: DEMO_NAMES[role], demo, email };
   localStorage.setItem(KEY, JSON.stringify(s));
 }
 

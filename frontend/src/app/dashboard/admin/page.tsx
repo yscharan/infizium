@@ -34,12 +34,14 @@ const quickActions = ["Broadcast announcement", "Create consent form", "Export a
 export default function AdminDashboard() {
   const router = useRouter();
   const [name, setName] = useState("Priya");
+  const [email, setEmail] = useState("");
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const s = getSession();
     if (!s || s.role !== "admin") { router.replace("/login"); return; }
     setName(s.name);
+    setEmail(s.email ?? "");
     setReady(true);
   }, [router]);
 
@@ -232,6 +234,40 @@ export default function AdminDashboard() {
                 {a}
               </motion.button>
             ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+          className="bg-white/3 rounded-2xl border border-white/6 p-5"
+        >
+          <h2 className="font-semibold text-white/40 mb-3 flex items-center gap-2 text-xs uppercase tracking-wider"><span>👤</span> Your profile</h2>
+          <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
+            <div>
+              <p className="text-white/25 text-xs mb-0.5">Name</p>
+              <p className="text-white/70">{name || "—"}</p>
+            </div>
+            <div>
+              <p className="text-white/25 text-xs mb-0.5">Role</p>
+              <p className="text-white/70">School Admin</p>
+            </div>
+            <div>
+              <p className="text-white/25 text-xs mb-0.5">Email</p>
+              <p className="text-white/70">{email || "—"}</p>
+            </div>
+            <div>
+              <p className="text-white/25 text-xs mb-0.5">School</p>
+              <p className="text-white/70">St. Joseph&apos;s High School</p>
+            </div>
+            <div className="col-span-2 mt-1 pt-3 border-t border-white/5">
+              <p className="text-white/25 text-xs mb-1">Telegram / WhatsApp link</p>
+              <p className="text-white/50 text-xs leading-relaxed">
+                Open <span className="text-violet-400">@InfiziumBot</span> on Telegram and send{" "}
+                <code className="bg-white/8 px-1.5 py-0.5 rounded text-white/70">/register &lt;your phone&gt;</code>
+              </p>
+            </div>
           </div>
         </motion.div>
 

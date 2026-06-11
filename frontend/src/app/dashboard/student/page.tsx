@@ -29,12 +29,14 @@ const dayLabels = ["M", "T", "W", "T", "F", "S", "S"];
 export default function StudentDashboard() {
   const router = useRouter();
   const [name, setName] = useState("Arjun");
+  const [email, setEmail] = useState("");
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const s = getSession();
     if (!s || s.role !== "student") { router.replace("/login"); return; }
     setName(s.name);
+    setEmail(s.email ?? "");
     setReady(true);
   }, [router]);
 
@@ -237,6 +239,40 @@ export default function StudentDashboard() {
             <div>
               <p className="font-semibold text-white mb-1">AI Tutor — Coming Phase 3</p>
               <p className="text-sm text-violet-300/60 leading-relaxed">Ask doubts you&apos;re too shy to raise in class. Get feedback on essays. Practice with past papers. Powered by Amazon Bedrock.</p>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+          className="bg-white/3 rounded-2xl border border-white/6 p-5"
+        >
+          <h2 className="font-semibold text-white/40 mb-3 flex items-center gap-2 text-xs uppercase tracking-wider"><span>👤</span> Your profile</h2>
+          <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
+            <div>
+              <p className="text-white/25 text-xs mb-0.5">Name</p>
+              <p className="text-white/70">{name || "—"}</p>
+            </div>
+            <div>
+              <p className="text-white/25 text-xs mb-0.5">Role</p>
+              <p className="text-white/70">Student · Grade 9A</p>
+            </div>
+            <div>
+              <p className="text-white/25 text-xs mb-0.5">Email</p>
+              <p className="text-white/70">{email || "—"}</p>
+            </div>
+            <div>
+              <p className="text-white/25 text-xs mb-0.5">School</p>
+              <p className="text-white/70">St. Joseph&apos;s High School</p>
+            </div>
+            <div className="col-span-2 mt-1 pt-3 border-t border-white/5">
+              <p className="text-white/25 text-xs mb-1">Telegram link</p>
+              <p className="text-white/50 text-xs leading-relaxed">
+                Open <span className="text-emerald-400">@InfiziumBot</span> on Telegram and send{" "}
+                <code className="bg-white/8 px-1.5 py-0.5 rounded text-white/70">/register &lt;your phone&gt;</code>
+              </p>
             </div>
           </div>
         </motion.div>

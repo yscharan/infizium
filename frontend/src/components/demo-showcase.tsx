@@ -291,16 +291,26 @@ function AdminScreen({ tick }: { tick: number }) {
 export function DemoShowcase() {
   const [active, setActive] = useState(0);
   const [tick, setTick] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [userPicked, setUserPicked] = useState(false);
 
   useEffect(() => {
-    const cycle = setInterval(() => setActive(a => (a + 1) % 4), 4000);
+    if (paused || userPicked) return;
+    const cycle = setInterval(() => setActive(a => (a + 1) % 4), 6000);
     return () => clearInterval(cycle);
-  }, []);
+  }, [paused, userPicked]);
 
   useEffect(() => {
     const t = setInterval(() => setTick(n => n + 1), 1500);
     return () => clearInterval(t);
   }, []);
+
+  function pickTab(i: number) {
+    setActive(i);
+    setUserPicked(true);
+    // Resume auto-cycle after 12s of inactivity
+    setTimeout(() => setUserPicked(false), 12000);
+  }
 
   const screens = [
     <ParentScreen key="parent" tick={tick} />,
@@ -344,12 +354,16 @@ export function DemoShowcase() {
           {tabs.map((t, i) => (
             <button
               key={t.id}
-              onClick={() => setActive(i)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-medium transition-all duration-300 ${
-                active === i ? t.active : "border-white/10 text-white/40 hover:border-white/20 hover:text-white/60"
+              onClick={() => pickTab(i)}
+              onMouseEnter={() => setPaused(true)}
+              onMouseLeave={() => setPaused(false)}
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-full border text-sm font-medium transition-all duration-200 ${
+                active === i
+                  ? `${t.active} scale-105 shadow-lg`
+                  : "border-white/12 text-white/40 hover:border-white/30 hover:text-white/80 hover:bg-white/5 hover:scale-105"
               }`}
             >
-              <span>{t.icon}</span>
+              <span className="text-base">{t.icon}</span>
               <span className="hidden sm:inline">{t.name}</span>
               <span className="sm:hidden">{t.label}</span>
             </button>
@@ -362,6 +376,8 @@ export function DemoShowcase() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3, duration: 0.7, ease: EASE }}
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
           className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-black/60"
           style={{ background: "#111114" }}
         >
@@ -416,10 +432,10 @@ export function DemoShowcase() {
           {/* Progress bar auto-cycle indicator */}
           <div className="h-0.5 bg-white/5">
             <motion.div
-              key={active}
+              key={`${active}-${paused}-${userPicked}`}
               initial={{ width: "0%" }}
-              animate={{ width: "100%" }}
-              transition={{ duration: 4, ease: "linear" }}
+              animate={{ width: paused || userPicked ? undefined : "100%" }}
+              transition={{ duration: 6, ease: "linear" }}
               className={`h-0.5 ${
                 active === 0 ? "bg-orange-500" : active === 1 ? "bg-blue-500" : active === 2 ? "bg-emerald-500" : "bg-violet-500"
               }`}
@@ -429,7 +445,7 @@ export function DemoShowcase() {
 
         {/* Caption */}
         <p className="text-center text-xs text-white/20 mt-4">
-          Auto-cycling · click a tab to switch · all data is a live demo
+          {paused || userPicked ? "Paused · auto-cycles when you move away" : "Auto-cycling every 6s · hover or click a tab to pause"}
         </p>
       </div>
     </section>

@@ -317,8 +317,8 @@ export default function Home() {
                   <div
                     className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     style={{
-                      background: `radial-gradient(ellipse at top, ${p.neon}10, transparent 65%)`,
-                      boxShadow: `0 0 40px ${p.neon}18, 0 0 0 1px ${p.neon}30`,
+                      background: `radial-gradient(ellipse at top, ${p.neon}18, transparent 70%)`,
+                      boxShadow: `0 0 50px ${p.neon}25, 0 0 0 1px ${p.neon}50`,
                     }}
                   />
                   {/* Content */}

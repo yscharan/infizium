@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { createClient } from "@supabase/supabase-js";
-import { setSession, UserRole } from "@/lib/session";
+import { setSession, UserRole, ROLE_DASHBOARD } from "@/lib/session";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -338,6 +338,35 @@ export default function LoginPage() {
     router.push(role!.dash);
   }
 
+  async function resolveAndRedirect(authEmail: string) {
+    // Look up real profile from DB
+    const { data: profile, error: profileErr } = await supabase
+      .from("users")
+      .select("id, name, role, school_id, schools(name)")
+      .eq("email", authEmail)
+      .single();
+
+    if (profileErr || !profile) {
+      setError("Account not found in Infizium. Contact your school admin.");
+      return;
+    }
+
+    const dbRole = profile.role as UserRole;
+    const schoolsRaw = profile.schools as unknown;
+    const schoolName = Array.isArray(schoolsRaw)
+      ? (schoolsRaw[0]?.name ?? "")
+      : ((schoolsRaw as { name: string } | null)?.name ?? "");
+
+    setSession(dbRole, authEmail, false, {
+      id: profile.id,
+      name: profile.name,
+      schoolId: profile.school_id,
+      schoolName,
+    });
+
+    router.push(ROLE_DASHBOARD[dbRole]);
+  }
+
   async function sendMagicLink() {
     setError(""); setLoading(true);
     try {
@@ -360,8 +389,7 @@ export default function LoginPage() {
         if (error.message.includes("fetch") || error.message.includes("URL")) { demoLogin(); return; }
         throw error;
       }
-      setSession(selectedRole as UserRole, email, false);
-      router.push(role!.dash);
+      await resolveAndRedirect(email);
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : "Login failed");
     } finally { setLoading(false); }
@@ -372,8 +400,7 @@ export default function LoginPage() {
     try {
       const { error } = await supabase.auth.verifyOtp({ email, token: otp, type: "email" });
       if (error) throw error;
-      setSession(selectedRole as UserRole, email, false);
-      router.push(role!.dash);
+      await resolveAndRedirect(email);
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : "Invalid code");
     } finally { setLoading(false); }

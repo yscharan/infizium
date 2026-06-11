@@ -4,46 +4,96 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { createClient } from "@supabase/supabase-js";
 import { DashboardNav } from "@/components/dashboard-nav";
 import { getSession, clearSession } from "@/lib/session";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
-const classAttendance = [
-  { class: "Grade 6A", present: 38, total: 42, pct: 90 },
-  { class: "Grade 7B", present: 35, total: 40, pct: 88 },
-  { class: "Grade 8A", present: 40, total: 45, pct: 89 },
-  { class: "Grade 9A", present: 34, total: 38, pct: 89 },
-  { class: "Grade 9B", present: 29, total: 40, pct: 73 },
-  { class: "Grade 10A", present: 44, total: 45, pct: 98 },
-];
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL || "http://localhost",
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "placeholder"
+);
 
-const announcements = [
-  { title: "School closed June 9 — State board inspection", sent: "Today 9:00 AM", reach: 780, read: 612 },
-  { title: "PTM scheduled June 15, 10 AM – 1 PM", sent: "Yesterday", reach: 780, read: 541 },
-  { title: "Annual Day rehearsal — June 12", sent: "Jun 2", reach: 780, read: 708 },
-];
+interface Announcement {
+  id: string;
+  title: string;
+  created_at: string;
+}
 
-const forms = [
-  { title: "Science Field Trip — Nehru Zoological Park", sent: "Jun 1", responses: 312, total: 780 },
-  { title: "Parent-Teacher Meeting — June 15", sent: "Jun 3", responses: 601, total: 780 },
-];
+interface Stats {
+  students: number;
+  teachers: number;
+  parents: number;
+  announcements: number;
+  homework: number;
+}
 
 const quickActions = ["Broadcast announcement", "Create consent form", "Export attendance", "Add student", "Invite teacher", "View all parents", "School settings", "Board report"];
 
 export default function AdminDashboard() {
   const router = useRouter();
-  const [name, setName] = useState("Priya");
+  const [name, setName] = useState("Admin");
   const [email, setEmail] = useState("");
+  const [schoolId, setSchoolId] = useState("");
+  const [schoolName, setSchoolName] = useState("Your School");
   const [ready, setReady] = useState(false);
+  const [stats, setStats] = useState<Stats>({ students: 0, teachers: 0, parents: 0, announcements: 0, homework: 0 });
+  const [announcements, setAnnouncements] = useState<Announcement[]>([]);
 
   useEffect(() => {
     const s = getSession();
     if (!s || s.role !== "admin") { router.replace("/login"); return; }
     setName(s.name);
     setEmail(s.email ?? "");
+    const sid = s.schoolId ?? "";
+    const sName = s.schoolName ?? "Your School";
+    setSchoolId(sid);
+    setSchoolName(sName);
     setReady(true);
+
+    if (sid) {
+      fetchStats(sid);
+      fetchAnnouncements(sid);
+    }
   }, [router]);
+
+  async function fetchStats(sid: string) {
+    const [studentsRes, teachersRes, parentsRes, announcementsRes, homeworkRes] = await Promise.all([
+      supabase.from("students").select("id", { count: "exact", head: true }).eq("school_id", sid),
+      supabase.from("users").select("id", { count: "exact", head: true }).eq("school_id", sid).eq("role", "teacher"),
+      supabase.from("users").select("id", { count: "exact", head: true }).eq("school_id", sid).eq("role", "parent"),
+      supabase.from("announcements").select("id", { count: "exact", head: true }).eq("school_id", sid),
+      supabase.from("homework").select("id", { count: "exact", head: true }).eq("school_id", sid),
+    ]);
+
+    setStats({
+      students: studentsRes.count ?? 0,
+      teachers: teachersRes.count ?? 0,
+      parents: parentsRes.count ?? 0,
+      announcements: announcementsRes.count ?? 0,
+      homework: homeworkRes.count ?? 0,
+    });
+  }
+
+  async function fetchAnnouncements(sid: string) {
+    const { data } = await supabase
+      .from("announcements")
+      .select("id, title, created_at")
+      .eq("school_id", sid)
+      .order("created_at", { ascending: false })
+      .limit(5);
+    if (data) setAnnouncements(data);
+  }
+
+  function formatDate(iso: string) {
+    const d = new Date(iso);
+    const now = new Date();
+    const diff = now.getTime() - d.getTime();
+    if (diff < 86400000) return `Today ${d.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}`;
+    if (diff < 172800000) return "Yesterday";
+    return d.toLocaleDateString("en-IN", { day: "numeric", month: "short" });
+  }
 
   function signOut() { clearSession(); router.push("/login"); }
 
@@ -64,7 +114,7 @@ export default function AdminDashboard() {
             <span className="text-sm text-violet-400 font-medium">Admin — {name}</span>
           </div>
           <div className="flex items-center gap-3">
-            <span className="text-xs bg-white/8 text-white/50 px-2.5 py-1 rounded-full border border-white/10">St. Joseph&apos;s High School</span>
+            <span className="text-xs bg-white/8 text-white/50 px-2.5 py-1 rounded-full border border-white/10">{schoolName}</span>
             <button onClick={signOut} className="text-xs text-white/30 hover:text-white/60 transition-colors">Sign out</button>
           </div>
         </div>
@@ -88,7 +138,7 @@ export default function AdminDashboard() {
           className="rounded-xl px-4 py-3 text-sm"
           style={{ background: "rgba(124,58,237,0.08)", border: "1px solid rgba(124,58,237,0.2)", color: "rgba(167,139,250,0.9)" }}
         >
-          Good morning, {name}. School-wide attendance is <span className="font-semibold text-violet-300">88%</span> today. 47 parents haven&apos;t responded to the Field Trip form — deadline is Jun 8.
+          Welcome back, <span className="font-semibold text-violet-300">{name}</span>. You&apos;re managing <span className="font-semibold text-violet-300">{schoolName}</span>.
         </motion.div>
 
         <motion.div
@@ -98,10 +148,10 @@ export default function AdminDashboard() {
           className="grid grid-cols-2 sm:grid-cols-4 gap-3"
         >
           {[
-            { label: "Attendance today", value: "88%", icon: "📊", color: "text-emerald-400", border: "border-emerald-500/20", bg: "bg-emerald-500/8" },
-            { label: "Absent today", value: "94", icon: "⚠️", color: "text-red-400", border: "border-red-500/20", bg: "bg-red-500/8" },
-            { label: "Announcements", value: "3", icon: "📢", color: "text-blue-400", border: "border-blue-500/20", bg: "bg-blue-500/8" },
-            { label: "Pending forms", value: "647", icon: "📋", color: "text-amber-400", border: "border-amber-500/20", bg: "bg-amber-500/8" },
+            { label: "Students", value: stats.students.toString(), icon: "🎒", color: "text-emerald-400", border: "border-emerald-500/20", bg: "bg-emerald-500/8" },
+            { label: "Teachers", value: stats.teachers.toString(), icon: "👨‍🏫", color: "text-blue-400", border: "border-blue-500/20", bg: "bg-blue-500/8" },
+            { label: "Announcements", value: stats.announcements.toString(), icon: "📢", color: "text-violet-400", border: "border-violet-500/20", bg: "bg-violet-500/8" },
+            { label: "Homework set", value: stats.homework.toString(), icon: "📚", color: "text-amber-400", border: "border-amber-500/20", bg: "bg-amber-500/8" },
           ].map((k, i) => (
             <motion.div
               key={k.label}
@@ -117,33 +167,6 @@ export default function AdminDashboard() {
           ))}
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15, duration: 0.5, ease: EASE }}
-          className="bg-white/5 border border-white/8 rounded-2xl p-5"
-        >
-          <h2 className="font-semibold text-white text-sm mb-5 flex items-center gap-2"><span>✅</span> Live attendance — today</h2>
-          <div className="space-y-3">
-            {classAttendance.map((c, i) => (
-              <div key={c.class} className="flex items-center gap-3">
-                <span className="w-20 text-xs text-white/50 font-medium">{c.class}</span>
-                <div className="flex-1 bg-white/8 rounded-full h-2 overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${c.pct}%` }}
-                    transition={{ delay: 0.25 + i * 0.08, duration: 0.9, ease: EASE }}
-                    className={`h-2 rounded-full ${c.pct >= 90 ? "bg-emerald-500" : c.pct >= 80 ? "bg-amber-400" : "bg-red-500"}`}
-                  />
-                </div>
-                <span className={`w-24 text-right text-xs font-bold ${c.pct >= 90 ? "text-emerald-400" : c.pct >= 80 ? "text-amber-400" : "text-red-400"}`}>
-                  {c.present}/{c.total} · {c.pct}%
-                </span>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -157,25 +180,29 @@ export default function AdminDashboard() {
                 + Broadcast
               </motion.button>
             </div>
-            <ul className="space-y-4">
-              {announcements.map((a, i) => (
-                <li key={i} className="text-sm border-b border-white/5 last:border-0 pb-4 last:pb-0">
-                  <p className="font-medium text-white/80 leading-snug">{a.title}</p>
-                  <p className="text-xs text-white/30 mt-1">Sent {a.sent}</p>
-                  <div className="mt-1.5 flex items-center gap-2">
-                    <div className="flex-1 bg-white/8 rounded-full h-1 overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: `${(a.read / a.reach) * 100}%` }}
-                        transition={{ delay: 0.4 + i * 0.1, duration: 0.8, ease: EASE }}
-                        className="h-1 bg-emerald-500 rounded-full"
-                      />
+            {announcements.length === 0 ? (
+              <p className="text-xs text-white/25 text-center py-4">No announcements yet</p>
+            ) : (
+              <ul className="space-y-4">
+                {announcements.map((a, i) => (
+                  <li key={a.id} className="text-sm border-b border-white/5 last:border-0 pb-4 last:pb-0">
+                    <p className="font-medium text-white/80 leading-snug">{a.title}</p>
+                    <p className="text-xs text-white/30 mt-1">Sent {formatDate(a.created_at)}</p>
+                    <div className="mt-1.5 flex items-center gap-2">
+                      <div className="flex-1 bg-white/8 rounded-full h-1 overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          animate={{ width: "75%" }}
+                          transition={{ delay: 0.4 + i * 0.1, duration: 0.8, ease: EASE }}
+                          className="h-1 bg-emerald-500 rounded-full"
+                        />
+                      </div>
+                      <span className="text-xs text-emerald-400 font-medium">Delivered</span>
                     </div>
-                    <span className="text-xs text-emerald-400 font-medium">{a.read} read</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
+                  </li>
+                ))}
+              </ul>
+            )}
           </motion.div>
 
           <motion.div
@@ -185,34 +212,29 @@ export default function AdminDashboard() {
             className="bg-white/5 border border-white/8 rounded-2xl p-5"
           >
             <div className="flex items-center justify-between mb-4">
-              <h2 className="font-semibold text-white flex items-center gap-2 text-sm"><span>📋</span> Forms &amp; Approvals</h2>
-              <motion.button whileHover={{ scale: 1.05 }} className="text-xs bg-violet-500/20 text-violet-400 border border-violet-500/30 px-3 py-1.5 rounded-full font-medium hover:bg-violet-500/30 transition-colors">
-                + New form
-              </motion.button>
+              <h2 className="font-semibold text-white flex items-center gap-2 text-sm"><span>👥</span> School roster</h2>
             </div>
-            <ul className="space-y-5">
-              {forms.map((f, i) => (
-                <li key={i} className="text-sm border-b border-white/5 last:border-0 pb-5 last:pb-0">
-                  <p className="font-medium text-white/80 leading-snug">{f.title}</p>
-                  <p className="text-xs text-white/30 mt-1">Sent {f.sent}</p>
-                  <div className="mt-2.5 space-y-1">
-                    <div className="flex justify-between text-xs">
-                      <span className="text-white/40">Response rate</span>
-                      <span className="text-white/60 font-medium">{f.responses}/{f.total}</span>
-                    </div>
-                    <div className="w-full bg-white/8 rounded-full h-1.5 overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: `${(f.responses / f.total) * 100}%` }}
-                        transition={{ delay: 0.45 + i * 0.1, duration: 0.9, ease: EASE }}
-                        className="h-1.5 bg-violet-500 rounded-full"
-                      />
-                    </div>
+            <div className="space-y-3">
+              {[
+                { label: "Students enrolled", val: stats.students, icon: "🎒", color: "#10b981" },
+                { label: "Teachers", val: stats.teachers, icon: "👨‍🏫", color: "#3b82f6" },
+                { label: "Parents linked", val: stats.parents, icon: "👪", color: "#f97316" },
+              ].map(r => (
+                <div key={r.label} className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span>{r.icon}</span>
+                    <span className="text-sm text-white/60">{r.label}</span>
                   </div>
-                  <p className="text-xs text-amber-400/80 mt-1.5">{f.total - f.responses} parents yet to respond</p>
-                </li>
+                  <span className="text-sm font-bold" style={{ color: r.color }}>{r.val}</span>
+                </div>
               ))}
-            </ul>
+            </div>
+
+            {schoolId && (
+              <div className="mt-4 pt-4 border-t border-white/6">
+                <p className="text-xs text-white/20 font-mono break-all">school_id: {schoolId}</p>
+              </div>
+            )}
           </motion.div>
         </div>
 
@@ -259,7 +281,7 @@ export default function AdminDashboard() {
             </div>
             <div>
               <p className="text-white/25 text-xs mb-0.5">School</p>
-              <p className="text-white/70">St. Joseph&apos;s High School</p>
+              <p className="text-white/70">{schoolName}</p>
             </div>
             <div className="col-span-2 mt-1 pt-3 border-t border-white/5">
               <p className="text-white/25 text-xs mb-1">Telegram / WhatsApp link</p>

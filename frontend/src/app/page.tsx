@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { InfiziumMark } from "@/components/infizium-mark";
 import { motion, AnimatePresence } from "framer-motion";
 import { APP_VERSION } from "@/lib/version";
 import { SponsorChat } from "@/components/sponsor-chat";
@@ -1024,7 +1024,7 @@ export default function Home() {
         {/* Top row */}
         <div className="max-w-6xl mx-auto px-4 h-12 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <Image src="/logo.jpg" alt="Infizium" width={30} height={30} className="rounded-full flex-shrink-0" />
+            <InfiziumMark size={30} className="flex-shrink-0 text-white" />
             <span className="font-bold text-base tracking-tight text-white">Infizium</span>
             <span className="hidden sm:block text-[10px] font-mono tracking-widest uppercase" style={{ color: "rgba(0,212,255,0.5)" }}>Telangana School OS</span>
             <span className="text-[10px] font-mono text-white/15">v{APP_VERSION}</span>

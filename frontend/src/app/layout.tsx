@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter, Space_Mono } from "next/font/google";
+import { Space_Grotesk, Inter, Space_Mono, Special_Elite } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/lib/auth/context";
 
@@ -24,6 +24,13 @@ const spaceMono = Space_Mono({
   display: "swap",
 });
 
+const specialElite = Special_Elite({
+  subsets: ["latin"],
+  variable: "--font-typewriter",
+  weight: ["400"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Infizium — School Operating System for Telangana",
   description:
@@ -40,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${inter.variable} ${spaceMono.variable} h-full`}
+      className={`${spaceGrotesk.variable} ${inter.variable} ${spaceMono.variable} ${specialElite.variable} h-full`}
     >
       <body className="min-h-full flex flex-col font-body antialiased subpixel-antialiased">
         <AuthProvider>{children}</AuthProvider>

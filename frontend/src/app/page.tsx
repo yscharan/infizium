@@ -404,7 +404,7 @@ function PeopleSection() {
                   <p className="text-[11px] text-white/35 mt-0.5">{p.detail}</p>
                 </div>
               </div>
-              <p className="text-xs text-white/45 leading-relaxed">{p.story}</p>
+              <p className="text-xs text-white/45 leading-relaxed" style={{ fontFamily: "var(--font-typewriter)" }}>{p.story}</p>
               <ul className="mt-auto space-y-1.5">
                 {p.gets.slice(0,3).map(g => (
                   <li key={g} className="flex items-start gap-1.5 text-xs text-white/35">
@@ -444,10 +444,10 @@ function MissionSection() {
             Prepare students for life,<br />
             <span style={{ background: "linear-gradient(135deg, #00d4ff, #7c3aed)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>not just exams.</span>
           </h2>
-          <p className="text-lg font-semibold italic mb-5" style={{ color: "rgba(0,212,255,0.6)", letterSpacing: "0.01em" }}>
+          <p className="text-lg font-semibold italic mb-5" style={{ color: "rgba(0,212,255,0.6)", letterSpacing: "0.01em", fontFamily: "var(--font-typewriter)" }}>
             &ldquo;Educate to build a personality.&rdquo;
           </p>
-          <p className="text-white/40 text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-white/40 text-lg max-w-2xl mx-auto leading-relaxed" style={{ fontFamily: "var(--font-typewriter)" }}>
             Schools in Telangana prepare students brilliantly for board exams. But life after school — managing time, money, health, and relationships — is taught nowhere. Infizium starts by fixing the school operating system, then builds the life skills layer on top.
           </p>
         </motion.div>
@@ -904,6 +904,106 @@ function SponsorshipSection() {
   );
 }
 
+// ── History section ──────────────────────────────────────────────
+const historyEntries = [
+  {
+    year: "6th Century BCE",
+    title: "The Land of the Godavari",
+    body: "Long before borders were drawn, the Godavari river carved through what we now call Telangana. Your ancestors built cities, temples, and trade routes along its banks. Karimnagar sits on this ancient ground.",
+    icon: "🌊",
+  },
+  {
+    year: "1163 CE",
+    title: "The Kakatiya Empire",
+    body: "Queen Rudrama Devi ruled this land — one of the first women to command an empire in Indian history. She built forts, reformed taxes, and earned loyalty not through fear but through justice. She came from here.",
+    icon: "⚔️",
+  },
+  {
+    year: "1687 CE",
+    title: "Hyderabad's Golden Age",
+    body: "The Nizams built one of the wealthiest cities in the world. Scientists, poets, architects, and traders from Telangana helped build institutions that still stand. Culture was not imported — it was grown here.",
+    icon: "🏛️",
+  },
+  {
+    year: "1969",
+    title: "The Telangana Movement",
+    body: "Students and teachers walked out of classrooms and into streets to demand recognition of their identity. They were not asking for anything new — only that the world acknowledge what had always been true.",
+    icon: "✊",
+  },
+  {
+    year: "2014",
+    title: "A State Is Born",
+    body: "Telangana became the 29th state of India. The youngest state in the country. The people who built it are your grandparents. The people who will write its next chapter are in school right now.",
+    icon: "🗺️",
+  },
+  {
+    year: "Today",
+    title: "Your Turn",
+    body: "Karimnagar has produced scientists, engineers, athletes, and leaders. None of them knew they would change anything when they sat in a classroom. You don't need to know either. Just stay curious.",
+    icon: "🌱",
+    highlight: true,
+  },
+];
+
+function HistorySection() {
+  return (
+    <section className="py-28 px-4 relative overflow-hidden" style={{ background: "linear-gradient(180deg, #09090b 0%, #080508 50%, #09090b 100%)" }}>
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[120px]" style={{ background: "rgba(251,191,36,0.03)" }} />
+      </div>
+      <div className="max-w-3xl mx-auto relative">
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center mb-16">
+          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-5"
+            style={{ background: "rgba(251,191,36,0.08)", border: "1px solid rgba(251,191,36,0.2)" }}>
+            <span className="text-amber-400 text-xs">🏛</span>
+            <span className="text-xs font-mono font-semibold tracking-widest uppercase text-amber-400">History of Telangana</span>
+          </motion.div>
+          <motion.h2 variants={fadeUp} className="text-4xl font-bold text-white tracking-tight mb-3 leading-tight"
+            style={{ fontFamily: "var(--font-typewriter)" }}>
+            Know where you come from.
+          </motion.h2>
+          <motion.p variants={fadeUp} className="text-white/35 leading-relaxed max-w-lg mx-auto"
+            style={{ fontFamily: "var(--font-typewriter)", fontSize: "0.95rem" }}>
+            Before you build your future, read the past that built you. This land has carried great people for over two thousand years. You are one of them.
+          </motion.p>
+        </motion.div>
+
+        <div className="relative">
+          <div className="absolute left-5 top-0 bottom-0 w-px" style={{ background: "linear-gradient(180deg, transparent, rgba(251,191,36,0.3) 10%, rgba(251,191,36,0.3) 90%, transparent)" }} />
+          <div className="space-y-10">
+            {historyEntries.map((entry, i) => (
+              <motion.div key={entry.year} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1, duration: 0.6, ease: EASE }}
+                className="flex gap-6 pl-0">
+                <div className="flex-shrink-0 flex flex-col items-center">
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-lg z-10"
+                    style={entry.highlight
+                      ? { background: "rgba(251,191,36,0.25)", border: "2px solid rgba(251,191,36,0.6)" }
+                      : { background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)" }}>
+                    {entry.icon}
+                  </div>
+                </div>
+                <div className="flex-1 pb-2">
+                  <p className="text-xs font-mono tracking-widest uppercase mb-1" style={{ color: "rgba(251,191,36,0.5)" }}>{entry.year}</p>
+                  <h3 className="font-bold text-white mb-2" style={{ fontFamily: "var(--font-typewriter)", fontSize: "1.1rem" }}>{entry.title}</h3>
+                  <p className="text-white/45 leading-relaxed text-sm" style={{ fontFamily: "var(--font-typewriter)" }}>{entry.body}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.3 }}
+          className="mt-14 rounded-2xl p-6 text-center" style={{ background: "rgba(251,191,36,0.04)", border: "1px solid rgba(251,191,36,0.15)" }}>
+          <p className="text-white/50 leading-relaxed" style={{ fontFamily: "var(--font-typewriter)", fontSize: "1rem" }}>
+            &ldquo;Every generation of Telangana students has been handed a harder problem than the one before. Every generation solved it.&rdquo;
+          </p>
+          <p className="text-xs text-amber-400/50 mt-3 font-mono tracking-widest uppercase">Infizium · For the next generation</p>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 // ── Stats ─────────────────────────────────────────────────────────
 const stats = [
   { value: "90%+", label: "Parents on WhatsApp in Telangana" },
@@ -971,12 +1071,13 @@ export default function Home() {
       <AISection />
       <RoadmapSection />
       <SponsorshipSection />
+      <HistorySection />
 
       {/* CTA */}
       <section className="py-24 px-4">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: EASE }} className="max-w-xl mx-auto text-center">
           <h2 className="text-4xl font-bold text-white mb-4 tracking-tight">Get your school on Infizium</h2>
-          <p className="text-white/35 mb-8 leading-relaxed">We&apos;re onboarding pilot schools in Telangana. Setup takes under 2 hours.</p>
+          <p className="text-white/35 mb-8 leading-relaxed" style={{ fontFamily: "var(--font-typewriter)" }}>We&apos;re onboarding pilot schools in Telangana. Setup takes under 2 hours.</p>
           <Link href="/login" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-medium hover:scale-[1.02] transition-all"
             style={{ background: "rgba(0,212,255,0.12)", border: "1px solid rgba(0,212,255,0.4)", color: "#00d4ff", boxShadow: "0 0 40px rgba(0,212,255,0.12)" }}>
             Start with a demo →
@@ -985,10 +1086,21 @@ export default function Home() {
       </section>
 
       <footer className="border-t py-8 px-4" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-white/25">
-          <div><span className="font-semibold text-white/50">Infizium</span><span className="ml-2">· Telangana&apos;s school operating system</span></div>
-          <div className="flex items-center gap-3 text-xs text-white/20">
-            <span>infizium@outlook.com</span><span className="text-white/10">·</span><span className="font-mono">v{APP_VERSION}</span>
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="text-sm text-white/25">
+            <span className="font-semibold text-white/50">Infizium</span>
+            <span className="ml-2">· Telangana&apos;s school operating system</span>
+          </div>
+          <div className="flex items-center gap-4 text-xs text-white/25">
+            <span>infizium@outlook.com</span>
+            <span className="text-white/10">·</span>
+            <a href="https://www.instagram.com/infizium" target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-1.5 hover:text-white/60 transition-colors">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              <span>@infizium</span>
+            </a>
+            <span className="text-white/10">·</span>
+            <span className="font-mono">v{APP_VERSION}</span>
           </div>
         </div>
       </footer>

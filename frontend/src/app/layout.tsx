@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter, Space_Mono, Special_Elite } from "next/font/google";
+import { Space_Grotesk, Inter, Space_Mono, Courier_Prime } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/lib/auth/context";
 
@@ -24,10 +24,10 @@ const spaceMono = Space_Mono({
   display: "swap",
 });
 
-const specialElite = Special_Elite({
+const courierPrime = Courier_Prime({
   subsets: ["latin"],
   variable: "--font-special-elite",
-  weight: ["400"],
+  weight: ["400", "700"],
   display: "swap",
 });
 
@@ -47,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${inter.variable} ${spaceMono.variable} ${specialElite.variable} h-full`}
+      className={`${spaceGrotesk.variable} ${inter.variable} ${spaceMono.variable} ${courierPrime.variable} h-full`}
       style={{ "--font-typewriter": "var(--font-special-elite), 'Courier New', monospace" } as React.CSSProperties}
     >
       <body className="min-h-full flex flex-col font-body antialiased subpixel-antialiased">

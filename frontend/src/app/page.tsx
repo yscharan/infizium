@@ -260,29 +260,101 @@ function ShowcaseSidebar({ idx, onIdx }: { idx: number; onIdx: (i: number) => vo
   );
 }
 
+// ── Mobile showcase (top card on mobile) ─────────────────────────
+function MobileShowcase({ idx, onIdx }: { idx: number; onIdx: (i: number) => void }) {
+  const [key, setKey] = useState(0);
+  const p = personas[idx];
+  const Preview = previewContent[idx];
+
+  useEffect(() => {
+    const t = setInterval(() => { onIdx((idx + 1) % personas.length); setKey(k => k + 1); }, 5000);
+    return () => clearInterval(t);
+  }, [idx, onIdx]);
+
+  return (
+    <div className="relative flex flex-col px-4 pt-4 pb-3 overflow-hidden"
+      style={{ background: "linear-gradient(160deg, #0a0a0f 0%, #0d0a1a 100%)" }}>
+      <motion.div key={`mg-${idx}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: `radial-gradient(ellipse at 60% 30%, ${p.neon}15 0%, transparent 70%)` }} />
+      <div className="relative flex items-center justify-between mb-3">
+        <div>
+          <p className="text-[10px] font-mono tracking-widest uppercase" style={{ color: "rgba(0,212,255,0.5)" }}>Telangana School OS</p>
+          <AnimatePresence mode="wait">
+            <motion.p key={`t-${idx}`} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.4, ease: EASE }}
+              className="text-xl font-bold text-white leading-tight whitespace-pre-line mt-1">
+              {p.tagline}
+            </motion.p>
+          </AnimatePresence>
+        </div>
+        <AnimatePresence mode="wait">
+          <motion.span key={`badge-${idx}`} initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}
+            className="text-xs font-semibold px-2.5 py-1 rounded-full flex-shrink-0 ml-3"
+            style={{ background: `${p.neon}18`, color: p.neon, border: `1px solid ${p.neon}35` }}>
+            {p.icon} {p.role}
+          </motion.span>
+        </AnimatePresence>
+      </div>
+      <div className="relative rounded-xl border border-white/8 overflow-hidden" style={{ background: "rgba(255,255,255,0.03)" }}>
+        <div className="border-b border-white/6 px-3 py-2 flex items-center gap-1.5" style={{ background: "rgba(0,0,0,0.4)" }}>
+          <div className="flex gap-1">{["bg-red-500/40","bg-amber-500/40","bg-emerald-500/40"].map(c=><div key={c} className={`w-2 h-2 rounded-full ${c}`}/>)}</div>
+          <span className="text-[9px] text-white/20 font-mono ml-1">app.infizium.com</span>
+          <motion.div animate={{ opacity: [0.4,1,0.4] }} transition={{ duration: 2, repeat: Infinity }} className="ml-auto flex items-center gap-1">
+            <span className="w-1 h-1 rounded-full" style={{ background: p.neon }} /><span className="text-[8px] text-white/20 font-mono">LIVE</span>
+          </motion.div>
+        </div>
+        <div className="p-3">
+          <AnimatePresence mode="wait">
+            <motion.div key={key} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}><Preview /></motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+      <div className="relative flex items-center gap-1.5 mt-3">
+        {personas.map((_, i) => (
+          <button key={i} onClick={() => { onIdx(i); setKey(k=>k+1); }} className="relative h-1 rounded-full overflow-hidden transition-all duration-300"
+            style={{ width: i === idx ? 28 : 7, background: "rgba(255,255,255,0.12)" }}>
+            {i === idx && <motion.div key={idx} className="absolute inset-y-0 left-0 rounded-full" style={{ background: p.neon }} initial={{ width:"0%" }} animate={{ width:"100%" }} transition={{ duration: 5, ease:"linear" }} />}
+          </button>
+        ))}
+        <p className="ml-auto text-[9px] text-white/20">auto-cycling</p>
+      </div>
+    </div>
+  );
+}
+
 // ── Split hero ────────────────────────────────────────────────────
 function SplitHero() {
   const [idx, setIdx] = useState(0);
   const p = personas[idx];
   return (
-    <section className="flex min-h-screen">
-      <div className="hidden lg:flex lg:w-[52%] xl:w-[55%] flex-col"><ShowcaseSidebar idx={idx} onIdx={setIdx} /></div>
+    <section className="flex flex-col lg:flex-row min-h-screen">
+
+      {/* Mobile: compact showcase on top */}
+      <div className="lg:hidden">
+        <MobileShowcase idx={idx} onIdx={setIdx} />
+      </div>
+
+      {/* Desktop: full sidebar on left */}
+      <div className="hidden lg:flex lg:w-[52%] xl:w-[55%] flex-col">
+        <ShowcaseSidebar idx={idx} onIdx={setIdx} />
+      </div>
       <div className="hidden lg:block w-px bg-white/6" />
-      <div className="flex-1 flex flex-col items-center justify-center px-6 py-12">
-        <div className="lg:hidden mb-8 text-center">
-          <p className="font-bold text-xl text-white">Infizium</p>
-          <p className="text-xs text-white/30 mt-1 font-mono tracking-widest uppercase">Telangana School Operating System</p>
-        </div>
+
+      {/* Persona selector — right on desktop, bottom on mobile */}
+      <div className="flex-1 flex flex-col items-center justify-center px-5 py-8 lg:py-12">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: EASE }} className="w-full max-w-sm">
-          <div className="mb-7"><h1 className="text-2xl font-bold text-white mb-1">Who are you?</h1><p className="text-sm text-white/35">Select your role to see what Infizium does for you</p></div>
-          <div className="grid grid-cols-2 gap-2.5 mb-5">
+          <div className="mb-5">
+            <h1 className="text-xl lg:text-2xl font-bold text-white mb-1">Who are you?</h1>
+            <p className="text-sm text-white/35">Select your role to see what Infizium does for you</p>
+          </div>
+          <div className="grid grid-cols-4 lg:grid-cols-2 gap-2 mb-4">
             {personas.map((per, i) => (
               <motion.button key={per.id} onClick={() => setIdx(i)} whileTap={{ scale: 0.97 }}
-                className="rounded-2xl border-2 p-4 text-left transition-all duration-200"
+                className="rounded-xl lg:rounded-2xl border-2 p-2.5 lg:p-4 text-left transition-all duration-200"
                 style={idx === i ? { borderColor: per.neon, background: `${per.neon}10`, boxShadow: `0 0 0 1px ${per.neon}30` } : { borderColor: `${per.neon}30`, background: "rgba(255,255,255,0.02)" }}>
-                <div className="text-2xl mb-2">{per.icon}</div>
-                <p className="font-semibold text-sm text-white">{per.role}</p>
-                <p className="text-[11px] text-white/35 mt-0.5 leading-snug">{per.gets[0]}</p>
+                <div className="text-xl lg:text-2xl mb-1 lg:mb-2">{per.icon}</div>
+                <p className="font-semibold text-xs lg:text-sm text-white">{per.role}</p>
+                <p className="text-[10px] text-white/35 mt-0.5 leading-snug hidden lg:block">{per.gets[0]}</p>
               </motion.button>
             ))}
           </div>
@@ -300,16 +372,13 @@ function SplitHero() {
               </ul>
             </motion.div>
           </AnimatePresence>
-          <div className="space-y-2.5">
-            <Link href={p.href} className="block w-full py-3.5 rounded-xl font-semibold text-sm text-white text-center hover:opacity-90 transition-all" style={{ background: p.neon }}>
+          <div className="space-y-2">
+            <Link href={p.href} className="block w-full py-3 rounded-xl font-semibold text-sm text-white text-center hover:opacity-90 transition-all" style={{ background: p.neon }}>
               Explore as {p.role} →
             </Link>
-            <a href="#mission" className="block w-full py-2.5 rounded-xl text-xs text-white/25 hover:text-white/50 transition-colors text-center">See our mission ↓</a>
+            <a href="#mission" className="block w-full py-2 rounded-xl text-xs text-white/25 hover:text-white/50 transition-colors text-center">See our mission ↓</a>
           </div>
-          <div className="flex gap-1.5 justify-center mt-6">
-            {personas.map((_, i) => <div key={i} className="h-0.5 rounded-full transition-all duration-300" style={{ width: idx===i ? 24 : 8, background: idx===i ? p.neon : "rgba(255,255,255,0.12)" }} />)}
-          </div>
-          <p className="text-center text-[10px] text-white/12 mt-5">DPDP compliant · Access requires admin approval · Valmiki Vidyalayam pilot</p>
+          <p className="text-center text-[10px] text-white/12 mt-4">DPDP compliant · Access requires admin approval · Valmiki Vidyalayam pilot</p>
         </motion.div>
       </div>
     </section>
@@ -520,7 +589,7 @@ function CommuteSection() {
     { icon: "📡", title: "Solo + Smart Tag", desc: "Student travels alone. Infizium Tag in bag or Smart Band on wrist. Silent location ping to parent.", phase: "Phase 2" },
   ];
   return (
-    <section className="py-28 px-4 relative overflow-hidden" style={{ background: "linear-gradient(180deg, #09090b 0%, #0a0d0a 50%, #09090b 100%)" }}>
+    <section id="commute-section" className="py-28 px-4 relative overflow-hidden" style={{ background: "linear-gradient(180deg, #09090b 0%, #0a0d0a 50%, #09090b 100%)" }}>
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] rounded-full blur-[100px]" style={{ background: "rgba(245,158,11,0.05)" }} />
       </div>
@@ -624,7 +693,7 @@ function AISection() {
     { from: "bot", msg: "📚 2 assignments due June 8:\n• *Maths* — Chapter 7 exercises\n• *English* — Essay on environment (due June 10)\n\nBoth posted by Ravi sir today." },
   ];
   return (
-    <section className="py-24 px-4" style={{ background: "rgba(0,0,0,0.2)" }}>
+    <section id="ai-section" className="py-24 px-4" style={{ background: "rgba(0,0,0,0.2)" }}>
       <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
@@ -801,24 +870,38 @@ export default function Home() {
 
       <motion.nav initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: EASE }}
         className="fixed top-0 left-0 right-0 z-50 border-b"
-        style={{ background: "rgba(9,9,11,0.85)", backdropFilter: "blur(20px)", borderColor: "rgba(255,255,255,0.06)" }}>
-        <div className="max-w-6xl mx-auto px-5 h-14 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <span className="font-bold text-[17px] tracking-tight text-white">Infizium</span>
+        style={{ background: "rgba(9,9,11,0.92)", backdropFilter: "blur(20px)", borderColor: "rgba(255,255,255,0.06)" }}>
+        {/* Top row */}
+        <div className="max-w-6xl mx-auto px-4 h-12 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="font-bold text-base tracking-tight text-white">Infizium</span>
             <span className="hidden sm:block text-[10px] font-mono tracking-widest uppercase" style={{ color: "rgba(0,212,255,0.5)" }}>Telangana School OS</span>
-            <span className="text-[10px] font-mono text-white/20">v{APP_VERSION}</span>
+            <span className="text-[10px] font-mono text-white/15">v{APP_VERSION}</span>
           </div>
-          <div className="flex items-center gap-4">
-            <a href="#mission" className="text-sm text-white/40 hover:text-white/80 transition-colors hidden sm:block">Mission</a>
-            <a href="#features" className="text-sm text-white/40 hover:text-white/80 transition-colors hidden sm:block">Features</a>
-            <a href="#personas" className="text-sm text-white/40 hover:text-white/80 transition-colors hidden sm:block">Personas</a>
-            <Link href="/login" className="text-sm px-4 py-1.5 rounded-full font-medium hover:scale-[1.03] transition-all"
-              style={{ background: "rgba(0,212,255,0.10)", border: "1px solid rgba(0,212,255,0.25)", color: "#00d4ff" }}>Sign in</Link>
+          <Link href="/login" className="text-xs px-3 py-1.5 rounded-full font-semibold transition-all"
+            style={{ background: "rgba(0,212,255,0.10)", border: "1px solid rgba(0,212,255,0.25)", color: "#00d4ff" }}>Sign in</Link>
+        </div>
+        {/* Scrollable nav chips */}
+        <div className="border-t overflow-x-auto scrollbar-none" style={{ borderColor: "rgba(255,255,255,0.04)" }}>
+          <div className="flex items-center gap-1 px-4 py-1.5 w-max min-w-full">
+            {[
+              { label: "Mission", href: "#mission" },
+              { label: "Personas", href: "#personas" },
+              { label: "Features", href: "#features" },
+              { label: "Commute", href: "#commute-section" },
+              { label: "AI", href: "#ai-section" },
+              { label: "Schools", href: "/schools" },
+              { label: "Jobs", href: "/jobs" },
+            ].map(n => (
+              n.href.startsWith("#")
+                ? <a key={n.label} href={n.href} className="text-[11px] font-medium px-3 py-1 rounded-full whitespace-nowrap transition-all text-white/40 hover:text-white/80 hover:bg-white/6">{n.label}</a>
+                : <Link key={n.label} href={n.href} className="text-[11px] font-semibold px-3 py-1 rounded-full whitespace-nowrap transition-all"
+                    style={{ color: "#00d4ff", background: "rgba(0,212,255,0.08)", border: "1px solid rgba(0,212,255,0.15)" }}>{n.label}</Link>
+            ))}
           </div>
         </div>
       </motion.nav>
-
-      <div className="h-14" />
+      <div className="h-[84px]" />
 
       <SplitHero />
 

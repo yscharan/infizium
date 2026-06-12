@@ -511,61 +511,89 @@ function MissionSection() {
   );
 }
 
-// ── What's built now ──────────────────────────────────────────────
-const mvpModules = [
-  { icon: "✅", title: "Attendance", status: "Live", neon: "#10b981", desc: "Teacher marks full class on mobile in under 2 minutes. Absent students trigger WhatsApp alerts to parents automatically.", tags: ["teacher","parent","admin"] },
-  { icon: "📚", title: "Homework", status: "Live", neon: "#10b981", desc: "Teacher assigns with a due date. Students see a clean feed. Parents notified via WhatsApp. AI bot answers 'what homework is due?' in real time.", tags: ["teacher","student","parent"] },
-  { icon: "📢", title: "Announcements", status: "Live", neon: "#10b981", desc: "Admin broadcasts to 780 parents in under 60 seconds. WhatsApp delivery with read tracking per parent. No more group chats.", tags: ["admin","teacher","parent","student"] },
-  { icon: "📋", title: "Forms & Approvals", status: "Live", neon: "#10b981", desc: "Parents approve field trips with a WhatsApp reply. Full DPDP-compliant audit log. Admin sees who approved, who declined, who hasn't replied.", tags: ["admin","parent","teacher"] },
-  { icon: "💬", title: "WhatsApp-First", status: "Live", neon: "#10b981", desc: "Every alert goes to WhatsApp — no new app for parents. Works for any parent who has WhatsApp. 90%+ of Telangana parents already do.", tags: ["parent","student"] },
-  { icon: "🤖", title: "AI Bot (Claude Haiku)", status: "Live", neon: "#10b981", desc: "Parents text the bot anything — \"Arjun attendance ela undi?\" — and get real-time answers from the school database. Responds in Telugu.", tags: ["parent","student"] },
-  { icon: "🔐", title: "Parent Permissions", status: "Live", neon: "#10b981", desc: "Parents control which notifications arrive, which features are active for their child, and what data is shared. DPDP compliant.", tags: ["parent","admin"] },
-  { icon: "🤖", title: "MCP Server", status: "Live", neon: "#10b981", desc: "7 tools that give Claude Code (development) and the future AI tutor (production) grounded, real-time access to school data.", tags: ["admin"] },
-  { icon: "🚌", title: "Commute Ecosystem", status: "Phase 2", neon: "#f59e0b", desc: "UI built. Real GPS integration pending. 5 commute modes + Smart Band + Smart Tag hardware. The 9-minute rule.", tags: ["parent","student","admin"] },
-  { icon: "💰", title: "Sponsorship Platform", status: "Phase 2", neon: "#f59e0b", desc: "UI built. Payment integration pending. Donors pay student fees directly to school — no middleman. Anonymous, Codename, or Direct modes.", tags: ["student","admin"] },
-  { icon: "📊", title: "Analytics & Reports", status: "Phase 2", neon: "#3b82f6", desc: "Board-ready PDF reports with one click. Attendance trends, form response rates, announcement reach. No Excel required.", tags: ["admin","teacher"] },
-  { icon: "🧠", title: "AI Tutor (Telugu)", status: "Phase 3", neon: "#7c3aed", desc: "Bedrock-powered. Student asks in Telugu at 9 PM, tutor answers with worked examples. Aware of weak subjects. Parent-controlled.", tags: ["student","parent"] },
+// ── Features by persona ───────────────────────────────────────────
+const featuresByPersona = [
+  {
+    persona: "parent", icon: "👩", label: "Parent", neon: "#f97316",
+    features: [
+      { icon: "📱", title: "Attendance alerts on WhatsApp", status: "Live", desc: "Get a WhatsApp message the moment your child is marked absent. No app to download, no login needed." },
+      { icon: "💬", title: "Ask anything on WhatsApp", status: "Live", desc: "Text your question in Telugu or English — attendance, homework, fees. Get an instant answer from the school." },
+      { icon: "📋", title: "Approve field trips by WhatsApp reply", status: "Live", desc: "School sends a permission request. Reply YES or NO. Your response is recorded and the school is notified." },
+      { icon: "🔔", title: "Homework reminders", status: "Live", desc: "Know what your child has due tomorrow. Sent directly to your WhatsApp the night before." },
+      { icon: "🔐", title: "Control your child's data", status: "Live", desc: "Decide which notifications you receive and what information the school can access. DPDP compliant." },
+      { icon: "🚌", title: "Live bus tracking", status: "Phase 2", desc: "See your child's bus on a map. Get a ping when they board and when they reach school." },
+    ],
+  },
+  {
+    persona: "teacher", icon: "👨‍🏫", label: "Teacher", neon: "#3b82f6",
+    features: [
+      { icon: "✅", title: "Mark attendance in 2 minutes", status: "Live", desc: "Open the app, tap present or absent for each student. Parents are notified automatically. No register, no WhatsApp messages." },
+      { icon: "📚", title: "Assign homework in seconds", status: "Live", desc: "Type the assignment, set a due date, done. Every student and parent sees it instantly." },
+      { icon: "📢", title: "Send announcements", status: "Live", desc: "Broadcast to your class or the whole school. Read receipts show who got it." },
+      { icon: "📋", title: "Create approval forms", status: "Live", desc: "Field trips, events, consent — send a form, track who approved, who declined, who hasn't responded." },
+      { icon: "📊", title: "Class reports", status: "Phase 2", desc: "Attendance trends, homework completion rates, and class performance in one view. No Excel." },
+    ],
+  },
+  {
+    persona: "student", icon: "🧑‍🎓", label: "Student", neon: "#10b981",
+    features: [
+      { icon: "📚", title: "Clean homework feed", status: "Live", desc: "See all assignments due, with deadlines. Never miss something given verbally in class." },
+      { icon: "📈", title: "Track your attendance", status: "Live", desc: "See your attendance percentage and which days you were absent. Know when you're close to the limit." },
+      { icon: "🎯", title: "Progress at a glance", status: "Live", desc: "Your academic summary — subjects, attendance, homework completion — in one screen." },
+      { icon: "💰", title: "Sponsorship support", status: "Phase 2", desc: "If your family needs help with fees, anonymous sponsors can pay directly to your school. No shame, no middleman." },
+      { icon: "🧠", title: "Study help in Telugu", status: "Phase 3", desc: "Ask any question from your syllabus late at night and get a worked example back. In Telugu." },
+      { icon: "🌱", title: "Personality & life skills", status: "Phase 3", desc: "Routine tracking, goal setting, and character building built into your daily school experience." },
+    ],
+  },
+  {
+    persona: "admin", icon: "🏫", label: "Admin", neon: "#7c3aed",
+    features: [
+      { icon: "📊", title: "School-wide attendance at 8:15 AM", status: "Live", desc: "See which classes are fully marked, which are pending, and the school-wide attendance rate before assembly." },
+      { icon: "📢", title: "Broadcast to all parents in 60 seconds", status: "Live", desc: "Type your announcement once. Every parent in the school gets it on WhatsApp. Delivery tracked." },
+      { icon: "📋", title: "Forms and consent management", status: "Live", desc: "Create forms, send them to parents, and see a real-time response tracker. Full audit log." },
+      { icon: "🔐", title: "Parent permissions dashboard", status: "Live", desc: "See which parents have granted which permissions. DPDP compliance built in." },
+      { icon: "🚌", title: "Fleet and commute overview", status: "Phase 2", desc: "All buses on a map. Which students are in transit, who has arrived, which route is delayed." },
+      { icon: "📈", title: "Analytics and board reports", status: "Phase 2", desc: "Generate PDF reports for the school board with one click. Attendance, homework, form response rates." },
+      { icon: "💰", title: "Sponsorship management", status: "Phase 2", desc: "Review student sponsorship requests, verify and publish profiles, track donations to your school." },
+    ],
+  },
 ];
 
-const personaNeonMap: Record<string, string> = { parent: "#f97316", teacher: "#3b82f6", student: "#10b981", admin: "#7c3aed" };
-
 function ModulesSection() {
-  const [filter, setFilter] = useState<string>("all");
-  const filtered = filter === "all" ? mvpModules : mvpModules.filter(m => m.tags.includes(filter));
   return (
-    <section id="features" className="py-24 px-4">
+    <section id="features" className="py-24 px-4" style={{ background: "rgba(0,0,0,0.1)" }}>
       <div className="max-w-6xl mx-auto">
-        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center mb-10">
-          <motion.p variants={fadeUp} className="text-xs font-mono tracking-widest uppercase text-white/30 mb-3">All modules</motion.p>
-          <motion.h2 variants={fadeUp} className="text-4xl font-bold text-white tracking-tight mb-3">Everything the school needs,<br/>nothing it doesn&apos;t</motion.h2>
-          <motion.p variants={fadeUp} className="text-white/30">12 modules across MVP and future phases. Filter by who uses each one.</motion.p>
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center mb-14">
+          <motion.p variants={fadeUp} className="text-xs font-mono tracking-widest uppercase text-white/30 mb-3">Features</motion.p>
+          <motion.h2 variants={fadeUp} className="text-4xl font-bold text-white tracking-tight mb-3">Built for each person in the school</motion.h2>
+          <motion.p variants={fadeUp} className="text-white/30 max-w-xl mx-auto">Every feature is designed around one person&apos;s daily need. Shared features appear where they matter most.</motion.p>
         </motion.div>
-        <div className="flex flex-wrap gap-2 justify-center mb-8">
-          {[{ id: "all", label: "All modules", neon: "#00d4ff" }, ...personas.map(p => ({ id: p.id, label: p.role, neon: p.neon }))].map(f => (
-            <button key={f.id} onClick={() => setFilter(f.id)}
-              className="text-xs font-semibold px-3 py-1.5 rounded-full transition-all"
-              style={filter === f.id ? { background: `${f.neon}20`, color: f.neon, border: `1px solid ${f.neon}40` } : { background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.35)", border: "1px solid rgba(255,255,255,0.08)" }}>
-              {f.label}
-            </button>
-          ))}
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filtered.map((m, i) => (
-            <motion.div key={m.title} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i*0.05, duration: 0.4, ease: EASE }}
-              className="rounded-2xl p-5 flex flex-col gap-3 relative"
-              style={{ background: `${m.neon}06`, border: `1px solid ${m.neon}18` }}>
-              <div className="absolute top-4 right-4">
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ background: `${m.neon}18`, color: m.neon, border: `1px solid ${m.neon}30` }}>{m.status}</span>
+        <div className="space-y-12">
+          {featuresByPersona.map((group, gi) => (
+            <motion.div key={group.persona} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: gi * 0.05, duration: 0.5, ease: EASE }}>
+              <div className="flex items-center gap-3 mb-5">
+                <span className="text-2xl">{group.icon}</span>
+                <div>
+                  <p className="font-bold text-white text-lg">{group.label}</p>
+                </div>
+                <div className="flex-1 h-px ml-2" style={{ background: `linear-gradient(90deg, ${group.neon}30, transparent)` }} />
               </div>
-              <div className="flex items-start gap-3 pr-16">
-                <span className="text-2xl mt-0.5">{m.icon}</span>
-                <div><h3 className="font-semibold text-white text-sm">{m.title}</h3><p className="text-xs text-white/35 leading-relaxed mt-0.5">{m.desc}</p></div>
-              </div>
-              <div className="flex flex-wrap gap-1.5 mt-auto">
-                {m.tags.map(tag => {
-                  const per = personas.find(p => p.id === tag);
-                  return per ? <span key={tag} className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{ background: `${per.neon}15`, color: per.neon, border: `1px solid ${per.neon}30` }}>{per.icon} {per.role}</span> : null;
-                })}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {group.features.map((f, fi) => (
+                  <motion.div key={f.title} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: fi * 0.05, duration: 0.4, ease: EASE }}
+                    className="rounded-xl p-4 flex flex-col gap-2 relative"
+                    style={{ background: `${group.neon}05`, border: `1px solid ${group.neon}18` }}>
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="flex items-start gap-2.5 flex-1 min-w-0">
+                        <span className="text-lg flex-shrink-0 mt-0.5">{f.icon}</span>
+                        <p className="font-semibold text-white text-sm leading-snug">{f.title}</p>
+                      </div>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full flex-shrink-0"
+                        style={{ background: `${group.neon}18`, color: group.neon, border: `1px solid ${group.neon}30` }}>{f.status}</span>
+                    </div>
+                    <p className="text-xs text-white/35 leading-relaxed">{f.desc}</p>
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
           ))}
@@ -856,7 +884,7 @@ const stats = [
   { value: "90%+", label: "Parents on WhatsApp in Telangana" },
   { value: "2 min", label: "To mark attendance for 40 students" },
   { value: "0", label: "App downloads required for parents" },
-  { value: "₹200/mo", label: "AI bot cost for 500 parents" },
+  { value: "9 min", label: "The rule: parent stops worrying" },
 ];
 
 // ── Main page ─────────────────────────────────────────────────────
@@ -885,7 +913,6 @@ export default function Home() {
               { label: "Personas", href: "#personas" },
               { label: "Features", href: "#features" },
               { label: "Commute", href: "#commute-section" },
-              { label: "AI", href: "#ai-section" },
               { label: "Schools", href: "/schools" },
               { label: "Jobs", href: "/jobs" },
             ].map(n => (

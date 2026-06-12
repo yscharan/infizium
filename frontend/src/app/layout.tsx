@@ -26,7 +26,7 @@ const spaceMono = Space_Mono({
 
 const specialElite = Special_Elite({
   subsets: ["latin"],
-  variable: "--font-typewriter",
+  variable: "--font-special-elite",
   weight: ["400"],
   display: "swap",
 });
@@ -48,6 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       className={`${spaceGrotesk.variable} ${inter.variable} ${spaceMono.variable} ${specialElite.variable} h-full`}
+      style={{ "--font-typewriter": "var(--font-special-elite), 'Courier New', monospace" } as React.CSSProperties}
     >
       <body className="min-h-full flex flex-col font-body antialiased subpixel-antialiased">
         <AuthProvider>{children}</AuthProvider>

@@ -405,7 +405,7 @@ function PeopleSection() {
                   <p className="text-[11px] text-white/35 mt-0.5">{p.detail}</p>
                 </div>
               </div>
-              <p className="text-xs text-white/45 leading-relaxed" style={{ fontFamily: "var(--font-typewriter)" }}>{p.story}</p>
+              <p className="text-xs text-white/45 leading-relaxed">{p.story}</p>
               <ul className="mt-auto space-y-1.5">
                 {p.gets.slice(0,3).map(g => (
                   <li key={g} className="flex items-start gap-1.5 text-xs text-white/35">
@@ -445,10 +445,10 @@ function MissionSection() {
             Prepare students for life,<br />
             <span style={{ background: "linear-gradient(135deg, #00d4ff, #7c3aed)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>not just exams.</span>
           </h2>
-          <p className="text-lg font-semibold italic mb-5" style={{ color: "rgba(0,212,255,0.6)", letterSpacing: "0.01em", fontFamily: "var(--font-typewriter)" }}>
-            &ldquo;Educate to build a personality.&rdquo;
+          <p className="text-lg font-semibold mb-5" style={{ color: "rgba(0,212,255,0.6)", letterSpacing: "0.01em" }}>
+            Educate to build a personality.
           </p>
-          <p className="text-white/40 text-lg max-w-2xl mx-auto leading-relaxed" style={{ fontFamily: "var(--font-typewriter)" }}>
+          <p className="text-white/40 text-lg max-w-2xl mx-auto leading-relaxed">
             Schools in Telangana prepare students brilliantly for board exams. But life after school — managing time, money, health, and relationships — is taught nowhere. Infizium starts by fixing the school operating system, then builds the life skills layer on top.
           </p>
         </motion.div>
@@ -959,12 +959,10 @@ function HistorySection() {
             <span className="text-amber-400 text-xs">🏛</span>
             <span className="text-xs font-mono font-semibold tracking-widest uppercase text-amber-400">History of Telangana</span>
           </motion.div>
-          <motion.h2 variants={fadeUp} className="text-4xl font-bold text-white tracking-tight mb-3 leading-tight"
-            style={{ fontFamily: "var(--font-typewriter)" }}>
+          <motion.h2 variants={fadeUp} className="font-typewriter text-4xl font-bold text-white tracking-tight mb-3 leading-tight">
             Know where you come from.
           </motion.h2>
-          <motion.p variants={fadeUp} className="text-white/35 leading-relaxed max-w-lg mx-auto"
-            style={{ fontFamily: "var(--font-typewriter)", fontSize: "0.95rem" }}>
+          <motion.p variants={fadeUp} className="font-typewriter text-white/35 leading-relaxed max-w-lg mx-auto text-[0.95rem]">
             Before you build your future, read the past that built you. This land has carried great people for over two thousand years. You are one of them.
           </motion.p>
         </motion.div>
@@ -985,8 +983,8 @@ function HistorySection() {
                 </div>
                 <div className="flex-1 pb-2">
                   <p className="text-xs font-mono tracking-widest uppercase mb-1" style={{ color: "rgba(251,191,36,0.5)" }}>{entry.year}</p>
-                  <h3 className="font-bold text-white mb-2" style={{ fontFamily: "var(--font-typewriter)", fontSize: "1.1rem" }}>{entry.title}</h3>
-                  <p className="text-white/45 leading-relaxed text-sm" style={{ fontFamily: "var(--font-typewriter)" }}>{entry.body}</p>
+                  <h3 className="font-typewriter font-bold text-white mb-2 text-[1.1rem]">{entry.title}</h3>
+                  <p className="font-typewriter text-white/45 leading-relaxed text-sm">{entry.body}</p>
                 </div>
               </motion.div>
             ))}
@@ -995,8 +993,8 @@ function HistorySection() {
 
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.3 }}
           className="mt-14 rounded-2xl p-6 text-center" style={{ background: "rgba(251,191,36,0.04)", border: "1px solid rgba(251,191,36,0.15)" }}>
-          <p className="text-white/50 leading-relaxed" style={{ fontFamily: "var(--font-typewriter)", fontSize: "1rem" }}>
-            &ldquo;Every generation of Telangana students has been handed a harder problem than the one before. Every generation solved it.&rdquo;
+          <p className="font-typewriter text-white/50 leading-relaxed text-[1rem]">
+            Every generation of Telangana students has been handed a harder problem than the one before. Every generation solved it.
           </p>
           <p className="text-xs text-amber-400/50 mt-3 font-mono tracking-widest uppercase">Infizium · For the next generation</p>
         </motion.div>
@@ -1079,7 +1077,7 @@ export default function Home() {
       <section className="py-24 px-4">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: EASE }} className="max-w-xl mx-auto text-center">
           <h2 className="text-4xl font-bold text-white mb-4 tracking-tight">Get your school on Infizium</h2>
-          <p className="text-white/35 mb-8 leading-relaxed" style={{ fontFamily: "var(--font-typewriter)" }}>We&apos;re onboarding pilot schools in Telangana. Setup takes under 2 hours.</p>
+          <p className="text-white/35 mb-8 leading-relaxed">We&apos;re onboarding pilot schools in Telangana. Setup takes under 2 hours.</p>
           <Link href="/login" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-medium hover:scale-[1.02] transition-all"
             style={{ background: "rgba(0,212,255,0.12)", border: "1px solid rgba(0,212,255,0.4)", color: "#00d4ff", boxShadow: "0 0 40px rgba(0,212,255,0.12)" }}>
             Start with a demo →

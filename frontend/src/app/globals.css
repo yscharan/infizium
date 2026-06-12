@@ -2,10 +2,9 @@
 
 /* ── Tailwind v4 theme — font families ───────────────────────── */
 @theme {
-  --font-display:    'Space Grotesk', sans-serif;
-  --font-body:       'Inter', sans-serif;
-  --font-mono:       'Space Mono', monospace;
-  --font-typewriter: var(--font-special-elite, 'Courier New', monospace);
+  --font-sans:        'DM Sans', sans-serif;
+  --font-mono:        'DM Mono', monospace;
+  --font-typewriter:  'Courier New', monospace;
 }
 
 /* ── Brand tokens ─────────────────────────────────────────────── */
@@ -28,9 +27,8 @@
   --navy-3:   #0d1525;
 
   /* Typography */
-  --font-display: 'Space Grotesk', sans-serif;
-  --font-body:    'Inter', sans-serif;
-  --font-mono:    'Space Mono', monospace;
+  --font-sans: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
 
   /* Radius */
   --radius-sm:  8px;
@@ -54,30 +52,32 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-body);
+  font-family: var(--font-sans);
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   letter-spacing: -0.01em;
 }
 
-/* Display font on all headings */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
-  letter-spacing: -0.03em;
-  line-height: 1.1;
+  font-family: var(--font-sans);
+  letter-spacing: -0.025em;
+  line-height: 1.15;
   font-weight: 700;
 }
 
-/* Mono on code + stats */
 code, kbd, pre, samp,
 .font-mono, [class*="font-mono"] {
   font-family: var(--font-mono);
 }
 
+.font-typewriter {
+  font-family: var(--font-typewriter);
+}
+
 /* ── Tailwind utilities ────────────────────────────────────────── */
 @layer utilities {
-  .font-display { font-family: var(--font-display); }
-  .font-body    { font-family: var(--font-body); }
-  .font-mono    { font-family: var(--font-mono); }
+  .font-sans        { font-family: var(--font-sans); }
+  .font-mono        { font-family: var(--font-mono); }
+  .font-typewriter  { font-family: var(--font-typewriter); }
 }
 
 /* ── Selection ────────────────────────────────────────────────── */

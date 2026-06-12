@@ -1,32 +1,25 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter, Space_Mono, Courier_Prime } from "next/font/google";
+import { DM_Sans, DM_Mono, Courier_Prime } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/lib/auth/context";
 
-const spaceGrotesk = Space_Grotesk({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-display",
-  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-sans",
+  weight: ["300", "400", "500", "600", "700", "800"],
   display: "swap",
 });
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-body",
-  weight: ["300", "400", "500", "600"],
-  display: "swap",
-});
-
-const spaceMono = Space_Mono({
+const dmMono = DM_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
-  weight: ["400", "700"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
 const courierPrime = Courier_Prime({
   subsets: ["latin"],
-  variable: "--font-special-elite",
+  variable: "--font-typewriter",
   weight: ["400", "700"],
   display: "swap",
 });
@@ -47,10 +40,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${inter.variable} ${spaceMono.variable} ${courierPrime.variable} h-full`}
-      style={{ "--font-typewriter": "var(--font-special-elite), 'Courier New', monospace" } as React.CSSProperties}
+      className={`${dmSans.variable} ${dmMono.variable} ${courierPrime.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col font-body antialiased subpixel-antialiased">
+      <body className="min-h-full flex flex-col font-sans antialiased subpixel-antialiased">
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>

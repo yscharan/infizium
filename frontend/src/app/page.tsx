@@ -923,7 +923,6 @@ export default function Home() {
               { label: "Mission", href: "#mission" },
               { label: "Personas", href: "#personas" },
               { label: "Features", href: "#features" },
-              { label: "Commute", href: "#commute-section" },
               { label: "Schools", href: "/schools" },
               { label: "Jobs", href: "/jobs" },
             ].map(n => (

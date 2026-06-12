@@ -497,7 +497,7 @@ function MissionSection() {
           <div className="text-5xl flex-shrink-0">🏫</div>
           <div className="flex-1 text-center sm:text-left">
             <div className="flex items-center gap-2 justify-center sm:justify-start mb-1.5">
-              <p className="font-bold text-white text-lg">Valmiki Vidyalayam, Hyderabad</p>
+              <p className="font-bold text-white text-lg">Valmiki Vidyalayam</p>
               <span className="text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ background: "rgba(16,185,129,0.15)", color: "#10b981", border: "1px solid rgba(16,185,129,0.3)" }}>Pilot School</span>
             </div>
             <p className="text-sm text-white/40 mb-2">Our first school. What works here rolls out to the next school. Real teachers, real parents, real students.</p>
@@ -555,6 +555,17 @@ const featuresByPersona = [
       { icon: "🚌", title: "Fleet and commute overview", status: "Phase 2", desc: "All buses on a map. Which students are in transit, who has arrived, which route is delayed." },
       { icon: "📈", title: "Analytics and board reports", status: "Phase 2", desc: "Generate PDF reports for the school board with one click. Attendance, homework, form response rates." },
       { icon: "💰", title: "Sponsorship management", status: "Phase 2", desc: "Review student sponsorship requests, verify and publish profiles, track donations to your school." },
+    ],
+  },
+  {
+    persona: "commute", icon: "🚌", label: "Commute Ecosystem", neon: "#f59e0b",
+    features: [
+      { icon: "🚌", title: "School Bus GPS", status: "Phase 2", desc: "Live GPS on every school bus. Parent gets a WhatsApp ping when their child boards and when the bus reaches school." },
+      { icon: "🚗", title: "Parent Car Pool", status: "Phase 2", desc: "Route-matching between verified school families. Shared live location during the trip. Mutual identity verified." },
+      { icon: "🛺", title: "Auto Buddy", status: "Phase 2", desc: "School-verified auto drivers only. Group ride for 3 to 4 students. Parent gets an arrival alert at drop-off." },
+      { icon: "🚶", title: "Walk Group", status: "Phase 2", desc: "Group check-in tracking — not individual GPS. A senior student leads. Parent gets one alert when the group arrives." },
+      { icon: "📡", title: "Solo + Smart Tag", status: "Phase 2", desc: "Student travels alone. Infizium Tag in school bag pings location silently. Parent sees the journey on their phone." },
+      { icon: "⌚", title: "Smart Band", status: "Phase 2", desc: "GPS + BLE wristband for students. 7-day battery. SOS button. Auto check-in at school gate. Looks like a watch." },
     ],
   },
 ];

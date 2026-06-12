@@ -209,18 +209,14 @@ function ShowcaseSidebar({ idx, onIdx }: { idx: number; onIdx: (i: number) => vo
       <motion.div key={`glow-${idx}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}
         className="absolute inset-0 pointer-events-none"
         style={{ background: `radial-gradient(ellipse at 30% 40%, ${p.neon}12 0%, transparent 65%)` }} />
-      <div className="relative">
-        <div className="flex items-center justify-between mb-0.5">
-          <Link href="/" className="font-bold text-white text-lg tracking-tight">Infizium</Link>
-          <AnimatePresence mode="wait">
-            <motion.span key={idx} initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} transition={{ duration: 0.4 }}
-              className="text-xs font-semibold px-3 py-1 rounded-full"
-              style={{ background: `${p.neon}18`, color: p.neon, border: `1px solid ${p.neon}35` }}>
-              {p.icon} {p.role} · {p.name}
-            </motion.span>
-          </AnimatePresence>
-        </div>
-        <p className="text-[10px] font-mono tracking-widest uppercase" style={{ color: "rgba(0,212,255,0.45)" }}>Telangana School Operating System</p>
+      <div className="relative flex items-center justify-end">
+        <AnimatePresence mode="wait">
+          <motion.span key={idx} initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} transition={{ duration: 0.4 }}
+            className="text-xs font-semibold px-3 py-1 rounded-full"
+            style={{ background: `${p.neon}18`, color: p.neon, border: `1px solid ${p.neon}35` }}>
+            {p.icon} {p.role} · {p.name}
+          </motion.span>
+        </AnimatePresence>
       </div>
       <div className="relative flex-1 flex flex-col justify-center py-6 gap-5">
         <AnimatePresence mode="wait">

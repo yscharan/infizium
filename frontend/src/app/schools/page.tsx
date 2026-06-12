@@ -10,6 +10,8 @@ const schools = [
     rank: 1,
     name: "Valmiki Vidyalayam",
     location: "Karimnagar, Telangana",
+    address: "Chaitanyapuri, Karimnagar, Telangana 505001",
+    mapQuery: "Chaitanyapuri+Karimnagar+Telangana+505001+India",
     since: "1987",
     students: 780,
     neon: "#00d4ff",
@@ -56,15 +58,24 @@ export default function SchoolsPage() {
                         style={{ background: `${s.neon}18`, color: s.neon, border: `1px solid ${s.neon}30` }}>{b}</span>
                     ))}
                   </div>
-                  <p className="text-xs text-white/35 mb-3">{s.location} · Est. {s.since} · {s.students} students</p>
+                  <a href={`https://www.google.com/maps/search/?api=1&query=${s.mapQuery}`} target="_blank" rel="noopener noreferrer"
+                    className="flex items-center gap-1 text-xs text-white/35 hover:text-white/60 transition-colors mb-3 w-fit">
+                    <span>📍</span><span>{s.address}</span>
+                  </a>
+                  <p className="text-xs text-white/35 mb-3">Est. {s.since} · {s.students} students</p>
                   <p className="text-sm text-white/50 mb-4 leading-relaxed">{s.desc}</p>
-                  <div className="grid grid-cols-3 gap-3">
+                  <div className="grid grid-cols-3 gap-3 mb-4">
                     {s.stats.map(st => (
                       <div key={st.label} className="rounded-xl p-2.5 text-center" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}>
                         <p className="text-lg font-bold" style={{ color: s.neon }}>{st.value}</p>
                         <p className="text-[10px] text-white/30 mt-0.5">{st.label}</p>
                       </div>
                     ))}
+                  </div>
+                  <div className="rounded-xl overflow-hidden h-48 w-full">
+                    <iframe src={`https://maps.google.com/maps?q=${s.mapQuery}&output=embed&z=16`}
+                      width="100%" height="100%" style={{ border: 0, filter: "invert(90%) hue-rotate(180deg)" }}
+                      allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
                   </div>
                 </div>
               </div>

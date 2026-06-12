@@ -492,19 +492,33 @@ function MissionSection() {
 
         {/* Pilot school */}
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: EASE }}
-          className="rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-5"
+          className="rounded-2xl overflow-hidden"
           style={{ background: "rgba(0,212,255,0.04)", border: "1px solid rgba(0,212,255,0.15)" }}>
-          <div className="text-5xl flex-shrink-0">🏫</div>
-          <div className="flex-1 text-center sm:text-left">
-            <div className="flex items-center gap-2 justify-center sm:justify-start mb-1.5">
-              <p className="font-bold text-white text-lg">Valmiki Vidyalayam</p>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ background: "rgba(16,185,129,0.15)", color: "#10b981", border: "1px solid rgba(16,185,129,0.3)" }}>Pilot School</span>
+          <div className="p-6 flex flex-col sm:flex-row items-start gap-5">
+            <div className="text-5xl flex-shrink-0">🏫</div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+                <p className="font-bold text-white text-lg">Valmiki Vidyalayam</p>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ background: "rgba(16,185,129,0.15)", color: "#10b981", border: "1px solid rgba(16,185,129,0.3)" }}>Pilot School</span>
+              </div>
+              <a href="https://www.google.com/maps/search/?api=1&query=Backside+SRR+Ground+Vidyanagar+Karimnagar+Telangana+505001"
+                target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-xs text-white/40 hover:text-white/70 transition-colors mb-2 w-fit">
+                <span>📍</span>
+                <span>Chaitanyapuri, Karimnagar, Telangana 505001</span>
+              </a>
+              <p className="text-sm text-white/40 mb-2">Our first school. What works here rolls out to the next school. Real teachers, real parents, real students.</p>
+              <p className="text-xs text-white/25">Principal: <span className="text-white/50 font-medium">Shekhar Rao Yadagiri</span> · <span className="text-white/50 font-medium">+91 99854 01894</span></p>
             </div>
-            <p className="text-sm text-white/40 mb-2">Our first school. What works here rolls out to the next school. Real teachers, real parents, real students.</p>
-            <p className="text-xs text-white/25">School owner: <span className="text-white/50 font-medium">Shekhar Rao Yadagiri</span> · <span className="text-white/50 font-medium">+91 99854 01894</span></p>
+            <Link href="/login" className="flex-shrink-0 text-sm px-5 py-2.5 rounded-xl font-semibold hover:scale-[1.02] transition-all"
+              style={{ background: "rgba(0,212,255,0.10)", border: "1px solid rgba(0,212,255,0.3)", color: "#00d4ff" }}>Get access →</Link>
           </div>
-          <Link href="/login" className="flex-shrink-0 text-sm px-5 py-2.5 rounded-xl font-semibold hover:scale-[1.02] transition-all"
-            style={{ background: "rgba(0,212,255,0.10)", border: "1px solid rgba(0,212,255,0.3)", color: "#00d4ff" }}>Get access →</Link>
+          <div className="w-full h-48 overflow-hidden">
+            <iframe
+              src="https://maps.google.com/maps?q=Chaitanyapuri+Karimnagar+Telangana+505001+India&output=embed&z=16"
+              width="100%" height="100%" style={{ border: 0, filter: "invert(90%) hue-rotate(180deg)" }}
+              allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+          </div>
         </motion.div>
       </div>
     </section>

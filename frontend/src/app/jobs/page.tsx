@@ -8,7 +8,7 @@ const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 const jobs = [
   {
     school: "Valmiki Vidyalayam",
-    location: "Hyderabad",
+    location: "Karimnagar, Telangana",
     role: "Maths Teacher",
     grade: "Grades 9 & 10",
     type: "Full-time",
@@ -19,13 +19,13 @@ const jobs = [
   },
   {
     school: "Valmiki Vidyalayam",
-    location: "Hyderabad",
+    location: "Karimnagar, Telangana",
     role: "Physical Education Teacher",
     grade: "All grades",
     type: "Full-time",
     neon: "#f59e0b",
     posted: "Jun 2026",
-    desc: "Build the sports culture at one of Hyderabad's top schools. State-level sports achievement preferred.",
+    desc: "Build the sports culture at one of Karimnagar's leading schools. State-level sports achievement preferred.",
     requirements: ["Sports science or B.P.Ed", "State level sports background", "Discipline and energy"],
   },
 ];

@@ -42,7 +42,7 @@ const personas = [
   },
   {
     id: "admin", idx: 3, role: "Admin", icon: "🏫", neon: "#7c3aed",
-    name: "Shekhar", detail: "Valmiki Vidyalayam, Hyderabad",
+    name: "Shekhar", detail: "Valmiki Vidyalayam, Karimnagar",
     tagline: "780 students. Real-time.\nFrom your phone.",
     story: "Shekhar starts every morning calling three class teachers for a rough attendance count. He sends announcements to a 200-parent WhatsApp group with no idea who read them.",
     gets: ["School-wide attendance view at 8:15 AM", "Broadcast to 780 parents in under 60 seconds", "Read receipts and delivery tracking per parent", "DPDP-compliant consent audit trail"],
@@ -456,7 +456,7 @@ function MissionSection() {
             { label: "Why", neon: "#f97316", icon: "🎯", heading: "The problem", body: "Parents miss alerts. Teachers waste 24 min/day on registers. Principals have no real-time view. Students get feedback twice a year." },
             { label: "What", neon: "#00d4ff", icon: "🏗️", heading: "What we build", body: "Attendance, homework, announcements, live bus tracking, parent communication, AI bot, and more. WhatsApp-first — no extra app needed for parents." },
             { label: "How", neon: "#10b981", icon: "⚡", heading: "How it works", body: "Mobile-first for teachers. WhatsApp for parents. Clean feed for students. Simple dashboard for admins. No app download required for parents." },
-            { label: "Where", neon: "#7c3aed", icon: "📍", heading: "Where we start", body: "Valmiki Vidyalayam, Hyderabad. Every feature is built alongside real teachers, parents, and students here first." },
+            { label: "Where", neon: "#7c3aed", icon: "📍", heading: "Where we start", body: "Valmiki Vidyalayam, Karimnagar, Telangana. Every feature is built alongside real teachers, parents, and students here first." },
           ].map((col, i) => (
             <motion.div key={col.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i*0.1, duration: 0.5, ease: EASE }}
               className="rounded-2xl p-5 flex flex-col gap-2" style={{ background: `${col.neon}08`, border: `1px solid ${col.neon}20` }}>

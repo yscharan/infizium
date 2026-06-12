@@ -9,7 +9,7 @@ const schools = [
   {
     rank: 1,
     name: "Valmiki Vidyalayam",
-    location: "Hyderabad",
+    location: "Karimnagar, Telangana",
     since: "1987",
     students: 780,
     neon: "#00d4ff",
@@ -19,7 +19,7 @@ const schools = [
       { label: "Sports titles", value: "12" },
       { label: "Notable alumni", value: "34" },
     ],
-    desc: "One of Hyderabad's most trusted schools. Strong in academics and athletics. First school on Infizium.",
+    desc: "One of Karimnagar's most trusted schools. Strong in academics and athletics. First school on Infizium.",
   },
 ];
 

@@ -41,7 +41,7 @@ const roles = [
     id: "admin", label: "Admin", icon: "🏫",
     desc: "School-wide operations & reports",
     accent: "#7c3aed", dash: "/dashboard/admin",
-    personaHint: "e.g., Principal, Valmiki Vidyalayam, Hyderabad",
+    personaHint: "e.g., Principal, Valmiki Vidyalayam, Karimnagar",
     personaLabel: "Your role and school name",
   },
 ];

@@ -107,7 +107,7 @@ function TeacherPreview() {
   useEffect(() => { const t = setTimeout(() => setSaved(true), 2000); return () => clearTimeout(t); }, []);
   return (
     <div className="space-y-3">
-      <div className="bg-white/5 border border-white/8 rounded-2xl p-4">
+      <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
         <div className="flex justify-between mb-3">
           <p className="text-xs font-semibold text-white/70">Grade 9A · Period 3 · Maths</p>
           <span className="text-[10px] bg-amber-500/20 text-amber-300 border border-amber-500/30 px-2 py-0.5 rounded-full">● Live</span>
@@ -141,7 +141,7 @@ function StudentPreview() {
     <div className="space-y-2">
       {hw.map((h, i) => (
         <motion.div key={h.title} initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.15 + i * 0.12, ease: EASE }}
-          className={`flex items-start gap-3 p-3 rounded-xl border text-xs ${h.done ? "bg-white/3 border-white/5 opacity-40" : h.urgent ? "bg-red-500/8 border-red-500/20" : "bg-white/5 border-white/8"}`}>
+          className={`flex items-start gap-3 p-3 rounded-xl border text-xs ${h.done ? "bg-white/3 border-white/5 opacity-40" : h.urgent ? "bg-red-500/8 border-red-500/20" : "bg-white/5 border-white/10"}`}>
           <div className={`w-4 h-4 rounded-md border flex-shrink-0 mt-0.5 flex items-center justify-center ${h.done ? "bg-emerald-500 border-emerald-500 text-white text-[9px]" : "border-white/25"}`}>{h.done && "✓"}</div>
           <div className="flex-1 min-w-0">
             <p className={`font-medium truncate ${h.done ? "line-through text-white/30" : "text-white/80"}`}>{h.title}</p>
@@ -176,7 +176,7 @@ function AdminPreview() {
           </motion.div>
         ))}
       </div>
-      <div className="bg-white/5 border border-white/8 rounded-xl p-3 space-y-2">
+      <div className="bg-white/5 border border-white/10 rounded-xl p-3 space-y-2">
         {bars.map((b, i) => (
           <div key={b.cls} className="flex items-center gap-2">
             <span className="text-[10px] text-white/40 w-16">{b.cls}</span>
@@ -227,10 +227,10 @@ function ShowcaseSidebar({ idx, onIdx }: { idx: number; onIdx: (i: number) => vo
             {p.tagline}
           </motion.p>
         </AnimatePresence>
-        <div className="rounded-2xl border border-white/8 overflow-hidden" style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(12px)" }}>
-          <div className="border-b border-white/6 px-4 py-2.5 flex items-center gap-2" style={{ background: "rgba(0,0,0,0.3)" }}>
+        <div className="rounded-2xl border border-white/10 overflow-hidden" style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(12px)" }}>
+          <div className="border-b border-white/[0.08] px-4 py-2.5 flex items-center gap-2" style={{ background: "rgba(0,0,0,0.3)" }}>
             <div className="flex gap-1.5">{["bg-red-500/50","bg-amber-500/50","bg-emerald-500/50"].map(c=><div key={c} className={`w-2.5 h-2.5 rounded-full ${c}`}/>)}</div>
-            <div className="flex-1 mx-2"><div className="bg-white/5 border border-white/8 rounded-md px-2.5 py-0.5 flex items-center gap-1.5 max-w-[180px] mx-auto"><span className="text-emerald-400 text-[10px]">🔒</span><span className="text-[10px] text-white/25 font-mono">app.infizium.com</span></div></div>
+            <div className="flex-1 mx-2"><div className="bg-white/5 border border-white/10 rounded-md px-2.5 py-0.5 flex items-center gap-1.5 max-w-[180px] mx-auto"><span className="text-emerald-400 text-[10px]">🔒</span><span className="text-[10px] text-white/25 font-mono">app.infizium.com</span></div></div>
             <motion.div animate={{ opacity: [0.4,1,0.4] }} transition={{ duration: 2, repeat: Infinity }} className="flex items-center gap-1">
               <span className="w-1.5 h-1.5 rounded-full" style={{ background: p.neon }} /><span className="text-[9px] text-white/25 font-mono">LIVE</span>
             </motion.div>
@@ -292,8 +292,8 @@ function MobileShowcase({ idx, onIdx }: { idx: number; onIdx: (i: number) => voi
           </motion.span>
         </AnimatePresence>
       </div>
-      <div className="relative rounded-xl border border-white/8 overflow-hidden" style={{ background: "rgba(255,255,255,0.03)" }}>
-        <div className="border-b border-white/6 px-3 py-2 flex items-center gap-1.5" style={{ background: "rgba(0,0,0,0.4)" }}>
+      <div className="relative rounded-xl border border-white/10 overflow-hidden" style={{ background: "rgba(255,255,255,0.03)" }}>
+        <div className="border-b border-white/[0.08] px-3 py-2 flex items-center gap-1.5" style={{ background: "rgba(0,0,0,0.4)" }}>
           <div className="flex gap-1">{["bg-red-500/40","bg-amber-500/40","bg-emerald-500/40"].map(c=><div key={c} className={`w-2 h-2 rounded-full ${c}`}/>)}</div>
           <span className="text-[9px] text-white/20 font-mono ml-1">app.infizium.com</span>
           <motion.div animate={{ opacity: [0.4,1,0.4] }} transition={{ duration: 2, repeat: Infinity }} className="ml-auto flex items-center gap-1">
@@ -335,7 +335,7 @@ function SplitHero() {
       <div className="hidden lg:flex lg:w-[52%] xl:w-[55%] flex-col">
         <ShowcaseSidebar idx={idx} onIdx={setIdx} />
       </div>
-      <div className="hidden lg:block w-px bg-white/6" />
+      <div className="hidden lg:block w-px bg-white/10" />
 
       {/* Persona selector — right on desktop, bottom on mobile */}
       <div className="flex-1 flex flex-col items-center justify-center px-5 py-8 lg:py-12">
@@ -385,7 +385,7 @@ function SplitHero() {
 // ── The four people ───────────────────────────────────────────────
 function PeopleSection() {
   return (
-    <section id="personas" className="py-24 px-4" style={{ background: "rgba(0,0,0,0.2)" }}>
+    <section id="personas" className="py-24 px-4 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
       <div className="max-w-6xl mx-auto">
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center mb-14">
           <motion.p variants={fadeUp} className="text-xs font-mono tracking-widest uppercase text-white/30 mb-3">Built for real people</motion.p>
@@ -428,16 +428,11 @@ function PeopleSection() {
 // ── Mission section ───────────────────────────────────────────────
 function MissionSection() {
   return (
-    <section id="mission" className="py-28 px-4 relative overflow-hidden"
-      style={{ background: "linear-gradient(180deg, #09090b 0%, #0d0515 50%, #09090b 100%)" }}>
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] rounded-full blur-[100px]" style={{ background: "rgba(0,212,255,0.04)" }} />
-        <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] rounded-full blur-[100px]" style={{ background: "rgba(139,92,246,0.06)" }} />
-      </div>
+    <section id="mission" className="py-28 px-4 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
       <div className="max-w-5xl mx-auto relative">
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex justify-center mb-10">
-          <span className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-bold tracking-widest uppercase" style={{ background: "rgba(0,212,255,0.08)", border: "1px solid rgba(0,212,255,0.2)", color: "#00d4ff" }}>
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />Mission Infizium
+          <span className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold tracking-widest uppercase" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.5)" }}>
+            Mission Infizium
           </span>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: EASE }} className="text-center mb-14">
@@ -587,7 +582,7 @@ const featuresByPersona = [
 
 function ModulesSection() {
   return (
-    <section id="features" className="py-24 px-4" style={{ background: "rgba(0,0,0,0.1)" }}>
+    <section id="features" className="py-24 px-4 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
       <div className="max-w-6xl mx-auto">
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center mb-14">
           <motion.p variants={fadeUp} className="text-xs font-mono tracking-widest uppercase text-white/30 mb-3">Features</motion.p>
@@ -639,7 +634,7 @@ function CommuteSection() {
     { icon: "📡", title: "Solo + Smart Tag", desc: "Student travels alone. Infizium Tag in bag or Smart Band on wrist. Silent location ping to parent.", phase: "Phase 2" },
   ];
   return (
-    <section id="commute-section" className="py-28 px-4 relative overflow-hidden" style={{ background: "linear-gradient(180deg, #09090b 0%, #0a0d0a 50%, #09090b 100%)" }}>
+    <section id="commute-section" className="py-28 px-4 relative overflow-hidden border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] rounded-full blur-[100px]" style={{ background: "rgba(245,158,11,0.05)" }} />
       </div>
@@ -743,7 +738,7 @@ function AISection() {
     { from: "bot", msg: "📚 2 assignments due June 8:\n• *Maths* — Chapter 7 exercises\n• *English* — Essay on environment (due June 10)\n\nBoth posted by Ravi sir today." },
   ];
   return (
-    <section id="ai-section" className="py-24 px-4" style={{ background: "rgba(0,0,0,0.2)" }}>
+    <section id="ai-section" className="py-24 px-4 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
       <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
@@ -774,7 +769,7 @@ function AISection() {
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: EASE }}>
             <div className="rounded-2xl overflow-hidden border border-white/10" style={{ background: "rgba(255,255,255,0.03)" }}>
-              <div className="flex items-center gap-2 px-4 py-3 border-b border-white/8" style={{ background: "rgba(0,0,0,0.3)" }}>
+              <div className="flex items-center gap-2 px-4 py-3 border-b border-white/10" style={{ background: "rgba(0,0,0,0.3)" }}>
                 <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-sm">📱</div>
                 <div><p className="text-xs font-semibold text-white">WhatsApp / @InfiziumBot</p><p className="text-[10px] text-emerald-400">● Online · Responds in English &amp; Telugu</p></div>
               </div>
@@ -782,7 +777,7 @@ function AISection() {
                 {convos.map((c, i) => (
                   <motion.div key={i} initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i*0.15, duration: 0.4, ease: EASE }}
                     className={`flex ${c.from === "parent" ? "justify-end" : "justify-start"}`}>
-                    <div className={`max-w-[80%] rounded-2xl px-3 py-2 text-xs leading-relaxed whitespace-pre-line ${c.from === "parent" ? "bg-emerald-600/30 text-emerald-100 border border-emerald-500/20" : "bg-white/8 text-white/80 border border-white/8"}`}>
+                    <div className={`max-w-[80%] rounded-2xl px-3 py-2 text-xs leading-relaxed whitespace-pre-line ${c.from === "parent" ? "bg-emerald-600/30 text-emerald-100 border border-emerald-500/20" : "bg-white/8 text-white/80 border border-white/10"}`}>
                       {c.msg}
                     </div>
                   </motion.div>
@@ -813,7 +808,7 @@ const phases = [
 
 function RoadmapSection() {
   return (
-    <section className="py-24 px-4" style={{ background: "rgba(0,0,0,0.15)" }}>
+    <section className="py-24 px-4 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
       <div className="max-w-6xl mx-auto">
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center mb-14">
           <motion.p variants={fadeUp} className="text-xs font-mono tracking-widest uppercase text-white/30 mb-3">Roadmap</motion.p>
@@ -845,7 +840,7 @@ function RoadmapSection() {
 // ── Sponsorship ───────────────────────────────────────────────────
 function SponsorshipSection() {
   return (
-    <section className="py-24 px-4 relative overflow-hidden" style={{ background: "linear-gradient(180deg, #09090b 0%, #100a04 50%, #09090b 100%)" }}>
+    <section className="py-24 px-4 relative overflow-hidden border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
       <div className="max-w-5xl mx-auto">
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center mb-12">
           <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-5 text-xs font-mono font-semibold tracking-widest uppercase text-amber-400"
@@ -948,7 +943,7 @@ const historyEntries = [
 
 function HistorySection() {
   return (
-    <section className="py-28 px-4 relative overflow-hidden" style={{ background: "linear-gradient(180deg, #09090b 0%, #080508 50%, #09090b 100%)" }}>
+    <section className="py-28 px-4 relative overflow-hidden border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[120px]" style={{ background: "rgba(251,191,36,0.03)" }} />
       </div>
@@ -1014,11 +1009,11 @@ const stats = [
 // ── Main page ─────────────────────────────────────────────────────
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-full" style={{ background: "#09090b" }}>
+    <div className="flex flex-col min-h-full" style={{ background: "#000" }}>
 
       <motion.nav initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: EASE }}
         className="fixed top-0 left-0 right-0 z-50 border-b"
-        style={{ background: "rgba(9,9,11,0.92)", backdropFilter: "blur(20px)", borderColor: "rgba(255,255,255,0.06)" }}>
+        style={{ background: "rgba(0,0,0,0.85)", backdropFilter: "blur(24px)", borderColor: "rgba(255,255,255,0.1)" }}>
         {/* Top row */}
         <div className="max-w-6xl mx-auto px-4 h-12 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
@@ -1027,11 +1022,11 @@ export default function Home() {
             <span className="hidden sm:block text-[10px] font-mono tracking-widest uppercase" style={{ color: "rgba(0,212,255,0.5)" }}>Telangana School OS</span>
             <span className="text-[10px] font-mono text-white/15">v{APP_VERSION}</span>
           </div>
-          <Link href="/login" className="text-xs px-3 py-1.5 rounded-full font-semibold transition-all"
-            style={{ background: "rgba(0,212,255,0.10)", border: "1px solid rgba(0,212,255,0.25)", color: "#00d4ff" }}>Sign in</Link>
+          <Link href="/login" className="text-xs px-4 py-1.5 rounded-full font-semibold transition-all hover:bg-white/10"
+            style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", color: "#fff" }}>Sign in</Link>
         </div>
         {/* Scrollable nav chips */}
-        <div className="border-t overflow-x-auto scrollbar-none" style={{ borderColor: "rgba(255,255,255,0.04)" }}>
+        <div className="border-t overflow-x-auto scrollbar-none" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
           <div className="flex items-center gap-1 px-4 py-1.5 w-max min-w-full">
             {[
               { label: "Mission", href: "#mission" },
@@ -1053,7 +1048,7 @@ export default function Home() {
       <SplitHero />
 
       {/* Stats */}
-      <section className="border-y py-10 px-4" style={{ background: "rgba(0,212,255,0.02)", borderColor: "rgba(0,212,255,0.08)" }}>
+      <section className="border-y py-10 px-4" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
         <div className="max-w-5xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map(s => (
             <motion.div key={s.label} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center">
@@ -1085,7 +1080,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <footer className="border-t py-8 px-4" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+      <footer className="border-t py-8 px-4" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-sm text-white/25">
             <span className="font-semibold text-white/50">Infizium</span>

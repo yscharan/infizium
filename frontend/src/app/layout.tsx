@@ -1,19 +1,17 @@
 import type { Metadata } from "next";
-import { DM_Sans, DM_Mono, Courier_Prime } from "next/font/google";
+import { Geist, Geist_Mono, Courier_Prime } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/lib/auth/context";
 
-const dmSans = DM_Sans({
+const geist = Geist({
   subsets: ["latin"],
   variable: "--font-sans",
-  weight: ["300", "400", "500", "600", "700", "800"],
   display: "swap",
 });
 
-const dmMono = DM_Mono({
+const geistMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
-  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -40,9 +38,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${dmSans.variable} ${dmMono.variable} ${courierPrime.variable} h-full`}
+      className={`${geist.variable} ${geistMono.variable} ${courierPrime.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col font-sans antialiased subpixel-antialiased">
+      <body className="min-h-full flex flex-col font-sans antialiased">
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>

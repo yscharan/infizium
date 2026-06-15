@@ -1037,94 +1037,165 @@ function BapuSection() {
   );
 }
 
-// ── History section ──────────────────────────────────────────────
-const historyEntries = [
+// ── History section — dual-track parallel timeline ───────────────
+const dualTrack = [
   {
-    year: "6th Century BCE",
-    title: "The Land of the Godavari",
-    body: "Long before borders were drawn, the Godavari river carved through what we now call Telangana. Your ancestors built cities, temples, and trade routes along its banks. Karimnagar sits on this ancient ground.",
-    icon: "🌊",
+    telangana: { year: "6th Century BCE", title: "The land of the Godavari", body: "Before any border was drawn, the Godavari carved through this region. Cities, temples, trade routes — built on this ground. Karimnagar stands on it." },
+    bapu: null,
   },
   {
-    year: "1163 CE",
-    title: "The Kakatiya Empire",
-    body: "Queen Rudrama Devi ruled this land — one of the first women to command an empire in Indian history. She built forts, reformed taxes, and earned loyalty not through fear but through justice. She came from here.",
-    icon: "⚔️",
+    telangana: { year: "1163 CE", title: "The Kakatiya Empire", body: "Queen Rudrama Devi — one of the first women to command an empire in Indian history. Built forts, reformed taxes, earned loyalty through justice, not fear. She came from here." },
+    bapu: null,
   },
   {
-    year: "1687 CE",
-    title: "Hyderabad's Golden Age",
-    body: "The Nizams built one of the wealthiest cities in the world. Scientists, poets, architects, and traders from Telangana helped build institutions that still stand. Culture was not imported — it was grown here.",
-    icon: "🏛️",
+    telangana: { year: "1687 CE", title: "Hyderabad's golden age", body: "The Nizams built one of the wealthiest cities in the world. Scientists, poets, architects from Telangana built institutions still standing. Culture was not imported — it was grown." },
+    bapu: null,
   },
   {
-    year: "1969",
-    title: "The Telangana Movement",
-    body: "Students and teachers walked out of classrooms and into streets to demand recognition of their identity. They were not asking for anything new — only that the world acknowledge what had always been true.",
-    icon: "✊",
+    telangana: null,
+    bapu: { year: "Early 1960s", title: "A boy in Kalamadugu", body: "Born in a forest village in Adilabad. First in his family to reach for education. The school was 20km away. There was no bus, no money, and no precedent." },
   },
   {
-    year: "2014",
-    title: "A State Is Born",
-    body: "Telangana became the 29th state of India. The youngest state in the country. The people who built it are your grandparents. The people who will write its next chapter are in school right now.",
-    icon: "🗺️",
+    telangana: { year: "1969", title: "The Telangana Movement", body: "Students and teachers walked out of classrooms into streets. They weren't asking for something new — only that the world acknowledge what had always been true about this land." },
+    bapu: { year: "~1975", title: "The bicycle", body: "He traded curry leaves and eggs — village to market, back again — until he had enough for a second-hand bicycle. That bicycle reached the school. That school reached him." },
   },
   {
-    year: "Today",
-    title: "Your Turn",
-    body: "Karimnagar has produced scientists, engineers, athletes, and leaders. None of them knew they would change anything when they sat in a classroom. You don't need to know either. Just stay curious.",
-    icon: "🌱",
-    highlight: true,
+    telangana: null,
+    bapu: { year: "Early 1980s", title: "First salary: ₹100", body: "Government school teacher. The full weight of a classroom on his shoulders. A hundred rupees a month. He never complained. He kept teaching." },
+  },
+  {
+    telangana: null,
+    bapu: { year: "1991", title: "A school begins", body: "One rented bungalow. One man teaching every subject. His family in a single room beside the classrooms. Fees minimal — waived whenever a farmer's harvest failed. No marketing. Only trust." },
+  },
+  {
+    telangana: { year: "2014", title: "Telangana — a state is born", body: "The 29th state of India. The youngest. Built by the grandparents of children who are in classrooms right now. The next chapter belongs to them." },
+    bapu: { year: "2014", title: "23 years and counting", body: "Two decades of students taught, fed, sheltered. They are now engineers, doctors, soldiers, teachers, software professionals — across the country and across the world." },
+  },
+  {
+    telangana: null,
+    bapu: { year: "2020–21", title: "COVID. The school stayed open.", body: "While budget schools across Telangana closed, he gave concessions, worked other jobs, spent his own money to keep it running. Not one child was permanently sent home." },
   },
 ];
 
 function HistorySection() {
+  // Center column is 64px wide. Left line at x=16, right line at x=48.
+  const CX_LEFT = 16;   // Telangana line x
+  const CX_RIGHT = 48;  // Bapu line x
+  const COL_W = 64;
+
   return (
     <section className="py-28 px-4 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
-      <div className="max-w-3xl mx-auto">
-        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center mb-16">
-          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-5" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)" }}>
-            <span className="text-xs font-mono font-semibold tracking-widest uppercase text-white/40">History of Telangana</span>
-          </motion.div>
-          <motion.h2 variants={fadeUp} className="font-typewriter text-4xl font-bold text-white tracking-tight mb-3 leading-tight">
-            Know where you come from.
+      <div className="max-w-5xl mx-auto">
+
+        {/* Header */}
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center mb-14">
+          <motion.p variants={fadeUp} className="font-typewriter text-xs tracking-widest uppercase mb-3 text-white/25">
+            Two tracks · One story
+          </motion.p>
+          <motion.h2 variants={fadeUp} className="font-typewriter text-4xl sm:text-5xl font-bold text-white tracking-tight mb-4 leading-tight">
+            The land. The man.<br />The reason.
           </motion.h2>
-          <motion.p variants={fadeUp} className="font-typewriter text-white/35 leading-relaxed max-w-lg mx-auto text-[0.95rem]">
-            Before you build your future, read the past that built you. This land has carried great people for over two thousand years. You are one of them.
+          <motion.p variants={fadeUp} className="text-white/35 max-w-xl mx-auto leading-relaxed text-[0.95rem]">
+            Telangana has carried great people for over two thousand years. Bapu is one of them. Both tracks flow into the same place.
           </motion.p>
         </motion.div>
 
-        <div className="relative">
-          <div className="absolute left-5 top-0 bottom-0 w-px" style={{ background: "linear-gradient(180deg, transparent, rgba(251,191,36,0.3) 10%, rgba(251,191,36,0.3) 90%, transparent)" }} />
-          <div className="space-y-10">
-            {historyEntries.map((entry, i) => (
-              <motion.div key={entry.year} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1, duration: 0.6, ease: EASE }}
-                className="flex gap-6 pl-0">
-                <div className="flex-shrink-0 flex flex-col items-center">
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-lg z-10"
-                    style={entry.highlight
-                      ? { background: "rgba(251,191,36,0.25)", border: "2px solid rgba(251,191,36,0.6)" }
-                      : { background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)" }}>
-                    {entry.icon}
-                  </div>
-                </div>
-                <div className="flex-1 pb-2">
-                  <p className="text-xs font-mono tracking-widest uppercase mb-1" style={{ color: "rgba(251,191,36,0.5)" }}>{entry.year}</p>
-                  <h3 className="font-typewriter font-bold text-white mb-2 text-[1.1rem]">{entry.title}</h3>
-                  <p className="font-typewriter text-white/45 leading-relaxed text-sm">{entry.body}</p>
-                </div>
-              </motion.div>
-            ))}
+        {/* Track legend */}
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+          className="flex justify-center gap-10 mb-12">
+          <div className="flex items-center gap-2.5">
+            <div className="w-6 h-px" style={{ background: "rgba(251,191,36,0.6)" }} />
+            <span className="text-xs font-mono uppercase tracking-widest" style={{ color: "rgba(251,191,36,0.5)" }}>Telangana</span>
           </div>
+          <div className="flex items-center gap-2.5">
+            <div className="w-6 h-px" style={{ background: "rgba(255,255,255,0.3)" }} />
+            <span className="text-xs font-mono uppercase tracking-widest text-white/30">Bapu&apos;s journey</span>
+          </div>
+        </motion.div>
+
+        {/* Dual-track timeline */}
+        <div className="relative">
+          {/* Two continuous vertical lines */}
+          <div className="absolute inset-y-0 pointer-events-none" style={{ left: `calc(50% - ${COL_W / 2}px)`, width: `${COL_W}px` }}>
+            <div className="absolute top-0 bottom-0 w-px" style={{ left: `${CX_LEFT}px`, background: "linear-gradient(180deg, transparent, rgba(251,191,36,0.35) 5%, rgba(251,191,36,0.35) 92%, transparent)" }} />
+            <div className="absolute top-0 bottom-0 w-px" style={{ left: `${CX_RIGHT}px`, background: "linear-gradient(180deg, transparent, rgba(255,255,255,0.18) 5%, rgba(255,255,255,0.18) 92%, transparent)" }} />
+          </div>
+
+          {dualTrack.map((row, i) => (
+            <div key={i} className="grid items-center" style={{ gridTemplateColumns: `1fr ${COL_W}px 1fr`, minHeight: "120px" }}>
+              {/* Left — Telangana */}
+              <div className="py-5 pr-8">
+                {row.telangana && (
+                  <motion.div initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+                    transition={{ delay: i * 0.06, duration: 0.55, ease: EASE }} className="text-right">
+                    <p className="text-[10px] font-mono tracking-widest uppercase mb-1" style={{ color: "rgba(251,191,36,0.5)" }}>
+                      {row.telangana.year}
+                    </p>
+                    <h3 className="font-typewriter font-bold text-white text-sm mb-1.5 leading-snug">{row.telangana.title}</h3>
+                    <p className="font-typewriter text-white/35 text-xs leading-relaxed">{row.telangana.body}</p>
+                  </motion.div>
+                )}
+              </div>
+
+              {/* Center — dots on tracks */}
+              <div className="relative flex-shrink-0" style={{ width: `${COL_W}px`, height: "100%" }}>
+                {row.telangana && (
+                  <motion.div initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }}
+                    transition={{ delay: i * 0.06 + 0.1, duration: 0.3 }}
+                    className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full z-10"
+                    style={{ left: `${CX_LEFT - 5}px`, background: "rgba(251,191,36,0.85)", border: "1.5px solid rgba(251,191,36,1)", boxShadow: "0 0 8px rgba(251,191,36,0.4)" }} />
+                )}
+                {row.bapu && (
+                  <motion.div initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }}
+                    transition={{ delay: i * 0.06 + 0.15, duration: 0.3 }}
+                    className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full z-10"
+                    style={{ left: `${CX_RIGHT - 5}px`, background: "rgba(255,255,255,0.65)", border: "1.5px solid rgba(255,255,255,0.85)", boxShadow: "0 0 8px rgba(255,255,255,0.15)" }} />
+                )}
+              </div>
+
+              {/* Right — Bapu */}
+              <div className="py-5 pl-8">
+                {row.bapu && (
+                  <motion.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+                    transition={{ delay: i * 0.06, duration: 0.55, ease: EASE }}>
+                    <p className="text-[10px] font-mono tracking-widest uppercase mb-1 text-white/30">{row.bapu.year}</p>
+                    <h3 className="font-typewriter font-bold text-white text-sm mb-1.5 leading-snug">{row.bapu.title}</h3>
+                    <p className="font-typewriter text-white/35 text-xs leading-relaxed">{row.bapu.body}</p>
+                  </motion.div>
+                )}
+              </div>
+            </div>
+          ))}
+
+          {/* Convergence — both tracks merge into Infizium */}
+          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: EASE }}
+            className="grid items-center" style={{ gridTemplateColumns: `1fr ${COL_W}px 1fr`, minHeight: "80px" }}>
+            <div />
+            <div className="relative flex-shrink-0 flex flex-col items-center justify-start" style={{ width: `${COL_W}px` }}>
+              {/* Two lines converging to center */}
+              <svg width={COL_W} height="40" style={{ display: "block", overflow: "visible" }}>
+                <line x1={CX_LEFT} y1="0" x2={COL_W / 2} y2="38" stroke="rgba(251,191,36,0.4)" strokeWidth="1" />
+                <line x1={CX_RIGHT} y1="0" x2={COL_W / 2} y2="38" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
+                <circle cx={COL_W / 2} cy="38" r="5" fill="white" />
+              </svg>
+            </div>
+            <div />
+          </motion.div>
         </div>
 
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.3 }}
-          className="mt-14 rounded-2xl p-6 text-center" style={{ background: "rgba(251,191,36,0.04)", border: "1px solid rgba(251,191,36,0.15)" }}>
-          <p className="font-typewriter text-white/50 leading-relaxed text-[1rem]">
-            Every generation of Telangana students has been handed a harder problem than the one before. Every generation solved it.
+        {/* Closing statement */}
+        <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: EASE }}
+          className="text-center mt-2 pb-4">
+          <p className="font-bold text-white text-xl mb-2">Infizium</p>
+          <p className="font-typewriter text-white/40 text-sm max-w-md mx-auto leading-relaxed">
+            The system Bapu never had — built so every school builder after him doesn&apos;t have to carry it alone.
           </p>
-          <p className="text-xs text-amber-400/50 mt-3 font-mono tracking-widest uppercase">Infizium · For the next generation</p>
+          <p className="text-[10px] font-mono uppercase tracking-widest mt-4" style={{ color: "rgba(251,191,36,0.35)" }}>
+            Telangana · est. 1991 · For the next generation
+          </p>
         </motion.div>
+
       </div>
     </section>
   );
@@ -1160,7 +1231,6 @@ export default function Home() {
           <div className="flex items-center gap-1 px-4 py-1.5 w-max min-w-full">
             {[
               { label: "Mission", href: "#mission" },
-              { label: "Bapu", href: "#bapu" },
               { label: "Personas", href: "#personas" },
               { label: "Features", href: "#features" },
               { label: "Schools", href: "/schools" },

@@ -206,10 +206,7 @@ function ShowcaseSidebar({ idx, onIdx }: { idx: number; onIdx: (i: number) => vo
 
   return (
     <div className="relative h-full flex flex-col justify-between p-10 overflow-hidden"
-      style={{ background: "linear-gradient(135deg, #0a0a0f 0%, #0d0a1a 50%, #080d14 100%)" }}>
-      <motion.div key={`glow-${idx}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: `radial-gradient(ellipse at 30% 40%, ${p.neon}12 0%, transparent 65%)` }} />
+      style={{ background: "#0a0a0a" }}>
       <div className="relative flex items-center justify-end">
         <AnimatePresence mode="wait">
           <motion.span key={idx} initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} transition={{ duration: 0.4 }}
@@ -270,13 +267,10 @@ function MobileShowcase({ idx, onIdx }: { idx: number; onIdx: (i: number) => voi
 
   return (
     <div className="relative flex flex-col px-4 pt-4 pb-3 overflow-hidden"
-      style={{ background: "linear-gradient(160deg, #0a0a0f 0%, #0d0a1a 100%)" }}>
-      <motion.div key={`mg-${idx}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: `radial-gradient(ellipse at 60% 30%, ${p.neon}15 0%, transparent 70%)` }} />
+      style={{ background: "#0a0a0a" }}>
       <div className="relative flex items-center justify-between mb-3">
         <div>
-          <p className="text-[10px] font-mono tracking-widest uppercase" style={{ color: "rgba(0,212,255,0.5)" }}>Telangana School OS</p>
+          <p className="text-[10px] font-mono tracking-widest uppercase text-white/25">Telangana School OS</p>
           <AnimatePresence mode="wait">
             <motion.p key={`t-${idx}`} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.4, ease: EASE }}
               className="text-xl font-bold text-white leading-tight whitespace-pre-line mt-1">
@@ -395,13 +389,13 @@ function PeopleSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {personas.map((p, i) => (
             <motion.div key={p.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i*0.1, duration: 0.5, ease: EASE }}
-              className="rounded-2xl p-5 flex flex-col gap-3 relative overflow-hidden"
-              style={{ background: `${p.neon}06`, border: `1px solid ${p.neon}20` }}>
+              className="rounded-lg p-5 flex flex-col gap-3"
+              style={{ background: "#0a0a0a", border: "1px solid #222" }}>
               <div className="flex items-start gap-3">
                 <span className="text-3xl">{p.icon}</span>
                 <div>
                   <p className="font-bold text-white">{p.name}</p>
-                  <p className="text-xs font-bold uppercase tracking-wider" style={{ color: p.neon }}>{p.role}</p>
+                  <p className="text-xs font-medium uppercase tracking-wider text-white/40">{p.role}</p>
                   <p className="text-[11px] text-white/35 mt-0.5">{p.detail}</p>
                 </div>
               </div>
@@ -409,12 +403,11 @@ function PeopleSection() {
               <ul className="mt-auto space-y-1.5">
                 {p.gets.slice(0,3).map(g => (
                   <li key={g} className="flex items-start gap-1.5 text-xs text-white/35">
-                    <span style={{ color: p.neon }} className="flex-shrink-0 mt-0.5">→</span>{g}
+                    <span className="text-white/30 flex-shrink-0 mt-0.5">→</span>{g}
                   </li>
                 ))}
               </ul>
-              <Link href={p.href} className="mt-1 self-start text-xs font-bold px-3 py-1.5 rounded-full transition-all hover:opacity-80"
-                style={{ background: `${p.neon}15`, color: p.neon, border: `1px solid ${p.neon}30` }}>
+              <Link href={p.href} className="mt-1 self-start text-xs font-medium px-3 py-1.5 rounded border border-white/15 text-white/50 hover:text-white hover:border-white/30 transition-colors">
                 Preview dashboard →
               </Link>
             </motion.div>
@@ -429,7 +422,7 @@ function PeopleSection() {
 function MissionSection() {
   return (
     <section id="mission" className="py-28 px-4 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
-      <div className="max-w-5xl mx-auto relative">
+      <div className="max-w-5xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex justify-center mb-10">
           <span className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold tracking-widest uppercase" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.5)" }}>
             Mission Infizium
@@ -438,9 +431,9 @@ function MissionSection() {
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: EASE }} className="text-center mb-14">
           <h2 className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-5 leading-tight">
             Prepare students for life,<br />
-            <span style={{ background: "linear-gradient(135deg, #00d4ff, #7c3aed)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>not just exams.</span>
+            not just exams.
           </h2>
-          <p className="text-lg font-semibold mb-5" style={{ color: "rgba(0,212,255,0.6)", letterSpacing: "0.01em" }}>
+          <p className="text-lg font-semibold mb-5 text-white/50">
             Educate to build a personality.
           </p>
           <p className="text-white/40 text-lg max-w-2xl mx-auto leading-relaxed">
@@ -455,8 +448,8 @@ function MissionSection() {
             { label: "Where", neon: "#7c3aed", icon: "📍", heading: "Where we start", body: "Valmiki Vidyalayam, Karimnagar, Telangana. Every feature is built alongside real teachers, parents, and students here first." },
           ].map((col, i) => (
             <motion.div key={col.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i*0.1, duration: 0.5, ease: EASE }}
-              className="rounded-2xl p-5 flex flex-col gap-2" style={{ background: `${col.neon}08`, border: `1px solid ${col.neon}20` }}>
-              <div className="flex items-center gap-2"><span className="text-xl">{col.icon}</span><span className="text-xs font-bold tracking-widest uppercase" style={{ color: col.neon }}>{col.label}</span></div>
+              className="rounded-lg p-5 flex flex-col gap-2" style={{ background: "#0a0a0a", border: "1px solid #222" }}>
+              <div className="flex items-center gap-2"><span className="text-xl">{col.icon}</span><span className="text-xs font-bold tracking-widest uppercase text-white/40">{col.label}</span></div>
               <p className="font-bold text-white text-sm">{col.heading}</p>
               <p className="text-xs text-white/45 leading-relaxed">{col.body}</p>
             </motion.div>
@@ -488,8 +481,8 @@ function MissionSection() {
 
         {/* Pilot school */}
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: EASE }}
-          className="rounded-2xl overflow-hidden"
-          style={{ background: "rgba(0,212,255,0.04)", border: "1px solid rgba(0,212,255,0.15)" }}>
+          className="rounded-lg overflow-hidden"
+          style={{ background: "#0a0a0a", border: "1px solid #222" }}>
           <div className="p-6 flex flex-col sm:flex-row items-start gap-5">
             <div className="text-5xl flex-shrink-0">🏫</div>
             <div className="flex-1 min-w-0">
@@ -506,8 +499,7 @@ function MissionSection() {
               <p className="text-sm text-white/40 mb-2">Our first school. What works here rolls out to the next school. Real teachers, real parents, real students.</p>
               <p className="text-xs text-white/25">Principal: <span className="text-white/50 font-medium">Shekhar Rao Yadagiri</span> · <span className="text-white/50 font-medium">+91 99854 01894</span></p>
             </div>
-            <Link href="/login" className="flex-shrink-0 text-sm px-5 py-2.5 rounded-xl font-semibold hover:scale-[1.02] transition-all"
-              style={{ background: "rgba(0,212,255,0.10)", border: "1px solid rgba(0,212,255,0.3)", color: "#00d4ff" }}>Get access →</Link>
+            <Link href="/login" className="flex-shrink-0 text-sm px-5 py-2.5 rounded-lg font-medium border border-white/20 text-white/60 hover:text-white hover:border-white/40 transition-colors">Get access →</Link>
           </div>
           <div className="w-full h-48 overflow-hidden">
             <iframe
@@ -597,20 +589,19 @@ function ModulesSection() {
                 <div>
                   <p className="font-bold text-white text-lg">{group.label}</p>
                 </div>
-                <div className="flex-1 h-px ml-2" style={{ background: `linear-gradient(90deg, ${group.neon}30, transparent)` }} />
+                <div className="flex-1 h-px ml-2 bg-white/[0.08]" />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {group.features.map((f, fi) => (
                   <motion.div key={f.title} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: fi * 0.05, duration: 0.4, ease: EASE }}
-                    className="rounded-xl p-4 flex flex-col gap-2 relative"
-                    style={{ background: `${group.neon}05`, border: `1px solid ${group.neon}18` }}>
+                    className="rounded-lg p-4 flex flex-col gap-2"
+                    style={{ background: "#0a0a0a", border: "1px solid #222" }}>
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex items-start gap-2.5 flex-1 min-w-0">
                         <span className="text-lg flex-shrink-0 mt-0.5">{f.icon}</span>
                         <p className="font-semibold text-white text-sm leading-snug">{f.title}</p>
                       </div>
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full flex-shrink-0"
-                        style={{ background: `${group.neon}18`, color: group.neon, border: `1px solid ${group.neon}30` }}>{f.status}</span>
+                      <span className="text-[10px] font-medium px-2 py-0.5 rounded-full flex-shrink-0 text-white/40 bg-white/[0.06] border border-white/10">{f.status}</span>
                     </div>
                     <p className="text-xs text-white/35 leading-relaxed">{f.desc}</p>
                   </motion.div>
@@ -634,21 +625,15 @@ function CommuteSection() {
     { icon: "📡", title: "Solo + Smart Tag", desc: "Student travels alone. Infizium Tag in bag or Smart Band on wrist. Silent location ping to parent.", phase: "Phase 2" },
   ];
   return (
-    <section id="commute-section" className="py-28 px-4 relative overflow-hidden border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] rounded-full blur-[100px]" style={{ background: "rgba(245,158,11,0.05)" }} />
-      </div>
-      <div className="max-w-5xl mx-auto relative">
+    <section id="commute-section" className="py-28 px-4 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+      <div className="max-w-5xl mx-auto">
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center mb-14">
-          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6" style={{ background: "rgba(245,158,11,0.1)", border: "1px solid rgba(245,158,11,0.25)" }}>
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-            <span className="text-xs font-mono font-semibold tracking-widest uppercase text-amber-400">Commute Ecosystem · Phase 2</span>
+          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)" }}>
+            <span className="text-xs font-mono font-semibold tracking-widest uppercase text-white/40">Commute Ecosystem · Phase 2</span>
           </motion.div>
           <motion.h2 variants={fadeUp} className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-4 leading-tight">
             The 9-minute rule.<br/>
-            <span style={{ background: "linear-gradient(135deg, #f59e0b, #f97316)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-              A parent who knows their child is 9 minutes from school stops worrying.
-            </span>
+            A parent who knows their child is 9 minutes from school stops worrying.
           </motion.h2>
           <motion.p variants={fadeUp} className="text-white/35 max-w-xl mx-auto leading-relaxed">
             Every morning, Lakshmi watches Arjun leave at 7:30 AM and doesn&apos;t know if he&apos;s safe until he calls. That 22-minute gap of no information is exactly what Infizium Commute closes.
@@ -659,7 +644,7 @@ function CommuteSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 mb-12">
           {modes.map((m, i) => (
             <motion.div key={m.title} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i*0.08, duration: 0.5, ease: EASE }}
-              className="rounded-2xl p-4 flex flex-col gap-2" style={{ background: "rgba(245,158,11,0.06)", border: "1px solid rgba(245,158,11,0.18)" }}>
+              className="rounded-lg p-4 flex flex-col gap-2" style={{ background: "#0a0a0a", border: "1px solid #222" }}>
               <span className="text-2xl">{m.icon}</span>
               <p className="font-bold text-white text-sm">{m.title}</p>
               <p className="text-xs text-white/40 leading-relaxed">{m.desc}</p>
@@ -682,17 +667,17 @@ function CommuteSection() {
             },
           ].map((hw, i) => (
             <motion.div key={hw.name} initial={{ opacity: 0, x: i===0 ? -16 : 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: EASE }}
-              className="rounded-2xl p-6" style={{ background: `${hw.neon}06`, border: `1px solid ${hw.neon}20` }}>
+              className="rounded-lg p-6" style={{ background: "#0a0a0a", border: "1px solid #222" }}>
               <div className="flex items-center gap-3 mb-3">
                 <span className="text-3xl">{hw.icon}</span>
                 <div>
                   <p className="font-bold text-white">{hw.name}</p>
                   <p className="text-xs text-white/40">{hw.who}</p>
                 </div>
-                <span className="ml-auto text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ background: `${hw.neon}18`, color: hw.neon, border: `1px solid ${hw.neon}30` }}>Phase 2 prototype</span>
+                <span className="ml-auto text-[10px] font-medium px-2 py-0.5 rounded-full text-white/40 bg-white/[0.06] border border-white/10">Phase 2</span>
               </div>
               <ul className="space-y-1.5">
-                {hw.specs.map(s => <li key={s} className="flex items-start gap-2 text-xs text-white/50"><span style={{ color: hw.neon }} className="flex-shrink-0 mt-0.5">·</span>{s}</li>)}
+                {hw.specs.map(s => <li key={s} className="flex items-start gap-2 text-xs text-white/50"><span className="text-white/30 flex-shrink-0 mt-0.5">·</span>{s}</li>)}
               </ul>
             </motion.div>
           ))}
@@ -719,8 +704,7 @@ function CommuteSection() {
         </motion.div>
 
         <div className="text-center mt-8">
-          <Link href="/commute" className="inline-flex items-center gap-2 text-sm px-6 py-3 rounded-xl font-semibold transition-all hover:scale-[1.02]"
-            style={{ background: "rgba(245,158,11,0.12)", border: "1px solid rgba(245,158,11,0.35)", color: "#f59e0b" }}>
+          <Link href="/commute" className="inline-flex items-center gap-2 text-sm px-6 py-3 rounded-lg font-medium border border-white/20 text-white/60 hover:text-white hover:border-white/40 transition-colors">
             See full commute feature →
           </Link>
         </div>
@@ -742,13 +726,13 @@ function AISection() {
       <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
-            <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6" style={{ background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.25)" }}>
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
-              <span className="text-xs font-mono font-semibold tracking-widest uppercase text-indigo-400">AI Handler · Live now</span>
+            <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)" }}>
+              <span className="w-1.5 h-1.5 rounded-full bg-white/40 animate-pulse" />
+              <span className="text-xs font-mono font-semibold tracking-widest uppercase text-white/40">AI Handler · Live now</span>
             </motion.div>
             <motion.h2 variants={fadeUp} className="text-4xl font-bold text-white tracking-tight mb-4 leading-tight">
               A parent texts. The school answers.<br/>
-              <span style={{ background: "linear-gradient(135deg, #818cf8, #a78bfa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>In Telugu. At 10 PM.</span>
+              In Telugu. At 10 PM.
             </motion.h2>
             <motion.p variants={fadeUp} className="text-white/40 leading-relaxed mb-6">
               Lakshmi texts the bot on WhatsApp or Telegram in Telugu. Claude Haiku calls the real Supabase database, pulls Arjun&apos;s actual attendance and homework, and replies in under 5 seconds — in whatever language she wrote in.
@@ -818,16 +802,16 @@ function RoadmapSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
           {phases.map((ph, i) => (
             <motion.div key={ph.phase} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i*0.07, duration: 0.5, ease: EASE }}
-              className="rounded-2xl p-5 flex flex-col gap-3 relative overflow-hidden"
-              style={{ background: `${ph.neon}06`, border: `1px solid ${ph.neon}20` }}>
-              {i <= 1 && <div className="absolute top-0 left-0 right-0 h-0.5 rounded-t-2xl" style={{ background: `linear-gradient(90deg, ${ph.neon}, transparent)` }} />}
+              className="rounded-lg p-5 flex flex-col gap-3 relative overflow-hidden"
+              style={{ background: "#0a0a0a", border: "1px solid #222" }}>
+              {i <= 1 && <div className="absolute top-0 left-0 right-0 h-0.5" style={{ background: "rgba(255,255,255,0.15)" }} />}
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold tracking-widest uppercase" style={{ color: ph.neon }}>{ph.phase}</span>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ background: `${ph.neon}18`, color: ph.neon, border: `1px solid ${ph.neon}30` }}>{ph.badge}</span>
+                <span className="text-xs font-bold tracking-widest uppercase text-white/40">{ph.phase}</span>
+                <span className="text-[10px] font-medium px-2 py-0.5 rounded-full text-white/40 bg-white/[0.06] border border-white/10">{ph.badge}</span>
               </div>
               <div><p className="font-bold text-white text-sm mb-0.5">{ph.title}</p><p className="text-[10px] text-white/30 font-mono">{ph.time}</p></div>
               <ul className="space-y-1 mt-auto">
-                {ph.modules.map(m => <li key={m} className="text-[11px] text-white/40 flex items-start gap-1"><span style={{ color: ph.neon }} className="flex-shrink-0 mt-0.5">·</span>{m}</li>)}
+                {ph.modules.map(m => <li key={m} className="text-[11px] text-white/40 flex items-start gap-1"><span className="text-white/20 flex-shrink-0 mt-0.5">·</span>{m}</li>)}
               </ul>
             </motion.div>
           ))}
@@ -843,13 +827,12 @@ function SponsorshipSection() {
     <section className="py-24 px-4 relative overflow-hidden border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
       <div className="max-w-5xl mx-auto">
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center mb-12">
-          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-5 text-xs font-mono font-semibold tracking-widest uppercase text-amber-400"
-            style={{ background: "rgba(251,191,36,0.1)", border: "1px solid rgba(251,191,36,0.25)" }}>
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />Sponsorship &amp; Donations
+          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-5" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)" }}>
+            <span className="text-xs font-mono font-semibold tracking-widest uppercase text-white/40">Sponsorship &amp; Donations</span>
           </motion.div>
           <motion.h2 variants={fadeUp} className="text-4xl font-bold text-white tracking-tight mb-3">
             A ₹1,200 school fee<br/>
-            <span style={{ background: "linear-gradient(135deg, #fbbf24, #f97316)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>is the difference between Arjun staying or quitting.</span>
+            is the difference between Arjun staying or quitting.
           </motion.h2>
           <motion.p variants={fadeUp} className="text-white/35 max-w-xl mx-auto text-sm leading-relaxed">
             Donors give directly to verified students — no middleman, no NGO cut. School fee paid straight to the school. Pocket money only the student controls. Education loan repaid when they earn.
@@ -863,12 +846,12 @@ function SponsorshipSection() {
               { icon: "🎓", title: "Education Loan", neon: "#7c3aed", note: "No interest · Repaid when earning", desc: "Student receives now, repays when earning. Repayments fund the next student." },
             ].map(m => (
               <motion.div key={m.title} initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-                className="flex gap-4 p-5 rounded-2xl" style={{ background: `${m.neon}08`, border: `1px solid ${m.neon}20` }}>
+                className="flex gap-4 p-5 rounded-lg" style={{ background: "#0a0a0a", border: "1px solid #222" }}>
                 <span className="text-2xl flex-shrink-0">{m.icon}</span>
                 <div>
-                  <div className="flex items-center gap-2 mb-1">
+                  <div className="flex items-center gap-2 mb-1 flex-wrap">
                     <p className="font-bold text-white text-sm">{m.title}</p>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full" style={{ background: `${m.neon}18`, color: m.neon, border: `1px solid ${m.neon}30` }}>{m.note}</span>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full text-white/35 bg-white/[0.05] border border-white/10">{m.note}</span>
                   </div>
                   <p className="text-xs text-white/40 leading-relaxed">{m.desc}</p>
                 </div>
@@ -887,8 +870,7 @@ function SponsorshipSection() {
             <p className="text-xs font-mono text-white/25 tracking-widest uppercase mb-3">Live interaction preview</p>
             <SponsorChat />
             <div className="text-center pt-4">
-              <Link href="/sponsor" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm hover:scale-[1.02] transition-all"
-                style={{ background: "rgba(251,191,36,0.15)", border: "1px solid rgba(251,191,36,0.4)", color: "#fbbf24" }}>
+              <Link href="/sponsor" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium text-sm bg-white text-black hover:bg-white/90 transition-colors">
                 Browse students to sponsor →
               </Link>
               <p className="text-xs text-white/20 mt-2">All profiles verified by school principals · 100% reaches the student</p>
@@ -943,16 +925,11 @@ const historyEntries = [
 
 function HistorySection() {
   return (
-    <section className="py-28 px-4 relative overflow-hidden border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[120px]" style={{ background: "rgba(251,191,36,0.03)" }} />
-      </div>
-      <div className="max-w-3xl mx-auto relative">
+    <section className="py-28 px-4 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+      <div className="max-w-3xl mx-auto">
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center mb-16">
-          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-5"
-            style={{ background: "rgba(251,191,36,0.08)", border: "1px solid rgba(251,191,36,0.2)" }}>
-            <span className="text-amber-400 text-xs">🏛</span>
-            <span className="text-xs font-mono font-semibold tracking-widest uppercase text-amber-400">History of Telangana</span>
+          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-5" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)" }}>
+            <span className="text-xs font-mono font-semibold tracking-widest uppercase text-white/40">History of Telangana</span>
           </motion.div>
           <motion.h2 variants={fadeUp} className="font-typewriter text-4xl font-bold text-white tracking-tight mb-3 leading-tight">
             Know where you come from.
@@ -1019,11 +996,9 @@ export default function Home() {
           <div className="flex items-center gap-2.5">
             <InfiziumMark size={30} className="flex-shrink-0 text-white" />
             <span className="font-bold text-base tracking-tight text-white">Infizium</span>
-            <span className="hidden sm:block text-[10px] font-mono tracking-widest uppercase" style={{ color: "rgba(0,212,255,0.5)" }}>Telangana School OS</span>
-            <span className="text-[10px] font-mono text-white/15">v{APP_VERSION}</span>
+            <span className="text-[10px] font-mono text-white/20">v{APP_VERSION}</span>
           </div>
-          <Link href="/login" className="text-xs px-4 py-1.5 rounded-full font-semibold transition-all hover:bg-white/10"
-            style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", color: "#fff" }}>Sign in</Link>
+          <Link href="/login" className="text-xs px-4 py-1.5 rounded font-medium border border-white/20 text-white hover:bg-white/10 transition-colors">Sign in</Link>
         </div>
         {/* Scrollable nav chips */}
         <div className="border-t overflow-x-auto scrollbar-none" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
@@ -1036,9 +1011,8 @@ export default function Home() {
               { label: "Jobs", href: "/jobs" },
             ].map(n => (
               n.href.startsWith("#")
-                ? <a key={n.label} href={n.href} className="text-[11px] font-medium px-3 py-1 rounded-full whitespace-nowrap transition-all text-white/40 hover:text-white/80 hover:bg-white/6">{n.label}</a>
-                : <Link key={n.label} href={n.href} className="text-[11px] font-semibold px-3 py-1 rounded-full whitespace-nowrap transition-all"
-                    style={{ color: "#00d4ff", background: "rgba(0,212,255,0.08)", border: "1px solid rgba(0,212,255,0.15)" }}>{n.label}</Link>
+                ? <a key={n.label} href={n.href} className="text-[11px] font-medium px-3 py-1 rounded-full whitespace-nowrap transition-all text-white/40 hover:text-white/70">{n.label}</a>
+                : <Link key={n.label} href={n.href} className="text-[11px] font-medium px-3 py-1 rounded-full whitespace-nowrap transition-all text-white/60 hover:text-white">{n.label}</Link>
             ))}
           </div>
         </div>
@@ -1052,8 +1026,8 @@ export default function Home() {
         <div className="max-w-5xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map(s => (
             <motion.div key={s.label} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center">
-              <p className="text-3xl font-bold mb-1" style={{ color: "#00d4ff" }}>{s.value}</p>
-              <p className="text-sm text-white/35">{s.label}</p>
+              <p className="text-3xl font-bold mb-1 text-white">{s.value}</p>
+              <p className="text-sm text-white/40">{s.label}</p>
             </motion.div>
           ))}
         </div>
@@ -1073,8 +1047,7 @@ export default function Home() {
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: EASE }} className="max-w-xl mx-auto text-center">
           <h2 className="text-4xl font-bold text-white mb-4 tracking-tight">Get your school on Infizium</h2>
           <p className="text-white/35 mb-8 leading-relaxed">We&apos;re onboarding pilot schools in Telangana. Setup takes under 2 hours.</p>
-          <Link href="/login" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-medium hover:scale-[1.02] transition-all"
-            style={{ background: "rgba(0,212,255,0.12)", border: "1px solid rgba(0,212,255,0.4)", color: "#00d4ff", boxShadow: "0 0 40px rgba(0,212,255,0.12)" }}>
+          <Link href="/login" className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-medium bg-white text-black hover:bg-white/90 transition-colors">
             Start with a demo →
           </Link>
         </motion.div>

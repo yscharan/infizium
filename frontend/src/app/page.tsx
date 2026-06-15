@@ -1260,7 +1260,6 @@ export default function Home() {
       </section>
 
       <MissionSection />
-      <BapuSection />
       <PeopleSection />
       <ModulesSection />
       <CommuteSection />

@@ -31,3 +31,6 @@ npm-debug.log*
 .idea/
 .vscode/
 *.swp
+
+# MCP config (contains API keys — keep local only)
+.mcp.json

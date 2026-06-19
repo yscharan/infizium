@@ -1,9 +1,0 @@
-{
-  "mcpServers": {
-    "infizium": {
-      "command": "npx",
-      "args": ["tsx", "src/mcp/server.ts"],
-      "cwd": "/Users/charan/Infizium/backend"
-    }
-  }
-}

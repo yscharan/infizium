@@ -424,41 +424,41 @@ function MissionSection() {
     {
       label: "Why",
       neon: "#f97316",
-      heading: "Telangana is building 571 new schools. Every one needs an operating system.",
+      heading: "Access is solved. 95.7% of Telangana's children are enrolled. The next problem is what happens inside.",
       paras: [
-        "Telangana is serious about education. The government has committed over Rs 23,000 crore to the sector, 571 new schools are being added this academic year, and 105 Young India Integrated Residential Schools are coming at Rs 11,600 crore. The state has never been more invested in building for the next generation.",
-        "And Telangana has already proven it knows how to bring modern operations to complex sectors. Over 52 e-governance projects now run on AI, drones, blockchain and IoT across agriculture, healthcare, supply chain and transportation. The state built India's first Agricultural Data Exchange with the World Economic Forum. Kaleshwaram reached water to districts that never had irrigation. When Telangana decides something matters, it automates it, tracks it and makes it visible.",
-        "Schools have not received that same operational attention yet. A school opening this year is likely to run exactly as schools ran in 1991: fee collections in a hand register, salary records in a notebook, parent communication through a teacher's personal WhatsApp group. The investment in buildings is very real. The operations inside those buildings have not moved at all. That is the gap.",
+        "Telangana achieved something genuinely hard: near-universal school access. The Gross Enrolment Ratio has risen from 21.5% in 1961 to 95.7% today. Nearly every child who should be in school is in one. But where they are matters more than the headline number suggests.",
+        "Today, 64.7% of Telangana's students study in private unaided schools, the vast majority of them low-fee institutions built by community educators with no government grant, no bank loan, and no institutional backing. These schools serve the state's children at one-third the per-pupil cost of government schools. They are not a supplement to the education system. They are the education system for most families in Telangana.",
+        "Telangana's technology leadership is equally real. NASSCOM documented the state's AI success across agriculture, healthcare, and transportation. The World Economic Forum partnered with Telangana on AI for smallholder farmers, describing a pilot as a massive success. The state is positioning itself as a global hub for AI innovation. That ambition transformed farming and healthcare delivery. It has not yet reached the low-fee school in Karimnagar where 400 children are enrolled and every fee payment is written in a hand register.",
       ],
     },
     {
       label: "What",
       neon: "#00d4ff",
-      heading: "Every sector Telangana modernised got data, systems and accountability. Schools did not.",
+      heading: "NITI Aayog named the gap. Schools have limited capacity to monitor operations, access data, and ensure accountability.",
       paras: [
-        "Agriculture in Telangana now runs on data exchanges, crop health monitoring and sowing intelligence. Civil supplies distribution is tracked digitally. Healthcare records move across the state on unified systems. Transportation has smart governance dashboards. These sectors got operational infrastructure alongside their physical infrastructure. Schools got buildings and budgets.",
-        "Walk into any school in Telangana today and ask five simple questions: how many students paid fees this month, which teacher is absent, what was taught in Class 7 last week, how much stock is left in the kitchen, and which parents have not responded to the last circular. In most schools, every answer comes from memory or from whoever happens to be near the right notebook. That is not governance. That is hope.",
-        "Accountability requires records. Governance requires visibility. Communication requires a system that works even when the principal is not in the building. Every sector Telangana automated was built on exactly those three things. Schools are the last major sector still waiting for them.",
+        "NITI Aayog's assessment of India's school system identified the failure directly: schools have limited capacity to monitor learning progress, address day-to-day operational issues, and access data and financial information. That is not a technology observation. It is a governance observation. And it describes nearly every low-fee private school in Telangana.",
+        "The numbers confirm it. In 2024-25, Telangana has 2,081 government schools with zero student enrolment. Parents voted with their feet and moved children into private community-built schools. Those schools now carry 65% of the state's students. But the accountability inside them is no better than what parents left behind. Fees tracked in notebooks only the principal can interpret. Salary records on a single desk. Parent communication through a personal WhatsApp group. 91 private schools in Telangana remain unrecognised with no compliance records at all.",
+        "School management software adoption in India is growing, but research consistently shows that low-fee and rural schools face the sharpest adoption gap. The schools doing the most work, serving the most students, at the lowest cost, with the least support, are also the ones furthest from having any system. That is the gap Infizium exists to close.",
       ],
     },
     {
       label: "How",
       neon: "#10b981",
-      heading: "The operational layer that makes every new school investment actually work.",
+      heading: "A school operating system built for the principal who teaches half the day and manages everything else in the other half.",
       paras: [
-        "Infizium is a school operating system built around how Telangana schools already work, not how a product team imagined they should. Setup takes under two hours. No training required. No hardware to buy. No dedicated IT person needed.",
-        "Fee collections recorded with full payment history, outstanding amounts visible to every administrator, and automatic WhatsApp reminders to parents who have not paid. Salary records no longer locked inside one notebook. A daily checklist that surfaces every recurring task at the right time and logs it when done. Attendance marked in 90 seconds on a phone, with parents notified the moment it is complete. Homework assigned with a due date, visible to every student and parent immediately.",
-        "For parents in rural areas who cannot call during school hours and do not read English: a Telugu assistant that pulls real school data and answers at any hour without anyone needing to respond manually. WhatsApp-first because nine in ten Telangana parents are already there. No app to download. No login to manage. The school runs visibly. Parents are informed. Everyone is accountable.",
+        "Infizium is not built for a well-resourced school that already has an admin team. It is built for the low-fee private school where one person carries the entire institution: teaches, manages fees, handles parent calls, tracks staff, orders supplies, and does it all from memory. Setup takes under two hours. No training program. No hardware. No IT person required.",
+        "Every fee collection recorded and visible the moment it happens, with outstanding amounts clear and automatic WhatsApp reminders going to parents who have not paid. Salary records every administrator can see, not just the one with the notebook. A daily checklist so no task is forgotten when the day gets full. Attendance marked in 90 seconds on a phone, with every parent notified before the school day ends. Homework assigned with a due date, visible to students and parents the moment it is posted.",
+        "For the parent in a village who cannot call during school hours and reads Telugu but not English: a real-time assistant that answers questions about attendance, fees and homework in their language at any hour, without waking a teacher. No app to download. No account to create. Just WhatsApp, where nine in ten Telangana parents already are. The school runs visibly. Parents stay informed. The principal is no longer the only person who knows what is happening.",
       ],
     },
     {
       label: "Where",
       neon: "#10b981",
-      heading: "571 new schools are coming. Join the ones already running on Infizium.",
+      heading: "64.7% of Telangana's students are in schools built by communities. Those schools deserve a proper operating system.",
       paras: [
-        "Telangana is adding 571 new schools this year. Each one is being built with crores in infrastructure investment. Each one deserves the operational system that makes that investment produce real outcomes: fee accountability, staff governance, parent communication and daily visibility into how the school is actually running.",
-        "We are starting with a pilot school in Karimnagar that has kept children in classrooms for thirty years on trust and dedication alone. Every feature is built and tested here alongside real teachers and real parents before it goes to the next school. When it works here, it is ready for the next 570.",
-        "Setup is free for pilot schools in Telangana. Under two hours to go live.",
+        "These schools exist because parents chose them. They survived because the educators who built them refused to let them close, through droughts, through scholarship delays, through COVID, through every crisis that came. They are the most important institutions in Telangana's education ecosystem. They have never been given an operating system.",
+        "Infizium is launching in Telangana now. Starting with a pilot school in Karimnagar, built in 1991 and still running on the same dedication thirty years later. Every feature is developed here alongside real teachers and real parents before it goes to the next school. When it works here, it goes to the next one.",
+        "Setup is free for pilot schools. Under two hours to go live.",
       ],
     },
   ];
@@ -475,11 +475,11 @@ function MissionSection() {
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: EASE }} className="text-center mb-16">
           <h2 className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-5 leading-tight">
-            Telangana automated agriculture,<br />healthcare, supply chain.<br />
-            <span style={{ color: "#10b981" }}>Schools are next.</span>
+            Telangana solved school access.<br />95.7% enrolled. Now it needs to solve<br />
+            <span style={{ color: "#10b981" }}>what happens inside.</span>
           </h2>
           <p className="text-base text-white/40 max-w-2xl mx-auto leading-relaxed">
-            571 new schools are being built this year. Rs 23,108 crore committed to education. The investment is real and significant. What is still missing is the operating system inside those schools that turns infrastructure into accountability, visibility and results.
+            64.7% of Telangana's students are in private schools built by community educators with no government grant. These schools serve the most children at the lowest cost. They have no operating system. That is what Infizium is here to change.
           </p>
         </motion.div>
 

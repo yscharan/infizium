@@ -430,26 +430,25 @@ function MissionSection() {
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: EASE }} className="text-center mb-14">
           <h2 className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-5 leading-tight">
-            Prepare students for life,<br />
-            not just exams.
+            Telangana built its own schools.<br />
+            Now let&apos;s give them the tools to run them.
           </h2>
           <p className="text-lg font-semibold mb-5 text-white/50">
-            Educate to build a personality.
+            Operations. Transparency. Intelligent communication.
           </p>
           <p className="text-white/40 text-lg max-w-2xl mx-auto leading-relaxed">
-            Schools in Telangana prepare students brilliantly for board exams. But life after school — managing time, money, health, and relationships — is taught nowhere. Infizium starts by fixing the school operating system, then builds the life skills layer on top.
+            For decades, schools in Telangana were built from nothing — by people who had to fight for the right to educate their own communities. They built classrooms, fed children, ran institutions on memory and trust alone. What they never got were the tools to run those schools without carrying everything in their heads.
           </p>
           <p className="text-white/25 text-sm mt-5 max-w-xl mx-auto leading-relaxed">
-            This mission has a human origin. Yadagiri Shekhar Rao — Bapu — built a school with nothing but trust, a bicycle, and thirty years of dedication to children who had nowhere else to go.{" "}
-            <a href="#bapu" className="underline underline-offset-2 text-white/40 hover:text-white/60 transition-colors">His story ↓</a>
+            Infizium is built for every principal in Telangana who tracks fees on paper, every teacher who marks attendance in a register, every parent who waits three months to know how their child is doing. The gap is not dedication — it has never been dedication. The gap is systems.
           </p>
         </motion.div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
           {[
-            { label: "Why", neon: "#f97316", icon: "🎯", heading: "The problem", body: "Parents miss alerts. Teachers waste 24 min/day on registers. Principals have no real-time view. Students get feedback twice a year." },
-            { label: "What", neon: "#00d4ff", icon: "🏗️", heading: "What we build", body: "Attendance, homework, announcements, live bus tracking, parent communication, AI bot, and more. WhatsApp-first — no extra app needed for parents." },
-            { label: "How", neon: "#10b981", icon: "⚡", heading: "How it works", body: "Mobile-first for teachers. WhatsApp for parents. Clean feed for students. Simple dashboard for admins. No app download required for parents." },
-            { label: "Where", neon: "#7c3aed", icon: "📍", heading: "Where we start", body: "Valmiki Vidyalayam, Karimnagar, Telangana. Every feature is built alongside real teachers, parents, and students here first." },
+            { label: "Why", neon: "#f97316", icon: "🎯", heading: "The real problem", body: "Schools in Telangana were built by communities who had to build them. They run on will. Fees tracked on paper. Salaries in memory. Parents informed once a term. The institution works — the operations don't." },
+            { label: "What", neon: "#00d4ff", icon: "🏗️", heading: "What we build", body: "A school operating system. Fee tracking, salary records, daily checklists, attendance, parent communication, homework, forms — everything a principal carries in their head, given a place to live." },
+            { label: "How", neon: "#10b981", icon: "⚡", heading: "How it works", body: "WhatsApp for parents — no app to download. Mobile-first for teachers. A real dashboard for principals. Transparent to every stakeholder. Built around how Telangana schools actually operate." },
+            { label: "Where", neon: "#7c3aed", icon: "📍", heading: "Where we start", body: "A budget residential school in Karimnagar — built in 1991 with nothing but community trust, still running today. Every feature is tested here first, with real teachers, real parents, real students." },
           ].map((col, i) => (
             <motion.div key={col.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i*0.1, duration: 0.5, ease: EASE }}
               className="rounded-lg p-5 flex flex-col gap-2" style={{ background: "#0a0a0a", border: "1px solid #222" }}>
@@ -1040,40 +1039,32 @@ function BapuSection() {
 // ── History section — dual-track parallel timeline ───────────────
 const dualTrack = [
   {
-    telangana: { year: "6th Century BCE", title: "The land of the Godavari", body: "Before any border was drawn, the Godavari carved through this region. Cities, temples, trade routes — built on this ground. Karimnagar stands on it." },
-    bapu: null,
-  },
-  {
-    telangana: { year: "1163 CE", title: "The Kakatiya Empire", body: "Queen Rudrama Devi — one of the first women to command an empire in Indian history. Built forts, reformed taxes, earned loyalty through justice, not fear. She came from here." },
-    bapu: null,
-  },
-  {
-    telangana: { year: "1687 CE", title: "Hyderabad's golden age", body: "The Nizams built one of the wealthiest cities in the world. Scientists, poets, architects from Telangana built institutions still standing. Culture was not imported — it was grown." },
+    telangana: { year: "1956", title: "Merger — schools left behind", body: "When Andhra Pradesh was formed from Hyderabad State, education followed power. Andhra educationalists arrived with capital and connections. Village schools in Telangana — most running on minimal funding — fell behind before they'd had a fair start." },
     bapu: null,
   },
   {
     telangana: null,
-    bapu: { year: "Early 1960s", title: "A boy in Kalamadugu", body: "Born in a forest village in Adilabad. First in his family to reach for education. The school was 20km away. There was no bus, no money, and no precedent." },
+    bapu: { year: "Early 1960s", title: "A boy in Adilabad", body: "Born in a forest village. First in his family to reach for education. The school was far, access wasn't guaranteed, but the intention was set without wavering." },
   },
   {
-    telangana: { year: "1969", title: "The Telangana Movement", body: "Students and teachers walked out of classrooms into streets. They weren't asking for something new — only that the world acknowledge what had always been true about this land." },
-    bapu: { year: "~1975", title: "The bicycle", body: "He traded curry leaves and eggs — village to market, back again — until he had enough for a second-hand bicycle. That bicycle reached the school. That school reached him." },
+    telangana: { year: "1969", title: "Education was the front line", body: "The first Jai Telangana agitation was built on a school grievance — college seats, government jobs, school funding all going disproportionately elsewhere. Students and teachers shut classrooms and walked into history. This was always also a fight about who gets to educate their children and how." },
+    bapu: { year: "~1975", title: "The bicycle", body: "He traded produce — village to market and back — until there was enough for a second-hand bicycle. That bicycle reached the school. The school reached him. A small transaction that changed one life's direction." },
   },
   {
-    telangana: null,
-    bapu: { year: "Early 1980s", title: "First salary: ₹100", body: "Government school teacher. The full weight of a classroom on his shoulders. A hundred rupees a month. He never complained. He kept teaching." },
+    telangana: { year: "1978 – 1985", title: "Budget schools rise from communities", body: "Unable to afford well-funded private schools, Telangana communities did what they always do: built their own. No bank loans, no government grants. Rented buildings, personal savings, trust from parents who had nowhere else to turn." },
+    bapu: { year: "Early 1980s", title: "First salary: ₹100/month", body: "Government school teacher. The full weight of a classroom carried willingly on a hundred rupees a month. He never complained. He kept teaching, kept saving, kept planning for something bigger." },
   },
   {
-    telangana: null,
-    bapu: { year: "1991", title: "A school begins", body: "One rented bungalow. One man teaching every subject. His family in a single room beside the classrooms. Fees minimal — waived whenever a farmer's harvest failed. No marketing. Only trust." },
+    telangana: { year: "1991 – 2000", title: "A generation of school builders", body: "From Adilabad to Nalgonda, hundreds of budget residential schools opened. Principals who taught every subject. Salaries paid from what came in. Fees waived when harvests failed. These schools ran on relationships and reputation — nothing else." },
+    bapu: { year: "1991", title: "A school begins", body: "One rented bungalow in Karimnagar. One man teaching every subject. Family in a room beside the classrooms. Fees minimal — waived for any family that couldn't. No marketing, no branding. Only trust earned slowly, parent by parent." },
   },
   {
-    telangana: { year: "2014", title: "Telangana — a state is born", body: "The 29th state of India. The youngest. Built by the grandparents of children who are in classrooms right now. The next chapter belongs to them." },
-    bapu: { year: "2014", title: "23 years and counting", body: "Two decades of students taught, fed, sheltered. They are now engineers, doctors, soldiers, teachers, software professionals — across the country and across the world." },
+    telangana: { year: "2014", title: "A state is born — and so is the gap", body: "Telangana became the 29th state of India. Schools that had survived on will now had a government that claimed them. But the operations didn't change. The notebook was still the fee ledger. WhatsApp was still the notice board. Statehood arrived; systems didn't." },
+    bapu: { year: "2014", title: "23 years and counting", body: "Students from this school now work as engineers, doctors, soldiers, teachers across India and abroad. The school still runs on memory, on relationships, on one principal's handwritten records. Success, built without a single operational tool." },
   },
   {
-    telangana: null,
-    bapu: { year: "2020–21", title: "COVID. The school stayed open.", body: "While budget schools across Telangana closed, he gave concessions, worked other jobs, spent his own money to keep it running. Not one child was permanently sent home." },
+    telangana: { year: "Today", title: "The schools exist. The systems don't.", body: "The dedication hasn't wavered. But there is still no clean fee record, no salary ledger, no dashboard for principals, no reliable channel to parents beyond a WhatsApp group. The gap is not in will — it is in tools. That is what Infizium closes." },
+    bapu: { year: "2020 – 21", title: "COVID. The school stayed open.", body: "While budget schools across Telangana closed, he gave fee concessions, worked other income sources, spent his own money to keep it running. Not one child was permanently sent home. A school built on service doesn't close when money runs short — it finds a way." },
   },
 ];
 
@@ -1090,13 +1081,13 @@ function HistorySection() {
         {/* Header */}
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center mb-14">
           <motion.p variants={fadeUp} className="font-typewriter text-xs tracking-widest uppercase mb-3 text-white/25">
-            Two tracks · One story
+            Two tracks · One gap
           </motion.p>
           <motion.h2 variants={fadeUp} className="font-typewriter text-4xl sm:text-5xl font-bold text-white tracking-tight mb-4 leading-tight">
-            The land. The man.<br />The reason.
+            The history that built<br />these schools. What&apos;s still missing.
           </motion.h2>
           <motion.p variants={fadeUp} className="text-white/35 max-w-xl mx-auto leading-relaxed text-[0.95rem]">
-            Telangana has carried great people for over two thousand years. Bapu is one of them. Both tracks flow into the same place.
+            Telangana schools were built by people who had to fight for the right to build them. Seventy years later, those schools still run without the tools they were always owed.
           </motion.p>
         </motion.div>
 
@@ -1105,11 +1096,11 @@ function HistorySection() {
           className="flex justify-center gap-10 mb-12">
           <div className="flex items-center gap-2.5">
             <div className="w-6 h-px" style={{ background: "rgba(251,191,36,0.6)" }} />
-            <span className="text-xs font-mono uppercase tracking-widest" style={{ color: "rgba(251,191,36,0.5)" }}>Telangana</span>
+            <span className="text-xs font-mono uppercase tracking-widest" style={{ color: "rgba(251,191,36,0.5)" }}>Telangana Schools</span>
           </div>
           <div className="flex items-center gap-2.5">
             <div className="w-6 h-px" style={{ background: "rgba(255,255,255,0.3)" }} />
-            <span className="text-xs font-mono uppercase tracking-widest text-white/30">Bapu&apos;s journey</span>
+            <span className="text-xs font-mono uppercase tracking-widest text-white/30">A school builder&apos;s path</span>
           </div>
         </motion.div>
 
@@ -1189,10 +1180,10 @@ function HistorySection() {
           className="text-center mt-2 pb-4">
           <p className="font-bold text-white text-xl mb-2">Infizium</p>
           <p className="font-typewriter text-white/40 text-sm max-w-md mx-auto leading-relaxed">
-            The system Bapu never had — built so every school builder after him doesn&apos;t have to carry it alone.
+            The system every Telangana school builder deserved from the beginning — operations, transparency, and communication that doesn&apos;t live only in one person&apos;s memory.
           </p>
           <p className="text-[10px] font-mono uppercase tracking-widest mt-4" style={{ color: "rgba(251,191,36,0.35)" }}>
-            Telangana · est. 1991 · For the next generation
+            Telangana · For every school builder who built something from nothing
           </p>
         </motion.div>
 

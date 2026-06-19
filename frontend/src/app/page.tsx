@@ -420,47 +420,95 @@ function PeopleSection() {
 
 // ── Mission section ───────────────────────────────────────────────
 function MissionSection() {
+  const cards = [
+    {
+      label: "Why",
+      neon: "#f97316",
+      heading: "Seventy years of a broken promise",
+      paras: [
+        "In 1956, when Telangana was merged into Andhra Pradesh, a Gentlemen's Agreement was signed. One clause promised that educational facilities in Telangana would be secured and improved. Within a decade, that clause was ignored. Funds earmarked for Telangana schools were diverted. Coastal Andhra, which already had stronger institutions from the British era, received the investment. Telangana's village schools fell behind before they had ever had a fair start.",
+        "By 1969, the anger had reached a point where 369 people gave their lives to a movement that began in classrooms. Students shut their schools, teachers walked into the streets, and the demand was simple: treat this region as ours. Education equity was not a footnote in the Telangana agitation. It was one of the reasons it happened.",
+        "Communities stopped waiting. Through the 1980s and 1990s, budget residential schools rose across Adilabad, Karimnagar, Nizamabad and Nalgonda, built by educators on personal savings and community trust. No bank loans. No government grants. Just belief, and parents who had nowhere else to go. In 2014 Telangana became its own state. The movement had won. But today, nearly 94% of schools in Telangana still fail basic RTE compliance standards, and more than one in four enrolled students in rural areas is absent on any given day. The schools exist. The dedication has never wavered. The systems never arrived.",
+      ],
+    },
+    {
+      label: "What",
+      neon: "#00d4ff",
+      heading: "The gap nobody names",
+      paras: [
+        "The problem in Telangana schools today is not talent. It is not effort. It is not even funding, though that is real. It is something quieter: there is no system. Everything runs in one person's head.",
+        "Fee collections tracked in handwritten ledgers that only the principal can interpret. Salary records in a notebook on one desk. Parents who learn about attendance by calling the school, or by waiting for the term report that comes home twice a year. Homework assigned verbally in class with no record for the parent or the absent student. Inventory managed by whoever remembers chalk is running low. When the person carrying all of this is unavailable, the school loses its memory entirely.",
+        "This is not a failure of the people running these schools. It is a failure of the tools they were given, or rather the tools they were never given at all. They built institutions that outlasted governments and survived crises. They deserve a system that keeps up with them.",
+      ],
+    },
+    {
+      label: "How",
+      neon: "#10b981",
+      heading: "What these schools actually need",
+      paras: [
+        "Infizium is not an app that schools have to learn from scratch. It is built around how these schools already operate, so the whole setup takes hours rather than months.",
+        "Fee tracking with a full payment history, outstanding amounts and automatic reminders through WhatsApp. Salary records visible to every administrator. A daily checklist so every recurring task surfaces at the right time and gets checked off. Attendance marked in 90 seconds on a phone, with parents notified automatically without the teacher sending a single message manually. Homework posted with a due date, visible to every student and parent the moment it is assigned.",
+        "For parents in villages who cannot call during school hours and cannot read English notifications: an assistant that reads real school data and answers questions in Telugu, day or night, without waking anyone. WhatsApp-first because 90% of parents in Telangana are already there. Mobile-first because teachers do not have desktops between classes. Simple enough for a school that has never used software before.",
+      ],
+    },
+    {
+      label: "Where",
+      neon: "#7c3aed",
+      heading: "Where this starts, and why",
+      paras: [
+        "Valmiki Vidyalayam, Karimnagar. A budget residential school built in 1991 by an educator from a forest village in Adilabad who had no funding, no land and no backing from any institution. He started with a rented bungalow, taught every subject himself, housed his own family in one room beside the classrooms, and waived fees for any family that could not pay. He has kept that school running for thirty years. His students are now engineers, doctors, teachers and soldiers across India and abroad.",
+        "He has run that school the same way every principal in Telangana runs theirs: on memory, on trust, on handwritten ledgers and a WhatsApp group. He is exactly the person Infizium is built for. Every feature is developed alongside the real teachers, parents and students at this school, not designed in a room for a hypothetical user.",
+        "When it works here, it goes to the next school.",
+      ],
+    },
+  ];
+
   return (
     <section id="mission" className="py-28 px-4 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
       <div className="max-w-5xl mx-auto">
+
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex justify-center mb-10">
           <span className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold tracking-widest uppercase" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.5)" }}>
             Mission Infizium
           </span>
         </motion.div>
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: EASE }} className="text-center mb-14">
+
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: EASE }} className="text-center mb-16">
           <h2 className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-5 leading-tight">
             Telangana built its own schools.<br />
             Now let&apos;s give them the tools to run them.
           </h2>
-          <p className="text-lg font-semibold mb-5 text-white/50">
+          <p className="text-lg font-semibold text-white/40">
             Operations. Transparency. Intelligent communication.
           </p>
-          <p className="text-white/40 text-lg max-w-2xl mx-auto leading-relaxed">
-            For decades, schools in Telangana were built from nothing, by people who had to fight for the right to educate their own communities. They built classrooms, fed children, ran institutions on memory and trust alone. What they never got were the tools to run those schools without carrying everything in their heads.
-          </p>
-          <p className="text-white/25 text-sm mt-5 max-w-xl mx-auto leading-relaxed">
-            Infizium is built for every principal in Telangana who tracks fees on paper, every teacher who marks attendance in a register, every parent who waits three months to know how their child is doing. The gap is not dedication. It has never been dedication. The gap is systems.
-          </p>
         </motion.div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
-          {[
-            { label: "Why", neon: "#f97316", icon: "🎯", heading: "The real problem", body: "Schools in Telangana were built by communities who had to build them. They run on will. Fees tracked on paper. Salaries in memory. Parents informed once a term. The institution works. The operations don't." },
-            { label: "What", neon: "#00d4ff", icon: "🏗️", heading: "What we build", body: "A school operating system. Fee tracking, salary records, daily checklists, attendance, parent communication, homework and forms. Everything a principal carries in their head, finally given a place to live." },
-            { label: "How", neon: "#10b981", icon: "⚡", heading: "How it works", body: "WhatsApp for parents with no app to download. Mobile-first for teachers. A real dashboard for principals. Transparent to every stakeholder. Built around how Telangana schools actually operate." },
-            { label: "Where", neon: "#7c3aed", icon: "📍", heading: "Where we start", body: "A budget residential school in Karimnagar, built in 1991 with nothing but community trust and still running today. Every feature is tested here first, with real teachers, real parents, real students." },
-          ].map((col, i) => (
-            <motion.div key={col.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i*0.1, duration: 0.5, ease: EASE }}
-              className="rounded-lg p-5 flex flex-col gap-2" style={{ background: "#0a0a0a", border: "1px solid #222" }}>
-              <div className="flex items-center gap-2"><span className="text-xl">{col.icon}</span><span className="text-xs font-bold tracking-widest uppercase text-white/40">{col.label}</span></div>
-              <p className="font-bold text-white text-sm">{col.heading}</p>
-              <p className="text-xs text-white/45 leading-relaxed">{col.body}</p>
+
+        {/* 2x2 rich context cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-14">
+          {cards.map((card, i) => (
+            <motion.div key={card.label}
+              initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.55, ease: EASE }}
+              className="rounded-xl p-8 flex flex-col gap-5"
+              style={{ background: "#0a0a0a", border: `1px solid ${card.neon}20` }}>
+              <div className="flex items-center gap-3">
+                <span className="text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full"
+                  style={{ background: `${card.neon}15`, color: card.neon, border: `1px solid ${card.neon}30` }}>
+                  {card.label}
+                </span>
+              </div>
+              <p className="font-bold text-white text-lg leading-snug">{card.heading}</p>
+              <div className="flex flex-col gap-3">
+                {card.paras.map((p, j) => (
+                  <p key={j} className="text-sm text-white/45 leading-relaxed">{p}</p>
+                ))}
+              </div>
             </motion.div>
           ))}
         </div>
 
         {/* Feature highlights strip */}
-        <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, ease: EASE }} className="mb-6">
+        <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, ease: EASE }} className="mb-8">
           <p className="text-xs font-mono tracking-widest uppercase text-white/25 text-center mb-4">What&apos;s inside</p>
           <div className="flex flex-wrap gap-2 justify-center">
             {[
@@ -484,7 +532,7 @@ function MissionSection() {
 
         {/* Pilot school */}
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: EASE }}
-          className="rounded-lg overflow-hidden"
+          className="rounded-xl overflow-hidden"
           style={{ background: "#0a0a0a", border: "1px solid #222" }}>
           <div className="p-6 flex flex-col sm:flex-row items-start gap-5">
             <div className="text-5xl flex-shrink-0">🏫</div>
@@ -500,9 +548,9 @@ function MissionSection() {
                 <span>Chaitanyapuri, Karimnagar, Telangana 505001</span>
               </a>
               <p className="text-sm text-white/40 mb-2">Our first school. What works here rolls out to the next school. Real teachers, real parents, real students.</p>
-              <p className="text-xs text-white/25">Principal: <span className="text-white/50 font-medium">Shekhar Rao Yadagiri</span> · <span className="text-white/50 font-medium">+91 99854 01894</span></p>
+              <p className="text-xs text-white/25">Principal: <span className="text-white/50 font-medium">Shekhar Rao Yadagiri</span> <span className="text-white/50 font-medium">+91 99854 01894</span></p>
             </div>
-            <Link href="/login" className="flex-shrink-0 text-sm px-5 py-2.5 rounded-lg font-medium border border-white/20 text-white/60 hover:text-white hover:border-white/40 transition-colors">Get access →</Link>
+            <Link href="/login" className="flex-shrink-0 text-sm px-5 py-2.5 rounded-lg font-medium border border-white/20 text-white/60 hover:text-white hover:border-white/40 transition-colors">Get access</Link>
           </div>
           <div className="w-full h-48 overflow-hidden">
             <iframe
@@ -1036,161 +1084,7 @@ function BapuSection() {
   );
 }
 
-// ── History section — dual-track parallel timeline ───────────────
-const dualTrack = [
-  {
-    telangana: { year: "1956", title: "Merger. Schools left behind.", body: "When Andhra Pradesh was formed from Hyderabad State, education followed power. Andhra educationalists arrived with capital and connections. Village schools in Telangana, most running on minimal funding, fell behind before they had ever had a fair start." },
-    bapu: null,
-  },
-  {
-    telangana: null,
-    bapu: { year: "Early 1960s", title: "A boy in Adilabad", body: "Born in a forest village. First in his family to reach for education. The school was far, access wasn't guaranteed, but the intention was set without wavering." },
-  },
-  {
-    telangana: { year: "1969", title: "Education was the front line", body: "The first Jai Telangana agitation was built on a school grievance. College seats, government jobs, school funding all going disproportionately elsewhere. Students and teachers shut classrooms and walked into history. This was always also a fight about who gets to educate their children and how." },
-    bapu: { year: "~1975", title: "The bicycle", body: "He traded produce, village to market and back, until there was enough for a second-hand bicycle. That bicycle reached the school. The school reached him. A small transaction that changed one life's direction." },
-  },
-  {
-    telangana: { year: "1978 – 1985", title: "Budget schools rise from communities", body: "Unable to afford well-funded private schools, Telangana communities did what they always do: built their own. No bank loans, no government grants. Rented buildings, personal savings, trust from parents who had nowhere else to turn." },
-    bapu: { year: "Early 1980s", title: "First salary: ₹100/month", body: "Government school teacher. The full weight of a classroom carried willingly on a hundred rupees a month. He never complained. He kept teaching, kept saving, kept planning for something bigger." },
-  },
-  {
-    telangana: { year: "1991 to 2000", title: "A generation of school builders", body: "From Adilabad to Nalgonda, hundreds of budget residential schools opened. Principals who taught every subject. Salaries paid from what came in. Fees waived when harvests failed. These schools ran on relationships and reputation. Nothing else." },
-    bapu: { year: "1991", title: "A school begins", body: "One rented bungalow in Karimnagar. One man teaching every subject. Family in a room beside the classrooms. Fees were minimal, waived for any family that could not pay. No marketing, no branding. Only trust earned slowly, parent by parent." },
-  },
-  {
-    telangana: { year: "2014", title: "A state is born. And so is the gap.", body: "Telangana became the 29th state of India. Schools that had survived on will now had a government that claimed them. But the operations did not change. The notebook was still the fee ledger. WhatsApp was still the notice board. Statehood arrived. Systems did not." },
-    bapu: { year: "2014", title: "23 years and counting", body: "Students from this school now work as engineers, doctors, soldiers, teachers across India and abroad. The school still runs on memory, on relationships, on one principal's handwritten records. Success, built without a single operational tool." },
-  },
-  {
-    telangana: { year: "Today", title: "The schools exist. The systems don't.", body: "The dedication hasn't wavered. But there is still no clean fee record, no salary ledger, no dashboard for principals, no reliable channel to parents beyond a WhatsApp group. The gap is not in will. It is in tools. That is what Infizium closes." },
-    bapu: { year: "2020 to 21", title: "COVID. The school stayed open.", body: "While budget schools across Telangana closed, he gave fee concessions, worked other income sources, spent his own money to keep it running. Not one child was permanently sent home. A school built on service does not close when money runs short. It finds a way." },
-  },
-];
 
-function HistorySection() {
-  // Center column is 64px wide. Left line at x=16, right line at x=48.
-  const CX_LEFT = 16;   // Telangana line x
-  const CX_RIGHT = 48;  // Bapu line x
-  const COL_W = 64;
-
-  return (
-    <section className="py-28 px-4 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
-      <div className="max-w-5xl mx-auto">
-
-        {/* Header */}
-        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center mb-14">
-          <motion.p variants={fadeUp} className="font-typewriter text-xs tracking-widest uppercase mb-3 text-white/25">
-            Two tracks · One gap
-          </motion.p>
-          <motion.h2 variants={fadeUp} className="font-typewriter text-4xl sm:text-5xl font-bold text-white tracking-tight mb-4 leading-tight">
-            The history that built<br />these schools. What&apos;s still missing.
-          </motion.h2>
-          <motion.p variants={fadeUp} className="text-white/35 max-w-xl mx-auto leading-relaxed text-[0.95rem]">
-            Telangana schools were built by people who had to fight for the right to build them. Seventy years later, those schools still run without the tools they were always owed.
-          </motion.p>
-        </motion.div>
-
-        {/* Track legend */}
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-          className="flex justify-center gap-10 mb-12">
-          <div className="flex items-center gap-2.5">
-            <div className="w-6 h-px" style={{ background: "rgba(251,191,36,0.6)" }} />
-            <span className="text-xs font-mono uppercase tracking-widest" style={{ color: "rgba(251,191,36,0.5)" }}>Telangana Schools</span>
-          </div>
-          <div className="flex items-center gap-2.5">
-            <div className="w-6 h-px" style={{ background: "rgba(255,255,255,0.3)" }} />
-            <span className="text-xs font-mono uppercase tracking-widest text-white/30">A school builder&apos;s path</span>
-          </div>
-        </motion.div>
-
-        {/* Dual-track timeline */}
-        <div className="relative">
-          {/* Two continuous vertical lines */}
-          <div className="absolute inset-y-0 pointer-events-none" style={{ left: `calc(50% - ${COL_W / 2}px)`, width: `${COL_W}px` }}>
-            <div className="absolute top-0 bottom-0 w-px" style={{ left: `${CX_LEFT}px`, background: "linear-gradient(180deg, transparent, rgba(251,191,36,0.35) 5%, rgba(251,191,36,0.35) 92%, transparent)" }} />
-            <div className="absolute top-0 bottom-0 w-px" style={{ left: `${CX_RIGHT}px`, background: "linear-gradient(180deg, transparent, rgba(255,255,255,0.18) 5%, rgba(255,255,255,0.18) 92%, transparent)" }} />
-          </div>
-
-          {dualTrack.map((row, i) => (
-            <div key={i} className="grid items-center" style={{ gridTemplateColumns: `1fr ${COL_W}px 1fr`, minHeight: "120px" }}>
-              {/* Left — Telangana */}
-              <div className="py-5 pr-8">
-                {row.telangana && (
-                  <motion.div initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-                    transition={{ delay: i * 0.06, duration: 0.55, ease: EASE }} className="text-right">
-                    <p className="text-[10px] font-mono tracking-widest uppercase mb-1" style={{ color: "rgba(251,191,36,0.5)" }}>
-                      {row.telangana.year}
-                    </p>
-                    <h3 className="font-typewriter font-bold text-white text-sm mb-1.5 leading-snug">{row.telangana.title}</h3>
-                    <p className="font-typewriter text-white/35 text-xs leading-relaxed">{row.telangana.body}</p>
-                  </motion.div>
-                )}
-              </div>
-
-              {/* Center — dots on tracks */}
-              <div className="relative flex-shrink-0" style={{ width: `${COL_W}px`, height: "100%" }}>
-                {row.telangana && (
-                  <motion.div initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }}
-                    transition={{ delay: i * 0.06 + 0.1, duration: 0.3 }}
-                    className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full z-10"
-                    style={{ left: `${CX_LEFT - 5}px`, background: "rgba(251,191,36,0.85)", border: "1.5px solid rgba(251,191,36,1)", boxShadow: "0 0 8px rgba(251,191,36,0.4)" }} />
-                )}
-                {row.bapu && (
-                  <motion.div initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }}
-                    transition={{ delay: i * 0.06 + 0.15, duration: 0.3 }}
-                    className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full z-10"
-                    style={{ left: `${CX_RIGHT - 5}px`, background: "rgba(255,255,255,0.65)", border: "1.5px solid rgba(255,255,255,0.85)", boxShadow: "0 0 8px rgba(255,255,255,0.15)" }} />
-                )}
-              </div>
-
-              {/* Right — Bapu */}
-              <div className="py-5 pl-8">
-                {row.bapu && (
-                  <motion.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-                    transition={{ delay: i * 0.06, duration: 0.55, ease: EASE }}>
-                    <p className="text-[10px] font-mono tracking-widest uppercase mb-1 text-white/30">{row.bapu.year}</p>
-                    <h3 className="font-typewriter font-bold text-white text-sm mb-1.5 leading-snug">{row.bapu.title}</h3>
-                    <p className="font-typewriter text-white/35 text-xs leading-relaxed">{row.bapu.body}</p>
-                  </motion.div>
-                )}
-              </div>
-            </div>
-          ))}
-
-          {/* Convergence — both tracks merge into Infizium */}
-          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: EASE }}
-            className="grid items-center" style={{ gridTemplateColumns: `1fr ${COL_W}px 1fr`, minHeight: "80px" }}>
-            <div />
-            <div className="relative flex-shrink-0 flex flex-col items-center justify-start" style={{ width: `${COL_W}px` }}>
-              {/* Two lines converging to center */}
-              <svg width={COL_W} height="40" style={{ display: "block", overflow: "visible" }}>
-                <line x1={CX_LEFT} y1="0" x2={COL_W / 2} y2="38" stroke="rgba(251,191,36,0.4)" strokeWidth="1" />
-                <line x1={CX_RIGHT} y1="0" x2={COL_W / 2} y2="38" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
-                <circle cx={COL_W / 2} cy="38" r="5" fill="white" />
-              </svg>
-            </div>
-            <div />
-          </motion.div>
-        </div>
-
-        {/* Closing statement */}
-        <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: EASE }}
-          className="text-center mt-2 pb-4">
-          <p className="font-bold text-white text-xl mb-2">Infizium</p>
-          <p className="font-typewriter text-white/40 text-sm max-w-md mx-auto leading-relaxed">
-            The system every Telangana school builder deserved from the beginning. Operations, transparency, and communication that does not live only in one person&apos;s memory.
-          </p>
-          <p className="text-[10px] font-mono uppercase tracking-widest mt-4" style={{ color: "rgba(251,191,36,0.35)" }}>
-            Telangana · For every school builder who built something from nothing
-          </p>
-        </motion.div>
-
-      </div>
-    </section>
-  );
-}
 
 // ── Stats ─────────────────────────────────────────────────────────
 const stats = [
@@ -1257,7 +1151,6 @@ export default function Home() {
       <AISection />
       <RoadmapSection />
       <SponsorshipSection />
-      <HistorySection />
 
       {/* CTA */}
       <section className="py-24 px-4">

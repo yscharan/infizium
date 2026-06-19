@@ -424,41 +424,41 @@ function MissionSection() {
     {
       label: "Why",
       neon: "#f97316",
-      heading: "Seventy years of a broken promise",
+      heading: "Telangana moved forward. School operations did not.",
       paras: [
-        "In 1956, when Telangana was merged into Andhra Pradesh, a Gentlemen's Agreement was signed. One clause promised that educational facilities in Telangana would be secured and improved. Within a decade, that clause was ignored. Funds earmarked for Telangana schools were diverted. Coastal Andhra, which already had stronger institutions from the British era, received the investment. Telangana's village schools fell behind before they had ever had a fair start.",
-        "By 1969, the anger had reached a point where 369 people gave their lives to a movement that began in classrooms. Students shut their schools, teachers walked into the streets, and the demand was simple: treat this region as ours. Education equity was not a footnote in the Telangana agitation. It was one of the reasons it happened.",
-        "Communities stopped waiting. Through the 1980s and 1990s, budget residential schools rose across Adilabad, Karimnagar, Nizamabad and Nalgonda, built by educators on personal savings and community trust. No bank loans. No government grants. Just belief, and parents who had nowhere else to go. In 2014 Telangana became its own state. The movement had won. But today, nearly 94% of schools in Telangana still fail basic RTE compliance standards, and more than one in four enrolled students in rural areas is absent on any given day. The schools exist. The dedication has never wavered. The systems never arrived.",
+        "Since 2014 Telangana has invested and built. Water reached districts through Kaleshwaram that had never seen reliable irrigation. New roads cut travel times. Power supply improved across towns and villages. The state took its future seriously and it shows.",
+        "Schools are a different story. The teachers are there. The principals are there. The communities built these schools with their own hands and their own money, and they have kept them running through every drought, every scholarship delay, every crisis that came. The dedication inside Telangana's schools has never been the problem.",
+        "What has not kept pace is how those schools are run. The same fee register from 2005 is still in use. The same WhatsApp group where one teacher sends messages to 200 parents, hoping someone reads them. The same notebook on the principal's desk that holds salary records no one else can read. Telangana moved. School operations stayed where they were.",
       ],
     },
     {
       label: "What",
       neon: "#00d4ff",
-      heading: "The gap nobody names",
+      heading: "The real gap is accountability and governance inside the school.",
       paras: [
-        "The problem in Telangana schools today is not talent. It is not effort. It is not even funding, though that is real. It is something quieter: there is no system. Everything runs in one person's head.",
-        "Fee collections tracked in handwritten ledgers that only the principal can interpret. Salary records in a notebook on one desk. Parents who learn about attendance by calling the school, or by waiting for the term report that comes home twice a year. Homework assigned verbally in class with no record for the parent or the absent student. Inventory managed by whoever remembers chalk is running low. When the person carrying all of this is unavailable, the school loses its memory entirely.",
-        "This is not a failure of the people running these schools. It is a failure of the tools they were given, or rather the tools they were never given at all. They built institutions that outlasted governments and survived crises. They deserve a system that keeps up with them.",
+        "Walk into any school in Telangana and ask: how many students paid fees this month, which staff are on leave today, what was taught in Class 8 last week, will the kitchen stock last until Friday. In most schools, every answer comes from memory. Not from a system.",
+        "That is the gap. Not the answer itself but where it lives. When the answer lives in one person's memory, there is no accountability. When one notebook holds all salary records, there is no governance. When parent communication depends on a teacher's personal phone, there is no structure. When the principal is unavailable, the school goes dark.",
+        "Operations. Accountability. Visibility. These are not technology problems. They are management problems that technology can finally solve, simply, for schools that have never had the tools to address them.",
       ],
     },
     {
       label: "How",
       neon: "#10b981",
-      heading: "What these schools actually need",
+      heading: "A school operating system built for how Telangana schools actually work.",
       paras: [
-        "Infizium is not an app that schools have to learn from scratch. It is built around how these schools already operate, so the whole setup takes hours rather than months.",
-        "Fee tracking with a full payment history, outstanding amounts and automatic reminders through WhatsApp. Salary records visible to every administrator. A daily checklist so every recurring task surfaces at the right time and gets checked off. Attendance marked in 90 seconds on a phone, with parents notified automatically without the teacher sending a single message manually. Homework posted with a due date, visible to every student and parent the moment it is assigned.",
-        "For parents in villages who cannot call during school hours and cannot read English notifications: an assistant that reads real school data and answers questions in Telugu, day or night, without waking anyone. WhatsApp-first because 90% of parents in Telangana are already there. Mobile-first because teachers do not have desktops between classes. Simple enough for a school that has never used software before.",
+        "Infizium is not an app that needs weeks of training. It is built around how schools in Telangana already operate, so the entire setup takes under two hours and adoption happens without forcing a new habit on anyone.",
+        "Every fee collection recorded, outstanding amounts visible at a glance, automatic WhatsApp reminders to parents who have not paid. Salary records every administrator can see, not just the person who keeps the book. A daily checklist that surfaces every recurring task at the right time. Attendance marked in 90 seconds on mobile, with parents notified automatically the moment it is done. Homework posted with a due date, visible to every student and parent immediately.",
+        "For parents in rural areas who cannot call during school hours: a Telugu assistant that reads real school data and answers at any hour, no app to download, no login required. Just WhatsApp, which nine in ten Telangana parents are already on.",
       ],
     },
     {
       label: "Where",
-      neon: "#7c3aed",
-      heading: "Where this starts, and why",
+      neon: "#10b981",
+      heading: "Launching in Telangana now. Pilot schools welcome.",
       paras: [
-        "Valmiki Vidyalayam, Karimnagar. A budget residential school built in 1991 by an educator from a forest village in Adilabad who had no funding, no land and no backing from any institution. He started with a rented bungalow, taught every subject himself, housed his own family in one room beside the classrooms, and waived fees for any family that could not pay. He has kept that school running for thirty years. His students are now engineers, doctors, teachers and soldiers across India and abroad.",
-        "He has run that school the same way every principal in Telangana runs theirs: on memory, on trust, on handwritten ledgers and a WhatsApp group. He is exactly the person Infizium is built for. Every feature is developed alongside the real teachers, parents and students at this school, not designed in a room for a hypothetical user.",
-        "When it works here, it goes to the next school.",
+        "Telangana has over 47,000 schools. Every one of them is run by a principal carrying more than any single person should carry alone. Infizium is launching here first because this is where the need is real, the commitment is proven, and the communities have already shown they will build what the state has not given them.",
+        "We are starting with a pilot school in Karimnagar that has been running for thirty years on trust, dedication and nothing else. Every feature is built and tested alongside real teachers and real parents here before it goes to the next school.",
+        "If you run a school in Telangana, setup is free for pilot schools. It takes under two hours to go live. Join the schools already on Infizium.",
       ],
     },
   ];
@@ -468,43 +468,56 @@ function MissionSection() {
       <div className="max-w-5xl mx-auto">
 
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex justify-center mb-10">
-          <span className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold tracking-widest uppercase" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.5)" }}>
-            Mission Infizium
+          <span className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold tracking-widest uppercase" style={{ background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.25)", color: "rgba(16,185,129,0.8)" }}>
+            Now live in Telangana
           </span>
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: EASE }} className="text-center mb-16">
           <h2 className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-5 leading-tight">
-            Telangana built its own schools.<br />
-            Now let&apos;s give them the tools to run them.
+            The state moved forward.<br />
+            Now its schools get a system to match.
           </h2>
-          <p className="text-lg font-semibold text-white/40">
-            Operations. Transparency. Intelligent communication.
+          <p className="text-base text-white/40 max-w-xl mx-auto leading-relaxed">
+            Telangana built water, roads and power. Infizium builds the operating system for what comes next: schools that run with accountability, visibility and communication that does not depend on one person's memory.
           </p>
         </motion.div>
 
         {/* 2x2 rich context cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-14">
-          {cards.map((card, i) => (
-            <motion.div key={card.label}
-              initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.55, ease: EASE }}
-              className="rounded-xl p-8 flex flex-col gap-5"
-              style={{ background: "#0a0a0a", border: `1px solid ${card.neon}20` }}>
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full"
-                  style={{ background: `${card.neon}15`, color: card.neon, border: `1px solid ${card.neon}30` }}>
-                  {card.label}
-                </span>
-              </div>
-              <p className="font-bold text-white text-lg leading-snug">{card.heading}</p>
-              <div className="flex flex-col gap-3">
-                {card.paras.map((p, j) => (
-                  <p key={j} className="text-sm text-white/45 leading-relaxed">{p}</p>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+          {cards.map((card, i) => {
+            const isLaunch = card.label === "Where";
+            return (
+              <motion.div key={card.label}
+                initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.55, ease: EASE }}
+                className="rounded-xl p-8 flex flex-col gap-5"
+                style={{
+                  background: isLaunch ? "rgba(16,185,129,0.04)" : "#0a0a0a",
+                  border: isLaunch ? "1px solid rgba(16,185,129,0.3)" : `1px solid ${card.neon}20`,
+                }}>
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full"
+                    style={{ background: `${card.neon}15`, color: card.neon, border: `1px solid ${card.neon}30` }}>
+                    {card.label}
+                  </span>
+                </div>
+                <p className="font-bold text-white text-lg leading-snug">{card.heading}</p>
+                <div className="flex flex-col gap-3">
+                  {card.paras.map((p, j) => (
+                    <p key={j} className="text-sm text-white/45 leading-relaxed">{p}</p>
+                  ))}
+                </div>
+                {isLaunch && (
+                  <Link href="/login"
+                    className="mt-2 self-start inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-black transition-colors"
+                    style={{ background: "#10b981" }}>
+                    Get your school on Infizium
+                  </Link>
+                )}
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Feature highlights strip */}

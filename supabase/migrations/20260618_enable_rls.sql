@@ -199,7 +199,7 @@ CREATE POLICY "form_responses: read same school"
 CREATE POLICY "form_responses: users can submit"
   ON form_responses FOR INSERT
   TO authenticated
-  WITH CHECK (responder_id = auth.uid());
+  WITH CHECK (parent_user_id = auth.uid());
 
 -- ─── user_permissions ──────────────────────────────────────────────
 ALTER TABLE user_permissions ENABLE ROW LEVEL SECURITY;

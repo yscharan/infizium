@@ -8,7 +8,8 @@ UPDATE users
 SET
   phone = '+919985401894',
   email = 'shekhar.yadagiri@gmail.com'
-WHERE name ILIKE '%shekhar%' OR name ILIKE '%yadagiri%';
+WHERE name ILIKE '%shekhar%'
+  AND phone != '+919985401894';
 
 -- Fix any remaining @valmiki.com fake emails to real Gmail placeholders
 UPDATE users

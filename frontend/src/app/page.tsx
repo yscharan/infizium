@@ -426,9 +426,9 @@ function MissionSection() {
       neon: "#f97316",
       heading: "Telangana's private school educators built something remarkable. One school at a time, district by district.",
       paras: [
-        "Over decades, community educators across Telangana took one room, one teacher, and one family's trust and built schools that now educate the majority of the state's children. The Gross Enrolment Ratio climbed from 21.5% in 1961 to 95.7% today. That did not happen through any single policy. It happened because people built schools from nothing.",
-        "Today 64.7% of Telangana's students are enrolled in private unaided schools. Institutions built without grants, without institutional backing, on the founder's reputation and the trust of local families. These schools run on dedication. They have never been given a professional operating system to match.",
-        "Infizium comes from inside one of these schools. A school started in Karimnagar in 1991 by a teacher from Adilabad who had never borrowed from a bank, never spent on marketing, and never let a child leave because of unpaid fees. He ran it on memory and trust for thirty years. His son built Infizium so the next generation of school builders do not have to carry what he carried.",
+        "Across India, and most visibly across Telangana, the schools that actually carry the next generation were rarely built by institutions. They were built by individuals: one room, one teacher, one family's trust at a time. In Telangana alone, enrolment climbed from 21.5% in 1961 to 95.7% today. That did not happen through any single policy. It happened because people built schools from nothing.",
+        "Today 64.7% of Telangana's students learn in private unaided schools, most of them low-fee institutions built without grants, without backing, on the founder's reputation and the trust of local families. The same pattern holds across much of India. These schools run on dedication. They have never been given a professional system to match it.",
+        "Infizium was shaped inside one such school, one that kept its doors open for more than thirty years on trust alone, through every crisis that should have closed it. What that school needed and never had became the blueprint. Infizium is built for every school owner who carries their institution the same way, in any town, in any state.",
       ],
     },
     {
@@ -446,9 +446,9 @@ function MissionSection() {
       neon: "#10b981",
       heading: "A professional school management platform. Fee records, staff management, parent communication. Setup in under two hours.",
       paras: [
-        "Infizium covers what a school actually needs to run professionally: fee management, staff records, payroll tracking, attendance, homework assignment, parent communication, and daily task management. All in one platform. No integration work. No module-by-module configuration. No IT team required.",
-        "Fee collections recorded the moment they happen, outstanding balances visible at a glance, automatic WhatsApp reminders to families with pending dues. Staff and salary records every administrator can access. Attendance marked in 90 seconds and pushed to every parent before the school day ends. Daily checklists so nothing falls through when the day gets full.",
-        "Parents receive everything on WhatsApp. No app to download. No login to manage. A Telugu-language assistant handles routine questions about fees, attendance and assignments at any hour without the principal needing to respond. The platform handles the communication. The school handles the education.",
+        "Infizium starts with what every school needs from the first day and rarely has in one place: attendance, homework, announcements, parent communication, approval forms, and a daily checklist so the school is never run from memory. All in one platform. No integration work. No IT team required. Fee and salary tracking follow as the platform grows with each school.",
+        "Attendance marked in 90 seconds on a phone and pushed to every parent before the school day ends. Homework assigned with a due date, visible to students and parents the instant it is posted. Announcements that reach every family at once, with delivery you can actually see. Approval forms sent and tracked without a single phone call. Daily checklists so nothing falls through when the day gets full.",
+        "Parents receive everything on WhatsApp. No app to download. No login to manage. A Telugu-language assistant answers routine questions about attendance, homework and school updates at any hour, without the principal needing to respond. The platform handles the communication. The school handles the education.",
       ],
     },
     {
@@ -458,7 +458,7 @@ function MissionSection() {
       paras: [
         "Infizium is live in Telangana. Starting in Karimnagar, the school where this platform was first built and tested alongside the teachers and parents who shaped every feature in it.",
         "Setup is free for schools in the pilot cohort. Under two hours from first login to fully operational. Every feature working before a single rupee is charged.",
-        "If you run a private school in Telangana, this platform is built for you.",
+        "If you run a school built on the same kind of trust, this platform is built for you. We are simply starting close to home.",
       ],
     },
   ];
@@ -475,11 +475,11 @@ function MissionSection() {
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: EASE }} className="text-center mb-16">
           <h2 className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-5 leading-tight">
-            Telangana's private schools educated<br />a generation on trust alone.<br />
-            <span style={{ color: "#10b981" }}>Infizium is the operating system they deserved.</span>
+            The best schools were built by people,<br />not institutions. On trust, not systems.<br />
+            <span style={{ color: "#10b981" }}>Infizium is the operating system they were never given.</span>
           </h2>
           <p className="text-base text-white/40 max-w-2xl mx-auto leading-relaxed">
-            64.7% of Telangana's students study in private schools built by community educators, one family at a time, with no institutional backing. Infizium is a professional school management platform built from inside one of those schools, for all of them.
+            A professional school management platform for the schools that hold a community together: the low-fee, family-built schools that run on trust instead of systems. We are starting in Telangana, where most children already learn in exactly these schools.
           </p>
         </motion.div>
 

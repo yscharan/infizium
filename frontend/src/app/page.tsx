@@ -21,7 +21,7 @@ const personas = [
     id: "parent", idx: 0, role: "Parent", icon: "👩", neon: "#f97316",
     name: "Lakshmi", detail: "38 · Kukatpally, Hyderabad · Home tailor",
     tagline: "Know your child is safe,\nbefore you finish breakfast.",
-    story: "Lakshmi watches Arjun leave at 7:30 AM and doesn't know if he's on the bus or safe — until he calls from school. She checks WhatsApp constantly. She won't download another app.",
+    story: "Lakshmi watches Arjun leave at 7:30 AM and doesn't know if he's on the bus or safe, not until he calls from school. She checks WhatsApp constantly. She won't download another app.",
     gets: ["WhatsApp attendance alert under 10 minutes", "Approve field trips with a WhatsApp reply", "Homework due dates without opening an app", "Full control over what data is shared"],
     href: "/dashboard/parent",
   },
@@ -29,8 +29,8 @@ const personas = [
     id: "teacher", idx: 1, role: "Teacher", icon: "👨‍🏫", neon: "#3b82f6",
     name: "Ravi", detail: "34 · Grade 8 Maths · 12 years experience",
     tagline: "40 students. 2 minutes.\nYou teach. We handle admin.",
-    story: "Ravi spends 24 minutes a day on attendance registers. He manages a parent WhatsApp group of 42 families — messages arrive at 10 PM. He answers because he cares. It's burning him out.",
-    gets: ["Mark attendance in under 90 seconds on mobile", "Parents auto-notified — no manual messages", "Assign homework with a due date in seconds", "After 6 PM messages held until morning"],
+    story: "Ravi spends 24 minutes a day on attendance registers. He manages a parent WhatsApp group of 42 families. Messages arrive at 10 PM. He answers because he cares. It's burning him out.",
+    gets: ["Mark attendance in under 90 seconds on mobile", "Parents auto-notified, no manual messages needed", "Assign homework with a due date in seconds", "After 6 PM messages held until morning"],
     href: "/dashboard/teacher",
   },
   {
@@ -38,7 +38,7 @@ const personas = [
     name: "Arjun", detail: "15 · Grade 9A · JEE 2028 aspirant",
     tagline: "Doubts at 9 PM?\nAsk. Get an answer. In Telugu.",
     story: "Arjun forgets homework given verbally. He has doubts at 9 PM with no one to ask. He re-reads notes before exams because no one has told him what to study differently.",
-    gets: ["Clean homework feed — never miss an assignment", "AI tutor answers questions at night (Phase 3)", "Track attendance % and progress trend", "No extra app for parents to manage"],
+    gets: ["Clean homework feed, never miss an assignment", "AI tutor answers questions at night (Phase 3)", "Track attendance % and progress trend", "No extra app for parents to manage"],
     href: "/dashboard/student",
   },
   {
@@ -84,7 +84,7 @@ function ParentPreview() {
             <span className="text-lg">📱</span>
             <div>
               <p className="text-[10px] text-white/50 mb-0.5">WhatsApp · just now</p>
-              <p className="text-xs text-white/80">Arjun marked absent — Period 1 Maths. Reply with reason.</p>
+              <p className="text-xs text-white/80">Arjun marked absent in Period 1 Maths. Reply with reason.</p>
               <div className="flex gap-2 mt-1.5">
                 <span className="text-[10px] bg-white/10 text-white/60 px-2 py-0.5 rounded-full">Sick today</span>
                 <span className="text-[10px] bg-white/10 text-white/60 px-2 py-0.5 rounded-full">Doctor visit</span>
@@ -133,9 +133,9 @@ function TeacherPreview() {
 
 function StudentPreview() {
   const hw = [
-    { sub: "Maths", title: "Ch 5 — Quadratic Equations", urgent: true, done: false },
+    { sub: "Maths", title: "Ch 5: Quadratic Equations", urgent: true, done: false },
     { sub: "English", title: "Essay: My Favourite Festival", urgent: false, done: false },
-    { sub: "Science", title: "Lab diagram — Plant Cell", urgent: false, done: true },
+    { sub: "Science", title: "Lab diagram, Plant Cell", urgent: false, done: true },
   ];
   return (
     <div className="space-y-2">
@@ -437,18 +437,18 @@ function MissionSection() {
             Operations. Transparency. Intelligent communication.
           </p>
           <p className="text-white/40 text-lg max-w-2xl mx-auto leading-relaxed">
-            For decades, schools in Telangana were built from nothing — by people who had to fight for the right to educate their own communities. They built classrooms, fed children, ran institutions on memory and trust alone. What they never got were the tools to run those schools without carrying everything in their heads.
+            For decades, schools in Telangana were built from nothing, by people who had to fight for the right to educate their own communities. They built classrooms, fed children, ran institutions on memory and trust alone. What they never got were the tools to run those schools without carrying everything in their heads.
           </p>
           <p className="text-white/25 text-sm mt-5 max-w-xl mx-auto leading-relaxed">
-            Infizium is built for every principal in Telangana who tracks fees on paper, every teacher who marks attendance in a register, every parent who waits three months to know how their child is doing. The gap is not dedication — it has never been dedication. The gap is systems.
+            Infizium is built for every principal in Telangana who tracks fees on paper, every teacher who marks attendance in a register, every parent who waits three months to know how their child is doing. The gap is not dedication. It has never been dedication. The gap is systems.
           </p>
         </motion.div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
           {[
-            { label: "Why", neon: "#f97316", icon: "🎯", heading: "The real problem", body: "Schools in Telangana were built by communities who had to build them. They run on will. Fees tracked on paper. Salaries in memory. Parents informed once a term. The institution works — the operations don't." },
-            { label: "What", neon: "#00d4ff", icon: "🏗️", heading: "What we build", body: "A school operating system. Fee tracking, salary records, daily checklists, attendance, parent communication, homework, forms — everything a principal carries in their head, given a place to live." },
-            { label: "How", neon: "#10b981", icon: "⚡", heading: "How it works", body: "WhatsApp for parents — no app to download. Mobile-first for teachers. A real dashboard for principals. Transparent to every stakeholder. Built around how Telangana schools actually operate." },
-            { label: "Where", neon: "#7c3aed", icon: "📍", heading: "Where we start", body: "A budget residential school in Karimnagar — built in 1991 with nothing but community trust, still running today. Every feature is tested here first, with real teachers, real parents, real students." },
+            { label: "Why", neon: "#f97316", icon: "🎯", heading: "The real problem", body: "Schools in Telangana were built by communities who had to build them. They run on will. Fees tracked on paper. Salaries in memory. Parents informed once a term. The institution works. The operations don't." },
+            { label: "What", neon: "#00d4ff", icon: "🏗️", heading: "What we build", body: "A school operating system. Fee tracking, salary records, daily checklists, attendance, parent communication, homework and forms. Everything a principal carries in their head, finally given a place to live." },
+            { label: "How", neon: "#10b981", icon: "⚡", heading: "How it works", body: "WhatsApp for parents with no app to download. Mobile-first for teachers. A real dashboard for principals. Transparent to every stakeholder. Built around how Telangana schools actually operate." },
+            { label: "Where", neon: "#7c3aed", icon: "📍", heading: "Where we start", body: "A budget residential school in Karimnagar, built in 1991 with nothing but community trust and still running today. Every feature is tested here first, with real teachers, real parents, real students." },
           ].map((col, i) => (
             <motion.div key={col.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i*0.1, duration: 0.5, ease: EASE }}
               className="rounded-lg p-5 flex flex-col gap-2" style={{ background: "#0a0a0a", border: "1px solid #222" }}>
@@ -522,7 +522,7 @@ const featuresByPersona = [
     persona: "parent", icon: "👩", label: "Parent", neon: "#f97316",
     features: [
       { icon: "📱", title: "Attendance alerts on WhatsApp", status: "Live", desc: "Get a WhatsApp message the moment your child is marked absent. No app to download, no login needed." },
-      { icon: "💬", title: "Ask anything on WhatsApp", status: "Live", desc: "Text your question in Telugu or English — attendance, homework, fees. Get an instant answer from the school." },
+      { icon: "💬", title: "Ask anything on WhatsApp", status: "Live", desc: "Text your question in Telugu or English about attendance, homework or fees. Get an instant answer from the school." },
       { icon: "📋", title: "Approve field trips by WhatsApp reply", status: "Live", desc: "School sends a permission request. Reply YES or NO. Your response is recorded and the school is notified." },
       { icon: "🔔", title: "Homework reminders", status: "Live", desc: "Know what your child has due tomorrow. Sent directly to your WhatsApp the night before." },
       { icon: "🔐", title: "Control your child's data", status: "Live", desc: "Decide which notifications you receive and what information the school can access. DPDP compliant." },
@@ -535,7 +535,7 @@ const featuresByPersona = [
       { icon: "✅", title: "Mark attendance in 2 minutes", status: "Live", desc: "Open the app, tap present or absent for each student. Parents are notified automatically. No register, no WhatsApp messages." },
       { icon: "📚", title: "Assign homework in seconds", status: "Live", desc: "Type the assignment, set a due date, done. Every student and parent sees it instantly." },
       { icon: "📢", title: "Send announcements", status: "Live", desc: "Broadcast to your class or the whole school. Read receipts show who got it." },
-      { icon: "📋", title: "Create approval forms", status: "Live", desc: "Field trips, events, consent — send a form, track who approved, who declined, who hasn't responded." },
+      { icon: "📋", title: "Create approval forms", status: "Live", desc: "Field trips, events, consent forms. Send it out, track who approved, who declined, who hasn't responded." },
       { icon: "📊", title: "Class reports", status: "Phase 2", desc: "Attendance trends, homework completion rates, and class performance in one view. No Excel." },
     ],
   },
@@ -544,7 +544,7 @@ const featuresByPersona = [
     features: [
       { icon: "📚", title: "Clean homework feed", status: "Live", desc: "See all assignments due, with deadlines. Never miss something given verbally in class." },
       { icon: "📈", title: "Track your attendance", status: "Live", desc: "See your attendance percentage and which days you were absent. Know when you're close to the limit." },
-      { icon: "🎯", title: "Progress at a glance", status: "Live", desc: "Your academic summary — subjects, attendance, homework completion — in one screen." },
+      { icon: "🎯", title: "Progress at a glance", status: "Live", desc: "Your academic summary in one screen. Subjects, attendance and homework completion all in one place." },
       { icon: "💰", title: "Sponsorship support", status: "Phase 2", desc: "If your family needs help with fees, anonymous sponsors can pay directly to your school. No shame, no middleman." },
       { icon: "🧠", title: "Study help in Telugu", status: "Phase 3", desc: "Ask any question from your syllabus late at night and get a worked example back. In Telugu." },
       { icon: "🌱", title: "Personality & life skills", status: "Phase 3", desc: "Routine tracking, goal setting, and character building built into your daily school experience." },
@@ -568,7 +568,7 @@ const featuresByPersona = [
       { icon: "🚌", title: "School Bus GPS", status: "Phase 2", desc: "Live GPS on every school bus. Parent gets a WhatsApp ping when their child boards and when the bus reaches school." },
       { icon: "🚗", title: "Parent Car Pool", status: "Phase 2", desc: "Route-matching between verified school families. Shared live location during the trip. Mutual identity verified." },
       { icon: "🛺", title: "Auto Buddy", status: "Phase 2", desc: "School-verified auto drivers only. Group ride for 3 to 4 students. Parent gets an arrival alert at drop-off." },
-      { icon: "🚶", title: "Walk Group", status: "Phase 2", desc: "Group check-in tracking — not individual GPS. A senior student leads. Parent gets one alert when the group arrives." },
+      { icon: "🚶", title: "Walk Group", status: "Phase 2", desc: "Group check-in tracking, not individual GPS. A senior student leads. Parent gets one alert when the group arrives." },
       { icon: "📡", title: "Solo + Smart Tag", status: "Phase 2", desc: "Student travels alone. Infizium Tag in school bag pings location silently. Parent sees the journey on their phone." },
       { icon: "⌚", title: "Smart Band", status: "Phase 2", desc: "GPS + BLE wristband for students. 7-day battery. SOS button. Auto check-in at school gate. Looks like a watch." },
     ],
@@ -660,12 +660,12 @@ function CommuteSection() {
           {[
             {
               name: "Infizium Smart Band", icon: "⌚", neon: "#f59e0b",
-              specs: ["GPS + BLE 5.0", "7-day battery", "IP67 waterproof", "SOS button — 3-sec hold → parent + admin alert", "School gate geofence auto check-in"],
+              specs: ["GPS + BLE 5.0", "7-day battery", "IP67 waterproof", "SOS button, 3-sec hold alerts parent and admin", "School gate geofence auto check-in"],
               who: "Student wears it · Looks like a watch",
             },
             {
               name: "Infizium Tag", icon: "🏷️", neon: "#f97316",
-              specs: ["23mm × 23mm × 4mm — fits in school bag", "6-month battery (no daily charging)", "BLE 5.2 + cell triangulation", "Water resistant", "Works without any student action"],
+              specs: ["23mm × 23mm × 4mm, fits in school bag", "6-month battery (no daily charging)", "BLE 5.2 + cell triangulation", "Water resistant", "Works without any student action"],
               who: "Hidden in bag · No daily charging",
             },
           ].map((hw, i) => (
@@ -722,7 +722,7 @@ function AISection() {
     { from: "parent", msg: "Arjun attendance ela undi this week?" },
     { from: "bot", msg: "✅ Arjun attended *4 of 5 days* this week. Absent on Wednesday, June 4. This month: 87% (24 of 28 days)." },
     { from: "parent", msg: "homework enti undi tomorrow?" },
-    { from: "bot", msg: "📚 2 assignments due June 8:\n• *Maths* — Chapter 7 exercises\n• *English* — Essay on environment (due June 10)\n\nBoth posted by Ravi sir today." },
+    { from: "bot", msg: "📚 2 assignments due June 8:\n• *Maths*: Chapter 7 exercises\n• *English*: Essay on environment (due June 10)\n\nBoth posted by Ravi sir today." },
   ];
   return (
     <section id="ai-section" className="py-24 px-4 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
@@ -738,13 +738,13 @@ function AISection() {
               In Telugu. At 10 PM.
             </motion.h2>
             <motion.p variants={fadeUp} className="text-white/40 leading-relaxed mb-6">
-              Lakshmi texts the bot on WhatsApp or Telegram in Telugu. Claude Haiku calls the real Supabase database, pulls Arjun&apos;s actual attendance and homework, and replies in under 5 seconds — in whatever language she wrote in.
+              Lakshmi texts the bot on WhatsApp or Telegram in Telugu. Claude Haiku calls the real Supabase database, pulls Arjun&apos;s actual attendance and homework, and replies in under 5 seconds, in whatever language she wrote in.
             </motion.p>
             <motion.div variants={fadeUp} className="space-y-3">
               {[
                 { icon: "🤖", label: "Built with Claude Haiku + MCP tool use" },
                 { icon: "🗣️", label: "Detects Telugu automatically, responds in kind" },
-                { icon: "📊", label: "Answers from real Supabase data — not scripted" },
+                { icon: "📊", label: "Answers from real Supabase data, not scripted" },
                 { icon: "💸", label: "~₹200/month for 500 parents" },
               ].map(f => (
                 <div key={f.label} className="flex items-center gap-3">
@@ -838,7 +838,7 @@ function SponsorshipSection() {
             is the difference between Arjun staying or quitting.
           </motion.h2>
           <motion.p variants={fadeUp} className="text-white/35 max-w-xl mx-auto text-sm leading-relaxed">
-            Donors give directly to verified students — no middleman, no NGO cut. School fee paid straight to the school. Pocket money only the student controls. Education loan repaid when they earn.
+            Donors give directly to verified students with no middleman and no NGO cut. School fee paid straight to the school. Pocket money only the student controls. Education loan repaid when they earn.
           </motion.p>
         </motion.div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
@@ -863,9 +863,9 @@ function SponsorshipSection() {
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="rounded-2xl p-4" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)" }}>
               <p className="text-xs font-mono text-white/30 tracking-widest uppercase mb-3">Interaction modes</p>
               {[
-                { dot: "#fbbf24", text: "Anonymous — donor gives, student knows someone cared, no identity shared" },
-                { dot: "#f97316", text: "Codename — donor picks a name like \"Phoenix\" — student knows their guardian angel" },
-                { dot: "#ef4444", text: "Direct — full identity, live messaging, long-term mentorship" },
+                { dot: "#fbbf24", text: "Anonymous: donor gives, student knows someone cared, no identity shared" },
+                { dot: "#f97316", text: "Codename: donor picks a name like \"Phoenix\" and student knows their guardian angel" },
+                { dot: "#ef4444", text: "Direct: full identity, live messaging, long-term mentorship" },
               ].map(t => <div key={t.text} className="flex items-start gap-2 text-xs text-white/35 mb-2"><div className="w-2 h-2 rounded-full flex-shrink-0 mt-0.5" style={{ background: t.dot }} />{t.text}</div>)}
             </motion.div>
           </div>
@@ -1039,7 +1039,7 @@ function BapuSection() {
 // ── History section — dual-track parallel timeline ───────────────
 const dualTrack = [
   {
-    telangana: { year: "1956", title: "Merger — schools left behind", body: "When Andhra Pradesh was formed from Hyderabad State, education followed power. Andhra educationalists arrived with capital and connections. Village schools in Telangana — most running on minimal funding — fell behind before they'd had a fair start." },
+    telangana: { year: "1956", title: "Merger. Schools left behind.", body: "When Andhra Pradesh was formed from Hyderabad State, education followed power. Andhra educationalists arrived with capital and connections. Village schools in Telangana, most running on minimal funding, fell behind before they had ever had a fair start." },
     bapu: null,
   },
   {
@@ -1047,24 +1047,24 @@ const dualTrack = [
     bapu: { year: "Early 1960s", title: "A boy in Adilabad", body: "Born in a forest village. First in his family to reach for education. The school was far, access wasn't guaranteed, but the intention was set without wavering." },
   },
   {
-    telangana: { year: "1969", title: "Education was the front line", body: "The first Jai Telangana agitation was built on a school grievance — college seats, government jobs, school funding all going disproportionately elsewhere. Students and teachers shut classrooms and walked into history. This was always also a fight about who gets to educate their children and how." },
-    bapu: { year: "~1975", title: "The bicycle", body: "He traded produce — village to market and back — until there was enough for a second-hand bicycle. That bicycle reached the school. The school reached him. A small transaction that changed one life's direction." },
+    telangana: { year: "1969", title: "Education was the front line", body: "The first Jai Telangana agitation was built on a school grievance. College seats, government jobs, school funding all going disproportionately elsewhere. Students and teachers shut classrooms and walked into history. This was always also a fight about who gets to educate their children and how." },
+    bapu: { year: "~1975", title: "The bicycle", body: "He traded produce, village to market and back, until there was enough for a second-hand bicycle. That bicycle reached the school. The school reached him. A small transaction that changed one life's direction." },
   },
   {
     telangana: { year: "1978 – 1985", title: "Budget schools rise from communities", body: "Unable to afford well-funded private schools, Telangana communities did what they always do: built their own. No bank loans, no government grants. Rented buildings, personal savings, trust from parents who had nowhere else to turn." },
     bapu: { year: "Early 1980s", title: "First salary: ₹100/month", body: "Government school teacher. The full weight of a classroom carried willingly on a hundred rupees a month. He never complained. He kept teaching, kept saving, kept planning for something bigger." },
   },
   {
-    telangana: { year: "1991 – 2000", title: "A generation of school builders", body: "From Adilabad to Nalgonda, hundreds of budget residential schools opened. Principals who taught every subject. Salaries paid from what came in. Fees waived when harvests failed. These schools ran on relationships and reputation — nothing else." },
-    bapu: { year: "1991", title: "A school begins", body: "One rented bungalow in Karimnagar. One man teaching every subject. Family in a room beside the classrooms. Fees minimal — waived for any family that couldn't. No marketing, no branding. Only trust earned slowly, parent by parent." },
+    telangana: { year: "1991 to 2000", title: "A generation of school builders", body: "From Adilabad to Nalgonda, hundreds of budget residential schools opened. Principals who taught every subject. Salaries paid from what came in. Fees waived when harvests failed. These schools ran on relationships and reputation. Nothing else." },
+    bapu: { year: "1991", title: "A school begins", body: "One rented bungalow in Karimnagar. One man teaching every subject. Family in a room beside the classrooms. Fees were minimal, waived for any family that could not pay. No marketing, no branding. Only trust earned slowly, parent by parent." },
   },
   {
-    telangana: { year: "2014", title: "A state is born — and so is the gap", body: "Telangana became the 29th state of India. Schools that had survived on will now had a government that claimed them. But the operations didn't change. The notebook was still the fee ledger. WhatsApp was still the notice board. Statehood arrived; systems didn't." },
+    telangana: { year: "2014", title: "A state is born. And so is the gap.", body: "Telangana became the 29th state of India. Schools that had survived on will now had a government that claimed them. But the operations did not change. The notebook was still the fee ledger. WhatsApp was still the notice board. Statehood arrived. Systems did not." },
     bapu: { year: "2014", title: "23 years and counting", body: "Students from this school now work as engineers, doctors, soldiers, teachers across India and abroad. The school still runs on memory, on relationships, on one principal's handwritten records. Success, built without a single operational tool." },
   },
   {
-    telangana: { year: "Today", title: "The schools exist. The systems don't.", body: "The dedication hasn't wavered. But there is still no clean fee record, no salary ledger, no dashboard for principals, no reliable channel to parents beyond a WhatsApp group. The gap is not in will — it is in tools. That is what Infizium closes." },
-    bapu: { year: "2020 – 21", title: "COVID. The school stayed open.", body: "While budget schools across Telangana closed, he gave fee concessions, worked other income sources, spent his own money to keep it running. Not one child was permanently sent home. A school built on service doesn't close when money runs short — it finds a way." },
+    telangana: { year: "Today", title: "The schools exist. The systems don't.", body: "The dedication hasn't wavered. But there is still no clean fee record, no salary ledger, no dashboard for principals, no reliable channel to parents beyond a WhatsApp group. The gap is not in will. It is in tools. That is what Infizium closes." },
+    bapu: { year: "2020 to 21", title: "COVID. The school stayed open.", body: "While budget schools across Telangana closed, he gave fee concessions, worked other income sources, spent his own money to keep it running. Not one child was permanently sent home. A school built on service does not close when money runs short. It finds a way." },
   },
 ];
 
@@ -1180,7 +1180,7 @@ function HistorySection() {
           className="text-center mt-2 pb-4">
           <p className="font-bold text-white text-xl mb-2">Infizium</p>
           <p className="font-typewriter text-white/40 text-sm max-w-md mx-auto leading-relaxed">
-            The system every Telangana school builder deserved from the beginning — operations, transparency, and communication that doesn&apos;t live only in one person&apos;s memory.
+            The system every Telangana school builder deserved from the beginning. Operations, transparency, and communication that does not live only in one person&apos;s memory.
           </p>
           <p className="text-[10px] font-mono uppercase tracking-widest mt-4" style={{ color: "rgba(251,191,36,0.35)" }}>
             Telangana · For every school builder who built something from nothing

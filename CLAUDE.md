@@ -59,6 +59,7 @@ Features to build:
 - Weekly revision guide — which topics to go back over, based on what was taught and how the student performed
 - Test prep visibility — before weekly/monthly tests, student sees exactly which topics to study drawn from actual syllabus covered
 - Personal help requests — raise a flag when stuck on a topic, teacher picks it up and responds personally. No public embarrassment, no waiting for the right classroom moment
+- Digital wellbeing — social media overuse is pulling students away from study, sleep, focus and attention. Help limit or redirect it: routine and focus support, healthier screen habits, the school nudging the student toward life beyond the feed. Ties to the mission: prepare students for life, not just exams
 
 ---
 

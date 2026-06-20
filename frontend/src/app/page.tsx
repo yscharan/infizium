@@ -424,40 +424,40 @@ function MissionSection() {
     {
       label: "Why",
       neon: "#f97316",
-      heading: "Telangana's private school educators built something remarkable. One school at a time, district by district.",
+      heading: "The schools that teach most of India were built the same way: one founder, one promise, one family's trust at a time.",
       paras: [
-        "Across India, and most visibly across Telangana, the schools that actually carry the next generation were rarely built by institutions. They were built by individuals: one room, one teacher, one family's trust at a time. In Telangana alone, enrolment climbed from 21.5% in 1961 to 95.7% today. That did not happen through any single policy. It happened because people built schools from nothing.",
-        "Today 64.7% of Telangana's students learn in private unaided schools, most of them low-fee institutions built without grants, without backing, on the founder's reputation and the trust of local families. The same pattern holds across much of India. These schools run on dedication. They have never been given a professional system to match it.",
-        "Infizium was shaped inside one such school, one that kept its doors open for more than thirty years on trust alone, through every crisis that should have closed it. What that school needed and never had became the blueprint. Infizium is built for every school owner who carries their institution the same way, in any town, in any state.",
+        "India now educates more children in private schools than at any point on record. About 39% of all school students, close to 96 million children, learn in private schools, and most of those are low-fee schools founded by individual educators rather than institutions. In Telangana the share is around 64.7%, the highest of any state.",
+        "These are not corporate chains. They are schools a teacher started in a rented building and grew classroom by classroom, on reputation and the trust of local parents. Fees kept low, cut further when a harvest failed. No marketing, no rank promises. Just a promise to the family in front of them, kept year after year.",
+        "Infizium was shaped inside one such school, one that kept its doors open for more than thirty years on trust alone, through every crisis that should have closed it. What that school needed and never had became the blueprint. It is built for every school owner who carries their institution the same way, in any town, in any state.",
       ],
     },
     {
       label: "What",
       neon: "#00d4ff",
-      heading: "These schools carry the majority of students. They have the least operational infrastructure of any institution their size.",
+      heading: "They carry the most students with the least support. Most still run on paper, memory, and one overloaded person.",
       paras: [
-        "Walk into most private schools in Telangana and the operational picture is unchanged from the day they opened. Fee collections in a register only the principal can read. Salary records on a single desk. Staff attendance logged differently by everyone who logs it. No consolidated view of what the school owes, what it is owed, or what is running low in the kitchen.",
-        "A school is a complex operation: fifteen to thirty teachers, hundreds of families, monthly fee cycles, compliance requirements, daily logistics, food, transport, maintenance. Any business of this size would run on management software as a baseline. Schools in Telangana have been running without that baseline for decades.",
-        "The result is that all accountability lives inside one person's memory. When that person is sick, everything waits. When they leave, institutional knowledge walks out with them. Professional operations infrastructure is not a luxury for private schools. It is overdue.",
+        "Only about 20 to 30% of private schools in India use proper school software. In the small and low-fee schools that serve most children, an estimated 60 to 80% of the daily work is still manual: admissions on paper forms, attendance in registers, fees in a notebook, salaries in a spreadsheet, parents on a personal WhatsApp number.",
+        "Most of it sits with one person. The founder is principal, administrator and accountant at once. When that person is unwell, the school waits. When they forget, something slips. Institutional memory lives in their head and in whichever register happens to be nearest.",
+        "The cost is real and documented. After COVID, many low-fee schools carried 20 to 30% of fees unpaid with no clear view of who owed what. Salaries ran late, experienced teachers left, and thousands of schools closed or were sold. Not for lack of dedication, but for lack of a system.",
       ],
     },
     {
       label: "How",
       neon: "#10b981",
-      heading: "A professional school management platform. Fee records, staff management, parent communication. Setup in under two hours.",
+      heading: "One platform for the daily work of running a school. Live in under two hours, with no IT team.",
       paras: [
-        "Infizium starts with what every school needs from the first day and rarely has in one place: attendance, homework, announcements, parent communication, approval forms, and a daily checklist so the school is never run from memory. All in one platform. No integration work. No IT team required. Fee and salary tracking follow as the platform grows with each school.",
-        "Attendance marked in 90 seconds on a phone and pushed to every parent before the school day ends. Homework assigned with a due date, visible to students and parents the instant it is posted. Announcements that reach every family at once, with delivery you can actually see. Approval forms sent and tracked without a single phone call. Daily checklists so nothing falls through when the day gets full.",
-        "Parents receive everything on WhatsApp. No app to download. No login to manage. A Telugu-language assistant answers routine questions about attendance, homework and school updates at any hour, without the principal needing to respond. The platform handles the communication. The school handles the education.",
+        "Infizium starts with what every school needs from the first day and rarely has in one place: attendance, homework, announcements, parent communication, approval forms, and a daily checklist so nothing is run from memory. Fee and salary tracking follow as the platform grows with each school.",
+        "Attendance marked in 90 seconds and pushed to every parent before the school day ends. Homework and announcements that reach every family at once, with delivery you can actually see. Approval forms sent and tracked without a single phone call. The founder stops being the only person who knows what is happening.",
+        "Parents receive everything on WhatsApp. No app to download, no login to manage. A Telugu-language assistant answers routine questions about attendance, homework and school updates at any hour. The platform handles the communication. The school handles the education.",
       ],
     },
     {
       label: "Where",
       neon: "#10b981",
-      heading: "Now open for pilot schools in Telangana.",
+      heading: "Starting in Telangana, built for schools like these everywhere.",
       paras: [
-        "Infizium is live in Telangana. Starting in Karimnagar, the school where this platform was first built and tested alongside the teachers and parents who shaped every feature in it.",
-        "Setup is free for schools in the pilot cohort. Under two hours from first login to fully operational. Every feature working before a single rupee is charged.",
+        "We are beginning close to home, in Telangana, where most children already learn in exactly these schools. The first is in Karimnagar, where Infizium was built and tested alongside the teachers and parents who shaped every feature in it.",
+        "Setup is free for schools in the pilot cohort. Under two hours from first login to fully working. Every feature proven before a single rupee is charged.",
         "If you run a school built on the same kind of trust, this platform is built for you. We are simply starting close to home.",
       ],
     },
@@ -475,11 +475,11 @@ function MissionSection() {
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: EASE }} className="text-center mb-16">
           <h2 className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-5 leading-tight">
-            The best schools were built by people,<br />not institutions. On trust, not systems.<br />
-            <span style={{ color: "#10b981" }}>Infizium is the operating system they were never given.</span>
+            Private schools educated a generation<br />on trust alone. They built classrooms.<br />
+            <span style={{ color: "#10b981" }}>Infizium gives them the system they were never given.</span>
           </h2>
           <p className="text-base text-white/40 max-w-2xl mx-auto leading-relaxed">
-            A professional school management platform for the schools that hold a community together: the low-fee, family-built schools that run on trust instead of systems. We are starting in Telangana, where most children already learn in exactly these schools.
+            About 39% of India's children now learn in private schools, the highest share ever recorded, most of them founded by individual educators rather than institutions. In Telangana that share is around 64.7%, the highest in the country. This is the platform built to run them.
           </p>
         </motion.div>
 
@@ -567,9 +567,10 @@ function MissionSection() {
           </div>
           <div className="w-full h-48 overflow-hidden">
             <iframe
-              src="https://maps.google.com/maps?q=Chaitanyapuri+Karimnagar+Telangana+505001+India&output=embed&z=16"
-              width="100%" height="100%" style={{ border: 0, filter: "invert(90%) hue-rotate(180deg)" }}
-              allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+              title="Valmiki Vidyalayam, Karimnagar"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=79.0950%2C18.4150%2C79.1650%2C18.4650&layer=mapnik&marker=18.4386%2C79.1288"
+              width="100%" height="100%" style={{ border: 0, filter: "invert(92%) hue-rotate(180deg) contrast(0.9)" }}
+              loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
           </div>
         </motion.div>
       </div>

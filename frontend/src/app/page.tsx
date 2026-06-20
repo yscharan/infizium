@@ -609,6 +609,7 @@ const featuresByPersona = [
       { icon: "💰", title: "Sponsorship support", status: "Phase 2", desc: "If your family needs help with fees, anonymous sponsors can pay directly to your school. No shame, no middleman." },
       { icon: "🧠", title: "Study help in Telugu", status: "Phase 3", desc: "Ask any question from your syllabus late at night and get a worked example back. In Telugu." },
       { icon: "🌱", title: "Personality & life skills", status: "Phase 3", desc: "Routine tracking, goal setting, and character building built into your daily school experience." },
+      { icon: "❤️", title: "Health and growth check", status: "Phase 3", desc: "Height, weight and wellbeing recorded each term, with simple supportive guidance on food and activity. No labels, no shame." },
     ],
   },
   {

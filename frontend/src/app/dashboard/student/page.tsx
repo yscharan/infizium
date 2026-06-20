@@ -26,6 +26,36 @@ const announcements = [
 const streakDays = [true, true, true, false, true, true, false];
 const dayLabels = ["M", "T", "W", "T", "F", "S", "S"];
 
+const health = {
+  heightCm: 162,
+  weightKg: 48,
+  lastChecked: "Jun 15, 2026",
+};
+
+// Simple supportive guidance from BMI. Never clinical, never shaming.
+function bmiAdvice(bmi: number) {
+  if (bmi < 18.5) return {
+    label: "Still growing",
+    tone: "#38bdf8",
+    tip: "Your body is still building itself. Add an extra serving through the day, like dal, eggs, milk, peanuts or a banana, and keep playing your sport.",
+  };
+  if (bmi < 25) return {
+    label: "Healthy range",
+    tone: "#10b981",
+    tip: "You are in a healthy range. Keep the routine steady: balanced meals, plenty of water, eight hours of sleep, and some movement every day.",
+  };
+  if (bmi < 30) return {
+    label: "A little above",
+    tone: "#f59e0b",
+    tip: "Small steps add up. Swap fried and sugary snacks for fruit, choose water over soft drinks, and get thirty active minutes outdoors each day.",
+  };
+  return {
+    label: "Let us work on it together",
+    tone: "#f97316",
+    tip: "No pressure and no labels. Your PT teacher will set a gentle daily routine, and the school nurse is there whenever you want to talk.",
+  };
+}
+
 export default function StudentDashboard() {
   const router = useRouter();
   const [name, setName] = useState("Arjun");
@@ -44,6 +74,9 @@ export default function StudentDashboard() {
 
   const completed = homework.filter(h => h.done).length;
   const total = homework.length;
+
+  const bmi = +(health.weightKg / Math.pow(health.heightCm / 100, 2)).toFixed(1);
+  const advice = bmiAdvice(bmi);
 
   if (!ready) return <div className="min-h-screen bg-[#0c0c0e]" />;
 
@@ -224,6 +257,44 @@ export default function StudentDashboard() {
               </li>
             ))}
           </ul>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.5, ease: EASE }}
+          className="bg-white/5 border border-white/8 rounded-2xl p-5"
+        >
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="font-semibold text-white flex items-center gap-2 text-sm"><span>❤️</span> Health &amp; Wellbeing</h2>
+            <span className="text-[10px] text-white/30">Checked {health.lastChecked}</span>
+          </div>
+
+          <div className="grid grid-cols-3 gap-3 mb-4">
+            {[
+              { label: "Height", value: `${health.heightCm}`, unit: "cm" },
+              { label: "Weight", value: `${health.weightKg}`, unit: "kg" },
+              { label: "BMI", value: `${bmi}`, unit: advice.label },
+            ].map((m) => (
+              <div key={m.label} className="rounded-xl bg-white/3 border border-white/8 p-3 text-center">
+                <p className="text-[10px] text-white/30 uppercase tracking-wider mb-1">{m.label}</p>
+                <p className="text-xl font-bold text-white leading-none">{m.value}</p>
+                <p className="text-[10px] mt-1" style={{ color: m.label === "BMI" ? advice.tone : "rgba(255,255,255,0.3)" }}>{m.unit}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="rounded-xl p-3 flex gap-3" style={{ background: `${advice.tone}12`, border: `1px solid ${advice.tone}30` }}>
+            <span className="text-lg flex-shrink-0">🌱</span>
+            <div>
+              <p className="text-xs font-semibold mb-0.5" style={{ color: advice.tone }}>Recommended for you</p>
+              <p className="text-xs text-white/55 leading-relaxed">{advice.tip}</p>
+            </div>
+          </div>
+
+          <p className="text-[10px] text-white/25 mt-3 leading-relaxed">
+            Recorded at the school health check. This is friendly guidance, not a medical opinion. Talk to your PT teacher or the school nurse anytime.
+          </p>
         </motion.div>
 
         <motion.div

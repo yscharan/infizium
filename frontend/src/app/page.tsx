@@ -578,6 +578,66 @@ function MissionSection() {
   );
 }
 
+// ── Why this. Why here. ───────────────────────────────────────────
+function WhyHereSection() {
+  const rungs = [
+    { n: "1", label: "Education", note: "The baseline. Get them in, keep them learning." },
+    { n: "2", label: "Knowledge", note: "Beyond the textbook. The world, not the exam." },
+    { n: "3", label: "Personality", note: "Discipline, focus, the character to stand alone." },
+    { n: "4", label: "Wisdom", note: "Knowing how to use what you know." },
+  ];
+  return (
+    <section className="py-28 px-4 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+      <div className="max-w-3xl mx-auto">
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center mb-14">
+          <motion.p variants={fadeUp} className="text-xs font-mono tracking-widest uppercase text-white/30 mb-4">Why this. Why here.</motion.p>
+          <motion.h2 variants={fadeUp} className="text-4xl sm:text-5xl font-bold text-white tracking-tight leading-tight">
+            Education was never the finish line.<br />
+            <span style={{ color: "#10b981" }}>It was always the first step.</span>
+          </motion.h2>
+        </motion.div>
+
+        {/* The four rungs */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-12">
+          {rungs.map((r, i) => (
+            <motion.div key={r.label} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              transition={{ delay: i * 0.08, duration: 0.5, ease: EASE }}
+              className="flex items-start gap-4 rounded-xl p-5" style={{ background: "#0a0a0a", border: "1px solid #222" }}>
+              <span className="text-sm font-bold flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: "rgba(16,185,129,0.12)", color: "#10b981", border: "1px solid rgba(16,185,129,0.3)" }}>{r.n}</span>
+              <div>
+                <p className="font-bold text-white text-base leading-snug">{r.label}</p>
+                <p className="text-sm text-white/40 leading-relaxed mt-0.5">{r.note}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Narration */}
+        <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: EASE }}
+          className="space-y-5 text-white/55 leading-relaxed">
+          <p>
+            A child who climbs all four does not just pass. They lift a family, and in time, a society. India&apos;s greatest teachers, from Vivekananda to Gandhi to Tagore, said the same thing in different words. The goal was never marks. It was always the whole human being.
+          </p>
+          <p>
+            But the climb has never been harder. The people who run these schools carry the whole operation in their heads, with no system to hold it. And the children they are raising are being pulled back down by a feed engineered to take their attention, their sleep and their focus. The evidence is no longer in doubt. Heavier phone use tracks with more anxiety and weaker results, in Indian classrooms as much as anywhere.
+          </p>
+          <p>
+            Telangana already knows how to do the hard part. In one decade it carried water to fields that had never seen it, put money directly into farmers&apos; hands, stood behind its most vulnerable, and built roads and a metro the whole country now watches. When Telangana decides something has been neglected for too long, it gives it a system, and it changes. That is what we want for its schools: not new buildings, the state is already adding those, but the way a school is run and the way a child is raised inside it.
+          </p>
+        </motion.div>
+
+        {/* Closing */}
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }}
+          className="mt-10 rounded-2xl p-8" style={{ background: "rgba(16,185,129,0.04)", border: "1px solid rgba(16,185,129,0.2)" }}>
+          <p className="text-white/70 text-lg leading-relaxed">
+            A state that rebuilt its canals and its farms can rebuild how its schools carry the day. Infizium does the carrying, so the school&apos;s hours return to the child: their knowledge, their character, their wisdom. We begin where the trust is oldest, in Karimnagar, on the first rung of the same ladder Telangana has been climbing all along.
+          </p>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 // ── Features by persona ───────────────────────────────────────────
 const featuresByPersona = [
   {
@@ -1007,6 +1067,7 @@ export default function Home() {
       </section>
 
       <MissionSection />
+      <WhyHereSection />
       <PeopleSection />
       <ModulesSection />
       <CommuteSection />

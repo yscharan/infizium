@@ -44,6 +44,21 @@ const story = [
   },
 ];
 
+const timeline = [
+  { year: "1948", track: "telangana", title: "A state takes shape", text: "Hyderabad State becomes part of India." },
+  { year: "1956", track: "telangana", title: "Identity on hold", text: "Telangana is merged into Andhra Pradesh. A distinct people wait for their own name." },
+  { year: "Childhood", track: "bapu", title: "A boy in the forest", text: "Bapu is born in Kalamadugu, Adilabad, the first in his family to reach for a book, trading curry leaves for the bicycle that carries him to school." },
+  { year: "1969", track: "telangana", title: "The first call", text: "Telangana rises for the first time, asking to govern its own." },
+  { year: "First salary", track: "bapu", title: "One hundred rupees", text: "Bapu's first pay as a government teacher is a hundred rupees, and a conviction worth far more." },
+  { year: "1991", track: "bapu", title: "The school that trust built", text: "In a rented bungalow, his family in a single room beside the classrooms, Bapu opens his own school. One man, every subject." },
+  { year: "2001", track: "telangana", title: "The movement returns", text: "The demand for a separate Telangana gathers force across the districts." },
+  { year: "2 June 2014", track: "telangana", title: "Telangana is born", text: "After decades of waiting, Telangana becomes India's 29th state." },
+  { year: "2014 onward", track: "telangana", title: "The state builds", text: "Water reaches fields that never had it. Farmers get direct support. Roads, a metro, a city the country now watches." },
+  { year: "2014 onward", track: "bapu", title: "Still holding the line", text: "Through all of it Bapu keeps teaching, keeps fees low, never lets a child leave for want of money." },
+  { year: "2020", track: "bapu", title: "He refused to close", text: "When COVID shut budget schools across the state, Bapu funded his from other work and kept every child." },
+  { year: "Now", track: "both", title: "The next chapter", text: "Telangana looks ahead. Bapu's belief becomes Infizium, the system he never had, built by the son who grew up inside his school." },
+];
+
 export default function StoryPage() {
   return (
     <div className="min-h-full" style={{ background: "#000" }}>
@@ -147,6 +162,40 @@ export default function StoryPage() {
             </p>
           </motion.div>
 
+          {/* Two-track timeline */}
+          <div className="mb-20">
+            <div className="text-center mb-3">
+              <p className="font-typewriter text-xs uppercase tracking-widest mb-2" style={{ color: "rgba(245,158,11,0.45)" }}>How Telangana came, and how he joined the flow</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white">Two journeys, one soil</h2>
+            </div>
+            <div className="flex items-center justify-center gap-5 mb-10 text-xs">
+              <span className="flex items-center gap-2 text-white/50"><span className="w-2 h-2 rounded-full" style={{ background: "#10b981" }} /> Telangana</span>
+              <span className="flex items-center gap-2 text-white/50"><span className="w-2 h-2 rounded-full" style={{ background: "#f59e0b" }} /> Bapu</span>
+            </div>
+
+            <div className="relative">
+              <div className="absolute top-0 bottom-0 left-4 sm:left-1/2 w-px sm:-translate-x-1/2" style={{ background: "rgba(255,255,255,0.1)" }} />
+              <div className="space-y-6">
+                {timeline.map((t, i) => {
+                  const color = t.track === "telangana" ? "#10b981" : t.track === "bapu" ? "#f59e0b" : "#ffffff";
+                  const isBapu = t.track === "bapu";
+                  const isBoth = t.track === "both";
+                  return (
+                    <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: (i % 3) * 0.05, duration: 0.5, ease: EASE }}
+                      className={`relative pl-12 sm:pl-0 sm:flex ${isBapu ? "sm:justify-end" : ""} ${isBoth ? "sm:justify-center" : ""}`}>
+                      <span className="absolute left-4 sm:left-1/2 top-2 w-3 h-3 rounded-full -translate-x-1/2 ring-4 ring-black" style={{ background: color }} />
+                      <div className={`rounded-lg p-4 sm:w-[45%] ${isBoth ? "sm:!w-[62%] sm:text-center" : ""}`} style={{ background: "#0a0a0a", border: `1px solid ${color}30` }}>
+                        <p className="text-[10px] font-mono uppercase tracking-widest mb-1" style={{ color }}>{t.year}</p>
+                        <p className="font-bold text-white text-sm mb-1">{t.title}</p>
+                        <p className="text-white/40 text-xs leading-relaxed">{t.text}</p>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
           {/* Closing */}
           <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }}
             className="text-center border-t pt-14" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
@@ -159,6 +208,16 @@ export default function StoryPage() {
             <div className="mt-10 max-w-xl mx-auto">
               <p className="text-white/35 text-sm leading-relaxed">
                 Infizium is built to give schools like Bapu's, the ones built on trust, not marketing, on service, not margin, the tools they have never had. Every feature is built with his school in mind first.
+              </p>
+            </div>
+
+            <div className="mt-12 max-w-xl mx-auto rounded-lg p-6 text-left" style={{ background: "rgba(245,158,11,0.04)", border: "1px solid rgba(245,158,11,0.15)" }}>
+              <p className="font-typewriter text-[10px] uppercase tracking-widest mb-3" style={{ color: "rgba(245,158,11,0.5)" }}>From the developer</p>
+              <p className="text-white/50 text-sm leading-relaxed mb-3">
+                I grew up inside this school. I watched my father carry all of it in his head: every fee, every meal, every repair, every child. He made it work on memory and will alone, for thirty years, and never once let it show.
+              </p>
+              <p className="text-white/50 text-sm leading-relaxed">
+                Infizium is the system he never had. I am building it so the next person who starts a school out of nothing does not have to carry it the way he did. This is his story. It is also the reason for every line of code.
               </p>
             </div>
             <p className="font-typewriter text-xs tracking-widest uppercase mt-8" style={{ color: "rgba(245,158,11,0.35)" }}>

@@ -566,7 +566,7 @@ function MissionSection() {
           <div className="w-full h-48 overflow-hidden">
             <iframe
               title="Valmiki Vidyalayam, Karimnagar"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=79.0950%2C18.4150%2C79.1650%2C18.4650&layer=mapnik&marker=18.4386%2C79.1288"
+              src="https://maps.google.com/maps?q=Chaitanyapuri+Karimnagar+Telangana+505001+India&output=embed&z=16"
               width="100%" height="100%" style={{ border: 0, filter: "invert(92%) hue-rotate(180deg) contrast(0.9)" }}
               loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
           </div>

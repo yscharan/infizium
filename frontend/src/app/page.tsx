@@ -59,7 +59,7 @@ function ParentPreview() {
     <div className="space-y-3">
       <div className="rounded-2xl p-4 border border-orange-500/20" style={{ background: "rgba(249,115,22,0.08)" }}>
         <div className="flex items-center gap-3 mb-3">
-          <div className="w-9 h-9 rounded-full bg-orange-500/20 flex items-center justify-center text-lg">🧑‍🎓</div>
+          <div className="w-9 h-9 rounded-full bg-orange-500/20 flex items-center justify-center text-sm font-bold text-orange-300">A</div>
           <div><p className="font-semibold text-white text-sm">Arjun · Grade 9A</p><p className="text-xs text-white/40">Valmiki Vidyalayam</p></div>
           <AnimatePresence mode="wait">
             <motion.span key={String(absent)} initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
@@ -80,8 +80,7 @@ function ParentPreview() {
       <AnimatePresence>
         {absent && (
           <motion.div initial={{ opacity: 0, y: -8, height: 0 }} animate={{ opacity: 1, y: 0, height: "auto" }} transition={{ duration: 0.4, ease: EASE }}
-            className="rounded-xl p-3 border border-green-700/40 flex gap-3" style={{ background: "rgba(7,94,84,0.35)" }}>
-            <span className="text-lg">📱</span>
+            className="rounded-xl p-3 border border-green-700/40" style={{ background: "rgba(7,94,84,0.35)" }}>
             <div>
               <p className="text-[10px] text-white/50 mb-0.5">WhatsApp · just now</p>
               <p className="text-xs text-white/80">Arjun marked absent in Period 1 Maths. Reply with reason.</p>
@@ -152,7 +151,7 @@ function StudentPreview() {
       ))}
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}
         className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl px-3 py-2 text-center">
-        <p className="text-[10px] text-emerald-300">🎯 JEE 2028 · Keep going, Arjun.</p>
+        <p className="text-[10px] text-emerald-300">JEE 2028 · Keep going, Arjun.</p>
       </motion.div>
     </div>
   );
@@ -212,7 +211,7 @@ function ShowcaseSidebar({ idx, onIdx }: { idx: number; onIdx: (i: number) => vo
           <motion.span key={idx} initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} transition={{ duration: 0.4 }}
             className="text-xs font-semibold px-3 py-1 rounded-full"
             style={{ background: `${p.neon}18`, color: p.neon, border: `1px solid ${p.neon}35` }}>
-            {p.icon} {p.role} · {p.name}
+            {p.role} · {p.name}
           </motion.span>
         </AnimatePresence>
       </div>
@@ -227,7 +226,7 @@ function ShowcaseSidebar({ idx, onIdx }: { idx: number; onIdx: (i: number) => vo
         <div className="rounded-2xl border border-white/10 overflow-hidden" style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(12px)" }}>
           <div className="border-b border-white/[0.08] px-4 py-2.5 flex items-center gap-2" style={{ background: "rgba(0,0,0,0.3)" }}>
             <div className="flex gap-1.5">{["bg-red-500/50","bg-amber-500/50","bg-emerald-500/50"].map(c=><div key={c} className={`w-2.5 h-2.5 rounded-full ${c}`}/>)}</div>
-            <div className="flex-1 mx-2"><div className="bg-white/5 border border-white/10 rounded-md px-2.5 py-0.5 flex items-center gap-1.5 max-w-[180px] mx-auto"><span className="text-emerald-400 text-[10px]">🔒</span><span className="text-[10px] text-white/25 font-mono">app.infizium.com</span></div></div>
+            <div className="flex-1 mx-2"><div className="bg-white/5 border border-white/10 rounded-md px-2.5 py-0.5 flex items-center gap-1.5 max-w-[180px] mx-auto"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-emerald-400/70"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg><span className="text-[10px] text-white/25 font-mono">app.infizium.com</span></div></div>
             <motion.div animate={{ opacity: [0.4,1,0.4] }} transition={{ duration: 2, repeat: Infinity }} className="flex items-center gap-1">
               <span className="w-1.5 h-1.5 rounded-full" style={{ background: p.neon }} /><span className="text-[9px] text-white/25 font-mono">LIVE</span>
             </motion.div>
@@ -282,7 +281,7 @@ function MobileShowcase({ idx, onIdx }: { idx: number; onIdx: (i: number) => voi
           <motion.span key={`badge-${idx}`} initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}
             className="text-xs font-semibold px-2.5 py-1 rounded-full flex-shrink-0 ml-3"
             style={{ background: `${p.neon}18`, color: p.neon, border: `1px solid ${p.neon}35` }}>
-            {p.icon} {p.role}
+            {p.role}
           </motion.span>
         </AnimatePresence>
       </div>
@@ -343,7 +342,7 @@ function SplitHero() {
               <motion.button key={per.id} onClick={() => setIdx(i)} whileTap={{ scale: 0.97 }}
                 className="rounded-xl lg:rounded-2xl border-2 p-2.5 lg:p-4 text-left transition-all duration-200"
                 style={idx === i ? { borderColor: per.neon, background: `${per.neon}10`, boxShadow: `0 0 0 1px ${per.neon}30` } : { borderColor: `${per.neon}30`, background: "rgba(255,255,255,0.02)" }}>
-                <div className="text-xl lg:text-2xl mb-1 lg:mb-2">{per.icon}</div>
+                <div className="w-2.5 h-2.5 rounded-full mb-2 lg:mb-3" style={{ background: per.neon }} />
                 <p className="font-semibold text-xs lg:text-sm text-white">{per.role}</p>
                 <p className="text-[10px] text-white/35 mt-0.5 leading-snug hidden lg:block">{per.gets[0]}</p>
               </motion.button>
@@ -352,7 +351,7 @@ function SplitHero() {
           <AnimatePresence mode="wait">
             <motion.div key={idx} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.3, ease: EASE }}
               className="rounded-2xl p-4 mb-4 border" style={{ background: `${p.neon}08`, borderColor: `${p.neon}25` }}>
-              <p className="text-xs font-semibold mb-0.5" style={{ color: p.neon }}>{p.icon} {p.role} · {p.name}</p>
+              <p className="text-xs font-semibold mb-0.5" style={{ color: p.neon }}>{p.role} · {p.name}</p>
               <p className="text-[11px] text-white/40 mb-2.5 leading-relaxed">{p.detail}</p>
               <ul className="space-y-1.5">
                 {p.gets.map(f => (
@@ -392,7 +391,7 @@ function PeopleSection() {
               className="rounded-lg p-5 flex flex-col gap-3"
               style={{ background: "#0a0a0a", border: "1px solid #222" }}>
               <div className="flex items-start gap-3">
-                <span className="text-3xl">{p.icon}</span>
+                <span className="w-2.5 h-2.5 rounded-full flex-shrink-0 mt-1.5" style={{ background: p.neon }} />
                 <div>
                   <p className="font-bold text-white">{p.name}</p>
                   <p className="text-xs font-medium uppercase tracking-wider text-white/40">{p.role}</p>
@@ -525,15 +524,15 @@ function MissionSection() {
           <p className="text-xs font-mono tracking-widest uppercase text-white/25 text-center mb-4">What&apos;s inside</p>
           <div className="flex flex-wrap gap-2 justify-center">
             {[
-              { label: "✅ Attendance", neon: "#10b981", status: "Live" },
-              { label: "📚 Homework", neon: "#10b981", status: "Live" },
-              { label: "💬 WhatsApp Alerts", neon: "#10b981", status: "Live" },
-              { label: "🤖 AI Bot (Telugu)", neon: "#10b981", status: "Live" },
-              { label: "📋 Forms & Approvals", neon: "#10b981", status: "Live" },
-              { label: "🚌 Live Bus Tracking", neon: "#f59e0b", status: "Phase 2" },
-              { label: "📡 Smart Band / Tag", neon: "#f59e0b", status: "Phase 2" },
-              { label: "💰 Sponsorship", neon: "#f59e0b", status: "Phase 2" },
-              { label: "🧠 AI Tutor", neon: "#7c3aed", status: "Phase 3" },
+              { label: "Attendance", neon: "#10b981", status: "Live" },
+              { label: "Homework", neon: "#10b981", status: "Live" },
+              { label: "WhatsApp Alerts", neon: "#10b981", status: "Live" },
+              { label: "AI Bot (Telugu)", neon: "#10b981", status: "Live" },
+              { label: "Forms & Approvals", neon: "#10b981", status: "Live" },
+              { label: "Live Bus Tracking", neon: "#f59e0b", status: "Phase 2" },
+              { label: "Smart Band / Tag", neon: "#f59e0b", status: "Phase 2" },
+              { label: "Sponsorship", neon: "#f59e0b", status: "Phase 2" },
+              { label: "AI Tutor", neon: "#7c3aed", status: "Phase 3" },
             ].map(f => (
               <span key={f.label} className="text-xs font-semibold px-3 py-1 rounded-full"
                 style={{ background: `${f.neon}12`, color: f.neon, border: `1px solid ${f.neon}30` }}>
@@ -548,7 +547,6 @@ function MissionSection() {
           className="rounded-xl overflow-hidden"
           style={{ background: "#0a0a0a", border: "1px solid #222" }}>
           <div className="p-6 flex flex-col sm:flex-row items-start gap-5">
-            <div className="text-5xl flex-shrink-0">🏫</div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1.5 flex-wrap">
                 <p className="font-bold text-white text-lg">Valmiki Vidyalayam</p>
@@ -557,7 +555,7 @@ function MissionSection() {
               <a href="https://www.google.com/maps/search/?api=1&query=Backside+SRR+Ground+Vidyanagar+Karimnagar+Telangana+505001"
                 target="_blank" rel="noopener noreferrer"
                 className="flex items-center gap-1.5 text-xs text-white/40 hover:text-white/70 transition-colors mb-2 w-fit">
-                <span>📍</span>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="flex-shrink-0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
                 <span>Chaitanyapuri, Karimnagar, Telangana 505001</span>
               </a>
               <p className="text-sm text-white/40 mb-2">Our first school. What works here rolls out to the next school. Real teachers, real parents, real students.</p>
@@ -711,7 +709,6 @@ function ModulesSection() {
           {featuresByPersona.map((group, gi) => (
             <motion.div key={group.persona} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: gi * 0.05, duration: 0.5, ease: EASE }}>
               <div className="flex items-center gap-3 mb-5">
-                <span className="text-2xl">{group.icon}</span>
                 <div>
                   <p className="font-bold text-white text-lg">{group.label}</p>
                 </div>
@@ -724,7 +721,6 @@ function ModulesSection() {
                     style={{ background: "#0a0a0a", border: "1px solid #222" }}>
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex items-start gap-2.5 flex-1 min-w-0">
-                        <span className="text-lg flex-shrink-0 mt-0.5">{f.icon}</span>
                         <p className="font-semibold text-white text-sm leading-snug">{f.title}</p>
                       </div>
                       <span className="text-[10px] font-medium px-2 py-0.5 rounded-full flex-shrink-0 text-white/40 bg-white/[0.06] border border-white/10">{f.status}</span>
@@ -771,7 +767,6 @@ function CommuteSection() {
           {modes.map((m, i) => (
             <motion.div key={m.title} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i*0.08, duration: 0.5, ease: EASE }}
               className="rounded-lg p-4 flex flex-col gap-2" style={{ background: "#0a0a0a", border: "1px solid #222" }}>
-              <span className="text-2xl">{m.icon}</span>
               <p className="font-bold text-white text-sm">{m.title}</p>
               <p className="text-xs text-white/40 leading-relaxed">{m.desc}</p>
             </motion.div>
@@ -795,7 +790,6 @@ function CommuteSection() {
             <motion.div key={hw.name} initial={{ opacity: 0, x: i===0 ? -16 : 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: EASE }}
               className="rounded-lg p-6" style={{ background: "#0a0a0a", border: "1px solid #222" }}>
               <div className="flex items-center gap-3 mb-3">
-                <span className="text-3xl">{hw.icon}</span>
                 <div>
                   <p className="font-bold text-white">{hw.name}</p>
                   <p className="text-xs text-white/40">{hw.who}</p>
@@ -816,8 +810,8 @@ function CommuteSection() {
           <div className="space-y-3">
             {[
               { time: "7:25 AM", msg: "Smart Band auto-activates commute mode", type: "band" },
-              { time: "7:31 AM", msg: "✅ Arjun boarded Bus #4. ETA school: 19 min.", type: "wa" },
-              { time: "7:51 AM", msg: "🏫 Arjun reached school. Good morning!", type: "wa" },
+              { time: "7:31 AM", msg: "Arjun boarded Bus #4. ETA school: 19 min.", type: "wa" },
+              { time: "7:51 AM", msg: "Arjun reached school. Good morning!", type: "wa" },
               { time: "7:51 AM", msg: "Lakshmi stops worrying. She goes back to tailoring.", type: "note" },
             ].map((ev, i) => (
               <motion.div key={i} initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i*0.1, duration: 0.4, ease: EASE }}
@@ -843,9 +837,9 @@ function CommuteSection() {
 function AISection() {
   const convos = [
     { from: "parent", msg: "Arjun attendance ela undi this week?" },
-    { from: "bot", msg: "✅ Arjun attended *4 of 5 days* this week. Absent on Wednesday, June 4. This month: 87% (24 of 28 days)." },
+    { from: "bot", msg: "Arjun attended *4 of 5 days* this week. Absent on Wednesday, June 4. This month: 87% (24 of 28 days)." },
     { from: "parent", msg: "homework enti undi tomorrow?" },
-    { from: "bot", msg: "📚 2 assignments due June 8:\n• *Maths*: Chapter 7 exercises\n• *English*: Essay on environment (due June 10)\n\nBoth posted by Ravi sir today." },
+    { from: "bot", msg: "2 assignments due June 8:\n• *Maths*: Chapter 7 exercises\n• *English*: Essay on environment (due June 10)\n\nBoth posted by Ravi sir today." },
   ];
   return (
     <section id="ai-section" className="py-24 px-4 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
@@ -871,7 +865,6 @@ function AISection() {
                 { icon: "💸", label: "~₹200/month for 500 parents" },
               ].map(f => (
                 <div key={f.label} className="flex items-center gap-3">
-                  <span className="text-lg">{f.icon}</span>
                   <span className="text-sm text-white/60">{f.label}</span>
                 </div>
               ))}
@@ -880,7 +873,7 @@ function AISection() {
           <motion.div initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: EASE }}>
             <div className="rounded-2xl overflow-hidden border border-white/10" style={{ background: "rgba(255,255,255,0.03)" }}>
               <div className="flex items-center gap-2 px-4 py-3 border-b border-white/10" style={{ background: "rgba(0,0,0,0.3)" }}>
-                <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-sm">📱</div>
+                <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center"><span className="w-2 h-2 rounded-full bg-emerald-400" /></div>
                 <div><p className="text-xs font-semibold text-white">WhatsApp / @InfiziumBot</p><p className="text-[10px] text-emerald-400">● Online · Responds in English &amp; Telugu</p></div>
               </div>
               <div className="p-4 space-y-3">
@@ -973,7 +966,6 @@ function SponsorshipSection() {
             ].map(m => (
               <motion.div key={m.title} initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
                 className="flex gap-4 p-5 rounded-lg" style={{ background: "#0a0a0a", border: "1px solid #222" }}>
-                <span className="text-2xl flex-shrink-0">{m.icon}</span>
                 <div>
                   <div className="flex items-center gap-2 mb-1 flex-wrap">
                     <p className="font-bold text-white text-sm">{m.title}</p>
@@ -1086,29 +1078,38 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <footer className="border-t py-8 px-4" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="text-sm text-white/25 flex items-center gap-2">
-            <span className="font-semibold text-white/50">Infizium</span>
-            <span>· Telangana&apos;s school operating system</span>
-            <span className="text-white/10">·</span>
-            <Link href="/story" className="text-white/25 hover:text-white/50 transition-colors">Our story</Link>
+      <footer className="border-t py-10 px-4" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="text-sm text-white/25 flex items-center gap-2">
+              <span className="font-semibold text-white/50">Infizium</span>
+              <span>The school operating system</span>
+              <span className="text-white/10">·</span>
+              <Link href="/story" className="text-white/25 hover:text-white/50 transition-colors">Our story</Link>
+            </div>
+            <div className="flex items-center gap-4 text-xs text-white/25">
+              <span>infizium@outlook.com</span>
+              <span className="text-white/10">·</span>
+              <a href="https://www.instagram.com/infizium" target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-1.5 hover:text-white/60 transition-colors">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                <span>@infizium</span>
+              </a>
+              <a href="https://www.linkedin.com/company/107568906/" target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-1.5 hover:text-white/60 transition-colors">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                <span>LinkedIn</span>
+              </a>
+            </div>
           </div>
-          <div className="flex items-center gap-4 text-xs text-white/25">
-            <span>infizium@outlook.com</span>
-            <span className="text-white/10">·</span>
-            <a href="https://www.instagram.com/infizium" target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-1.5 hover:text-white/60 transition-colors">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-              <span>@infizium</span>
-            </a>
-            <a href="https://www.linkedin.com/company/107568906/" target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-1.5 hover:text-white/60 transition-colors">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-              <span>LinkedIn</span>
-            </a>
-            <span className="text-white/10">·</span>
-            <span className="font-mono">v{APP_VERSION}</span>
+          <div className="mt-8 pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/25" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+            <span>© 2026 Infizium. All Rights Reserved.</span>
+            <div className="flex items-center gap-4">
+              <Link href="/privacy" className="hover:text-white/60 transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="hover:text-white/60 transition-colors">Terms of Service</Link>
+              <span className="text-white/10">·</span>
+              <span className="font-mono">v{APP_VERSION}</span>
+            </div>
           </div>
         </div>
       </footer>

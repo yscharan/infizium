@@ -47,7 +47,7 @@ const roles = [
   },
 ];
 
-type Step = "role" | "email_check" | "signin" | "otp" | "request" | "pending";
+type Step = "role" | "email_check" | "signin" | "phone_otp" | "request" | "pending";
 
 // ── Showcase slides ───────────────────────────────────────────────
 const slides = [
@@ -337,12 +337,22 @@ export default function LoginPage() {
   const [step, setStep] = useState<Step>("role");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [otp, setOtp] = useState("");
+  const [phone, setPhone] = useState("");
+  const [phoneOtp, setPhoneOtp] = useState("");
   const [personaDetail, setPersonaDetail] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [checking, setChecking] = useState(false);
   const [error, setError] = useState("");
+  const [tgHint, setTgHint] = useState<string | null>(null);
+  const [otpMasked, setOtpMasked] = useState("");
+  // After OTP verified: 'signin' redirects to dashboard, 'request' submits access form
+  const [phoneContext, setPhoneContext] = useState<"signin" | "request">("signin");
+  // Holds profile resolved during signin for final redirect after phone OTP
+  const [resolvedProfile, setResolvedProfile] = useState<{
+    role: UserRole; email: string; id: string; name: string;
+    schoolId: string | null; schoolName: string; isSuperAdmin: boolean;
+  } | null>(null);
 
   const role = roles.find(r => r.id === selectedRole);
 
@@ -350,35 +360,6 @@ export default function LoginPage() {
     if (!selectedRole) return;
     setSession(selectedRole as UserRole, undefined, true);
     router.push(role!.dash);
-  }
-
-  async function resolveAndRedirect(authEmail: string) {
-    const { data: profile, error: profileErr } = await supabase
-      .from("users")
-      .select("id, name, role, school_id, is_super_admin, schools(name)")
-      .eq("email", authEmail)
-      .single();
-
-    if (profileErr || !profile) {
-      setError("Account not found in Infizium. Contact infizium@outlook.com.");
-      return;
-    }
-
-    const isSuperAdmin = profile.is_super_admin ?? false;
-    const dbRole = (isSuperAdmin ? "super_admin" : profile.role) as UserRole;
-    const schoolsRaw = profile.schools as unknown;
-    const schoolName = Array.isArray(schoolsRaw)
-      ? (schoolsRaw[0]?.name ?? "")
-      : ((schoolsRaw as { name: string } | null)?.name ?? "");
-
-    setSession(dbRole, authEmail, false, {
-      id: profile.id,
-      name: profile.name,
-      schoolId: profile.school_id,
-      schoolName,
-      isSuperAdmin,
-    });
-    router.push(ROLE_DASHBOARD[dbRole]);
   }
 
   // Check if email exists → route to signin or request
@@ -392,10 +373,27 @@ export default function LoginPage() {
         .maybeSingle();
       setStep(data ? "signin" : "request");
     } catch {
-      setStep("request"); // default to request flow on error
+      setStep("request");
     } finally {
       setChecking(false);
     }
+  }
+
+  async function sendPhoneOtp(targetPhone: string): Promise<boolean> {
+    setError(""); setTgHint(null);
+    const res = await fetch("/api/auth/send-phone-otp", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ phone: targetPhone }),
+    });
+    const body = await res.json();
+    if (!res.ok) { setError(body.error ?? "Could not send code."); return false; }
+    if (!body.ok && body.method === "not_linked") {
+      setTgHint(body.instructions ?? "");
+      return false;
+    }
+    setOtpMasked(body.masked ?? "your Telegram");
+    return true;
   }
 
   async function signInWithPassword() {
@@ -406,16 +404,79 @@ export default function LoginPage() {
         if (authErr.message.includes("fetch") || authErr.message.includes("URL")) { demoLogin(); return; }
         throw authErr;
       }
-      await resolveAndRedirect(email);
+
+      // Fetch profile to get phone and build resolved profile
+      const { data: profile, error: profileErr } = await supabase
+        .from("users")
+        .select("id, name, role, phone, school_id, is_super_admin, schools(name)")
+        .eq("email", email.toLowerCase())
+        .single();
+
+      if (profileErr || !profile) {
+        setError("Account not found in Infizium. Contact infizium@outlook.com."); return;
+      }
+
+      const isSuperAdmin = profile.is_super_admin ?? false;
+      const dbRole = (isSuperAdmin ? "super_admin" : profile.role) as UserRole;
+      const schoolsRaw = profile.schools as unknown;
+      const schoolName = Array.isArray(schoolsRaw)
+        ? (schoolsRaw[0]?.name ?? "")
+        : ((schoolsRaw as { name: string } | null)?.name ?? "");
+
+      setResolvedProfile({ role: dbRole, email, id: profile.id, name: profile.name, schoolId: profile.school_id, schoolName, isSuperAdmin });
+      setPhone(profile.phone ?? "");
+
+      if (!profile.phone) {
+        setError("No phone number on your profile. Contact infizium@outlook.com to add one.");
+        return;
+      }
+
+      // Send OTP to registered phone
+      setPhoneContext("signin");
+      const sent = await sendPhoneOtp(profile.phone);
+      if (sent) setStep("phone_otp");
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : "Login failed");
     } finally { setLoading(false); }
   }
 
-  async function submitRequest() {
+  async function handleRequestSubmit() {
+    if (!personaDetail || !phone) { setError("All fields are required."); return; }
+    const digits = phone.replace(/\D/g, "").slice(-10);
+    if (digits.length !== 10) { setError("Enter a valid 10-digit mobile number."); return; }
+    setLoading(true);
+    setPhoneContext("request");
+    const sent = await sendPhoneOtp(digits);
+    setLoading(false);
+    if (sent) setStep("phone_otp");
+  }
+
+  async function verifyPhoneOtp() {
+    if (phoneOtp.length !== 6) { setError("Enter the 6-digit code."); return; }
     setError(""); setLoading(true);
     try {
-      const res = await fetch("/api/auth/request-access", {
+      const res = await fetch("/api/auth/verify-phone-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone, code: phoneOtp }),
+      });
+      const body = await res.json();
+      if (!res.ok) { setError(body.error ?? "Incorrect code."); return; }
+
+      if (phoneContext === "signin" && resolvedProfile) {
+        setSession(resolvedProfile.role, resolvedProfile.email, false, {
+          id: resolvedProfile.id,
+          name: resolvedProfile.name,
+          schoolId: resolvedProfile.schoolId ?? undefined,
+          schoolName: resolvedProfile.schoolName,
+          isSuperAdmin: resolvedProfile.isSuperAdmin,
+        });
+        router.push(ROLE_DASHBOARD[resolvedProfile.role]);
+        return;
+      }
+
+      // request context: submit access request now
+      const reqRes = await fetch("/api/auth/request-access", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -423,10 +484,11 @@ export default function LoginPage() {
           role: selectedRole,
           personaDetail,
           message,
+          phone: phone.replace(/\D/g, "").slice(-10),
         }),
       });
-      const body = await res.json();
-      if (!res.ok) { setError(body.error ?? "Failed to submit request."); return; }
+      const reqBody = await reqRes.json();
+      if (!reqRes.ok) { setError(reqBody.error ?? "Failed to submit request."); return; }
       setStep("pending");
     } catch {
       setError("Network error. Try again.");
@@ -566,9 +628,59 @@ export default function LoginPage() {
                   <motion.button onClick={signInWithPassword} disabled={loading || !password} whileTap={{ scale: 0.99 }}
                     className="w-full py-3.5 rounded-xl font-semibold text-sm text-white disabled:opacity-40"
                     style={{ background: role?.accent }}>
-                    {loading ? "Signing in…" : "Sign in →"}
+                    {loading ? "Verifying..." : "Continue"}
                   </motion.button>
                 </div>
+              </motion.div>
+            )}
+
+            {/* ── Step: phone OTP (2FA for signin + confirmation for requests) ── */}
+            {step === "phone_otp" && (
+              <motion.div key="phone_otp" initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }}>
+                <div className="mb-7">
+                  <button onClick={() => setStep(phoneContext === "signin" ? "signin" : "request")}
+                    className="text-xs text-white/30 hover:text-white/60 mb-3 flex items-center gap-1 transition-colors">Back</button>
+                  <h1 className="text-2xl font-bold text-white mb-1">Verify your number</h1>
+                  <p className="text-sm text-white/35">
+                    A 6-digit code was sent to {otpMasked || "your Telegram"}
+                  </p>
+                </div>
+
+                {tgHint ? (
+                  <div className="space-y-4">
+                    <div className="rounded-xl p-4 border border-blue-500/25 text-sm leading-relaxed"
+                      style={{ background: "rgba(59,130,246,0.07)" }}>
+                      <p className="font-semibold text-blue-300 mb-2 text-xs uppercase tracking-wide">Telegram not linked yet</p>
+                      <p className="text-white/60 text-xs whitespace-pre-line">{tgHint}</p>
+                    </div>
+                    <motion.button
+                      onClick={async () => { setTgHint(null); const ok = await sendPhoneOtp(phone); if (ok) setPhoneOtp(""); }}
+                      className="w-full py-3 rounded-xl text-sm font-semibold text-white"
+                      style={{ background: role?.accent }}>
+                      Resend after linking
+                    </motion.button>
+                  </div>
+                ) : (
+                  <div className="space-y-3.5">
+                    <input type="text" inputMode="numeric" value={phoneOtp}
+                      onChange={e => { setPhoneOtp(e.target.value.replace(/\D/g, "").slice(0, 6)); setError(""); }}
+                      placeholder="000000" autoFocus maxLength={6}
+                      className="w-full rounded-xl px-4 py-4 text-center text-2xl font-mono tracking-[0.5em] text-white placeholder-white/15 outline-none transition-all"
+                      style={inputStyle}
+                      onKeyDown={e => e.key === "Enter" && phoneOtp.length === 6 && verifyPhoneOtp()}
+                    />
+                    {error && <p className="text-xs text-red-400 bg-red-500/10 border border-red-500/20 px-3 py-2 rounded-lg">{error}</p>}
+                    <motion.button onClick={verifyPhoneOtp} disabled={loading || phoneOtp.length !== 6} whileTap={{ scale: 0.99 }}
+                      className="w-full py-3.5 rounded-xl font-semibold text-sm text-white disabled:opacity-40"
+                      style={{ background: role?.accent }}>
+                      {loading ? "Verifying..." : "Verify and continue"}
+                    </motion.button>
+                    <button onClick={() => sendPhoneOtp(phone)}
+                      className="w-full text-xs text-white/25 hover:text-white/50 py-1.5 transition-colors">
+                      Did not receive it? Resend
+                    </button>
+                  </div>
+                )}
               </motion.div>
             )}
 
@@ -592,13 +704,35 @@ export default function LoginPage() {
                       style={inputStyle} onFocus={inputFocus} onBlur={inputBlur}
                     />
                   </div>
+
                   <div>
                     <label className="text-xs text-white/40 mb-1.5 block">
-                      Message to admin <span className="text-white/20">(optional)</span>
+                      WhatsApp / Telegram number <span className="text-red-400">*</span>
+                    </label>
+                    <div className="flex gap-2">
+                      <span className="flex items-center px-3 rounded-xl text-sm text-white/40 flex-shrink-0"
+                        style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>
+                        +91
+                      </span>
+                      <input type="tel" inputMode="numeric" value={phone}
+                        onChange={e => setPhone(e.target.value.replace(/\D/g, "").slice(0, 10))}
+                        placeholder="9XXXXXXXXX"
+                        className="flex-1 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 outline-none transition-all"
+                        style={inputStyle} onFocus={inputFocus} onBlur={inputBlur}
+                      />
+                    </div>
+                    <p className="text-[10px] text-white/25 mt-1">
+                      You must verify this number via @InfiziumBot on Telegram before submitting
+                    </p>
+                  </div>
+
+                  <div>
+                    <label className="text-xs text-white/40 mb-1.5 block">
+                      Message <span className="text-white/20">(optional)</span>
                     </label>
                     <textarea value={message} onChange={e => setMessage(e.target.value)}
-                      placeholder="Anything else that helps us verify your request…"
-                      rows={3}
+                      placeholder="Anything that helps verify your request..."
+                      rows={2}
                       className="w-full rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 outline-none transition-all resize-none"
                       style={inputStyle}
                       onFocus={inputFocus as unknown as React.FocusEventHandler<HTMLTextAreaElement>}
@@ -608,14 +742,14 @@ export default function LoginPage() {
 
                   {error && <p className="text-xs text-red-400 bg-red-500/10 border border-red-500/20 px-3 py-2 rounded-lg">{error}</p>}
 
-                  <motion.button onClick={submitRequest} disabled={loading || !personaDetail} whileTap={{ scale: 0.99 }}
+                  <motion.button onClick={handleRequestSubmit} disabled={loading || !personaDetail || phone.length < 10} whileTap={{ scale: 0.99 }}
                     className="w-full py-3.5 rounded-xl font-semibold text-sm text-white disabled:opacity-40"
                     style={{ background: role?.accent }}>
-                    {loading ? "Sending request…" : "Submit request →"}
+                    {loading ? "Sending code..." : "Verify number and submit"}
                   </motion.button>
 
                   <p className="text-center text-xs text-white/20 leading-relaxed">
-                    Your request goes to the Infizium admin for review. You&apos;ll get an email once it&apos;s approved or denied.
+                    Your request goes to the school admin for review. You will receive an email once approved.
                   </p>
                 </div>
               </motion.div>
@@ -635,14 +769,14 @@ export default function LoginPage() {
                   </motion.div>
                   <h2 className="text-xl font-bold text-white mb-2">Request sent</h2>
                   <p className="text-sm text-white/40 leading-relaxed mb-6">
-                    Your request as a <span className="text-white/70 font-medium">{role?.label}</span> has been sent to the Infizium admin. Check <span className="text-white/70">{email}</span> for approval or denial.
+                    Your request as a <span className="text-white/70 font-medium">{role?.label}</span> has been submitted. Check <span className="text-white/70">{email}</span> for approval or denial.
                   </p>
                   <div className="rounded-xl p-4 text-left space-y-1.5 mb-6"
                     style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
-                    <p className="text-xs text-white/30">What happens next</p>
+                    <p className="text-xs text-white/30 mb-2">What happens next</p>
                     <p className="text-xs text-white/50">1. Admin reviews your request</p>
-                    <p className="text-xs text-white/50">2. You get an email with the decision</p>
-                    <p className="text-xs text-white/50">3. Approved: click the link to set your password</p>
+                    <p className="text-xs text-white/50">2. You receive an email with the decision</p>
+                    <p className="text-xs text-white/50">3. If approved, click the link to set your password</p>
                   </div>
                   <Link href="/"
                     className="text-sm text-white/30 hover:text-white/60 transition-colors">
@@ -652,37 +786,23 @@ export default function LoginPage() {
               </motion.div>
             )}
 
-            {/* ── Step: OTP (kept for magic link / admin invite flow) ── */}
-            {step === "otp" && (
-              <motion.div key="otp" initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }}>
-                <div className="mb-7">
-                  <button onClick={() => setStep("signin")} className="text-xs text-white/30 hover:text-white/60 mb-3 flex items-center gap-1 transition-colors">Back</button>
-                  <h1 className="text-2xl font-bold text-white mb-1">Check your email</h1>
-                  <p className="text-sm text-white/35">Code sent to {email}</p>
-                </div>
-                <input type="text" inputMode="numeric" value={otp} onChange={e => setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))}
-                  placeholder="000000" autoFocus
-                  className="w-full rounded-xl px-4 py-4 text-center text-2xl font-mono tracking-[0.5em] text-white placeholder-white/15 outline-none"
-                  style={inputStyle}
-                />
-                {error && <p className="text-xs text-red-400 bg-red-500/10 border border-red-500/20 px-3 py-2 rounded-lg mt-3">{error}</p>}
-              </motion.div>
-            )}
-
           </AnimatePresence>
 
           {/* Step indicator */}
           {step !== "pending" && (
             <div className="flex gap-1.5 justify-center mt-8">
-              {(["role", "email_check", "signin"] as Step[]).map((s) => (
-                <div key={s} className="h-0.5 rounded-full transition-all duration-300"
-                  style={{
-                    width: step === s || (step === "request" && s === "signin") ? 24 : 8,
-                    background: step === s || (step === "request" && s === "signin")
-                      ? (role?.accent ?? "rgba(255,255,255,0.5)")
-                      : "rgba(255,255,255,0.12)"
-                  }} />
-              ))}
+              {(["role", "email_check", "signin", "phone_otp"] as Step[]).map((s) => {
+                const active = step === s
+                  || (step === "request" && s === "signin")
+                  || (step === "phone_otp" && s === "phone_otp");
+                return (
+                  <div key={s} className="h-0.5 rounded-full transition-all duration-300"
+                    style={{
+                      width: active ? 24 : 8,
+                      background: active ? (role?.accent ?? "rgba(255,255,255,0.5)") : "rgba(255,255,255,0.12)"
+                    }} />
+                );
+              })}
             </div>
           )}
 

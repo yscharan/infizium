@@ -25,49 +25,65 @@ bot.start(async (ctx: Context) => {
   const user = await resolveUser(ctx.from!.id, ctx.from!.first_name);
   if (user) {
     await ctx.reply(
-      `👋 Welcome back, *${user.name}*!\n\nJust type your question naturally:\n\n` +
-      `• "What's Arjun's attendance today?"\n` +
-      `• "Any homework due this week?"\n` +
-      `• "Show me recent announcements"\n\n` +
-      `_Infizium School OS — powered by AI_`,
+      `Welcome back, *${user.name}*\n\nJust type your question naturally:\n\n` +
+      `"What is Arjun's attendance today?"\n` +
+      `"Any homework due this week?"\n` +
+      `"Show me recent announcements"\n\n` +
+      `_Infizium School OS_`,
       { parse_mode: "Markdown" }
     );
   } else {
     await ctx.reply(
-      `👋 Hi! I'm the *Infizium* school assistant.\n\n` +
-      `You're not registered yet. Ask your school admin to link your phone number.\n\n` +
-      `For testing, use /register to link a demo account.`,
+      `Hi! I am the *Infizium* school assistant.\n\n` +
+      `To receive login codes and school updates here, send your phone number:\n\n` +
+      `/register 9XXXXXXXXXX\n\n` +
+      `Use the same number you registered with on the Infizium app.`,
       { parse_mode: "Markdown" }
     );
   }
 });
 
-// ── /register — for testing: link Telegram ID to a user ────────
+// ── /register — link this Telegram account to a phone number ───
 bot.command("register", async (ctx: Context) => {
   const args = ctx.message && "text" in ctx.message
     ? ctx.message.text.split(" ").slice(1)
     : [];
-  const phone = args[0];
+  const raw = args[0];
 
-  if (!phone) {
-    await ctx.reply("Usage: /register <phone>\nExample: /register 9876543210");
+  if (!raw) {
+    await ctx.reply("Send your 10-digit mobile number:\n\n/register 9876543210");
+    return;
+  }
+
+  const digits = raw.replace(/\D/g, "").slice(-10);
+  if (digits.length !== 10) {
+    await ctx.reply("That does not look like a valid 10-digit number. Try again:\n\n/register 9876543210");
     return;
   }
 
   const { data: user } = await supabase
     .from("users")
     .select("id, name, role")
-    .eq("phone", phone)
-    .single();
+    .eq("phone", digits)
+    .maybeSingle();
 
   if (!user) {
-    await ctx.reply(`No user found with phone ${phone}. Ask your admin to add you first.`);
+    await ctx.reply(
+      `No Infizium account found for ${digits}.\n\n` +
+      `Ask your school admin to add your profile first, then come back and run /register again.`
+    );
     return;
   }
 
+  // Check if another Telegram account is already linked to this phone
   const tgKey = `tg:${ctx.from!.id}`;
   await supabase.from("users").update({ whatsapp_id: tgKey }).eq("id", user.id);
-  await ctx.reply(`✅ Linked! You're now connected as *${user.name}* (${user.role}).\n\nJust type any question to get started.`, { parse_mode: "Markdown" });
+
+  await ctx.reply(
+    `Linked. You are now *${user.name}* (${user.role}) on Infizium.\n\n` +
+    `You will receive your login codes here. Go back to the app and tap Resend to get your code.`,
+    { parse_mode: "Markdown" }
+  );
 });
 
 // ── /whoami ────────────────────────────────────────────────────

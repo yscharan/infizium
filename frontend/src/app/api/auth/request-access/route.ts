@@ -12,10 +12,15 @@ const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://infizium-app.vercel.
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, role, personaDetail, message, schoolName } = await req.json();
+    const { email, role, personaDetail, message, schoolName, phone } = await req.json();
 
     if (!email || !role) {
       return NextResponse.json({ error: "Email and role are required." }, { status: 400 });
+    }
+
+    // Phone is required — must be verified via OTP before this route is called
+    if (!phone) {
+      return NextResponse.json({ error: "Phone number verification is required." }, { status: 400 });
     }
 
     // Block duplicate pending requests from the same email
@@ -39,6 +44,7 @@ export async function POST(req: NextRequest) {
       .insert({
         email: email.toLowerCase(),
         role,
+        phone: phone ?? null,
         persona_detail: personaDetail ?? null,
         message: message ?? null,
         school_name: schoolName ?? null,

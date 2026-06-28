@@ -1,4 +1,4 @@
-export type UserRole = "student" | "parent" | "teacher" | "admin";
+export type UserRole = "student" | "parent" | "teacher" | "admin" | "owner" | "super_admin";
 
 export interface AppSession {
   role: UserRole;
@@ -8,6 +8,7 @@ export interface AppSession {
   id?: string;
   schoolId?: string;
   schoolName?: string;
+  isSuperAdmin?: boolean;
 }
 
 const KEY = "infizium_session";
@@ -17,6 +18,8 @@ const DEMO_NAMES: Record<UserRole, string> = {
   parent: "Lakshmi",
   teacher: "Ravi",
   admin: "Priya",
+  owner: "Shekhar",
+  super_admin: "Charan",
 };
 
 export const ROLE_DASHBOARD: Record<UserRole, string> = {
@@ -24,9 +27,16 @@ export const ROLE_DASHBOARD: Record<UserRole, string> = {
   parent: "/dashboard/parent",
   teacher: "/dashboard/teacher",
   admin: "/dashboard/admin",
+  owner: "/dashboard/owner",
+  super_admin: "/dashboard/super",
 };
 
-export function setSession(role: UserRole, email?: string, demo = true, extras?: { id?: string; name?: string; schoolId?: string; schoolName?: string }) {
+export function setSession(
+  role: UserRole,
+  email?: string,
+  demo = true,
+  extras?: { id?: string; name?: string; schoolId?: string; schoolName?: string; isSuperAdmin?: boolean }
+) {
   if (typeof window === "undefined") return;
   const s: AppSession = {
     role,
@@ -36,6 +46,7 @@ export function setSession(role: UserRole, email?: string, demo = true, extras?:
     id: extras?.id,
     schoolId: extras?.schoolId,
     schoolName: extras?.schoolName,
+    isSuperAdmin: extras?.isSuperAdmin ?? false,
   };
   localStorage.setItem(KEY, JSON.stringify(s));
 }

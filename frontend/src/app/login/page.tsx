@@ -14,34 +14,35 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "placeholder"
 );
 
-// ── Roles ─────────────────────────────────────────────────────────
+// ── Roles shown in public registration ───────────────────────────
+// Owner is provisioned by super admin — not self-registerable
 const roles = [
   {
-    id: "parent", label: "Parent", icon: "👩",
-    desc: "Attendance alerts & approvals",
+    id: "student", label: "Student",
+    desc: "Homework, progress and attendance",
+    accent: "#10b981", dash: "/dashboard/student",
+    personaHint: "e.g., Arjun Kumar, Grade 9A, Valmiki Vidyalayam",
+    personaLabel: "Your full name, class and school",
+  },
+  {
+    id: "parent", label: "Parent",
+    desc: "Attendance alerts, approvals and updates",
     accent: "#f97316", dash: "/dashboard/parent",
     personaHint: "e.g., Parent of Arjun Kumar, Grade 9A, Valmiki Vidyalayam",
-    personaLabel: "Your child's name, class, and school",
+    personaLabel: "Your child's name, class and school",
   },
   {
-    id: "teacher", label: "Teacher", icon: "👨‍🏫",
-    desc: "Attendance, homework, messaging",
+    id: "teacher", label: "Teacher",
+    desc: "Attendance, homework and parent messaging",
     accent: "#3b82f6", dash: "/dashboard/teacher",
     personaHint: "e.g., Maths teacher, Grade 9, Valmiki Vidyalayam",
-    personaLabel: "Your subject, grade, and school",
+    personaLabel: "Your subject, grade and school",
   },
   {
-    id: "student", label: "Student", icon: "🧑‍🎓",
-    desc: "Homework feed & progress",
-    accent: "#10b981", dash: "/dashboard/student",
-    personaHint: "e.g., IFZ-STU-0001 or Arjun Kumar, Grade 9A",
-    personaLabel: "Your student ID or full name and class",
-  },
-  {
-    id: "admin", label: "Admin", icon: "🏫",
-    desc: "School-wide operations & reports",
+    id: "admin", label: "Admin",
+    desc: "Full school operations and reporting",
     accent: "#7c3aed", dash: "/dashboard/admin",
-    personaHint: "e.g., Principal, Valmiki Vidyalayam, Karimnagar",
+    personaHint: "e.g., Office manager, Valmiki Vidyalayam, Karimnagar",
     personaLabel: "Your role and school name",
   },
 ];
@@ -71,7 +72,7 @@ const slides = [
   {
     persona: "Admin · Shekhar", accent: "#7c3aed",
     headline: "780 students.\nReal-time.\nFrom your phone.",
-    subline: "School-wide attendance, announcements, forms — live.",
+    subline: "School-wide attendance, announcements, forms. Live.",
     content: <AdminSlide />,
   },
 ];
@@ -84,7 +85,7 @@ function ParentSlide() {
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
         className="rounded-2xl p-4 border border-orange-500/20" style={{ background: "rgba(249,115,22,0.08)" }}>
         <div className="flex items-center gap-3 mb-3">
-          <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center text-xl">🧑‍🎓</div>
+          <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center text-sm font-bold text-orange-300">A</div>
           <div>
             <p className="font-semibold text-white text-sm">Arjun · Grade 9A</p>
             <p className="text-xs text-white/40">Valmiki Vidyalayam</p>
@@ -110,10 +111,12 @@ function ParentSlide() {
         {show && (
           <motion.div initial={{ opacity: 0, y: -8, height: 0 }} animate={{ opacity: 1, y: 0, height: "auto" }}
             className="rounded-xl p-3 border border-green-700/40 flex gap-3" style={{ background: "rgba(7,94,84,0.35)" }}>
-            <span className="text-xl">📱</span>
+            <div className="w-7 h-7 rounded-lg bg-green-700/40 flex items-center justify-center flex-shrink-0">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-green-300"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+            </div>
             <div>
               <p className="text-[10px] text-white/50 mb-0.5">WhatsApp · just now</p>
-              <p className="text-xs text-white/80">Arjun marked absent — Period 1 Maths. Reply with reason.</p>
+              <p className="text-xs text-white/80">Arjun marked absent in Period 1 Maths. Reply with reason.</p>
               <div className="flex gap-2 mt-1.5">
                 <span className="text-[10px] bg-white/10 text-white/60 px-2 py-0.5 rounded-full">Sick today</span>
                 <span className="text-[10px] bg-white/10 text-white/60 px-2 py-0.5 rounded-full">Doctor visit</span>
@@ -169,9 +172,9 @@ function TeacherSlide() {
 
 function StudentSlide() {
   const hw = [
-    { sub: "Maths", title: "Ch 5 — Quadratic Equations", urgent: true, done: false },
+    { sub: "Maths", title: "Ch 5: Quadratic Equations", urgent: true, done: false },
     { sub: "English", title: "Essay: My Favourite Festival", urgent: false, done: false },
-    { sub: "Science", title: "Lab diagram — Plant Cell", urgent: false, done: true },
+    { sub: "Science", title: "Lab diagram: Plant Cell", urgent: false, done: true },
   ];
   return (
     <div className="space-y-2">
@@ -190,7 +193,7 @@ function StudentSlide() {
       ))}
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}
         className="bg-indigo-500/10 border border-indigo-500/20 rounded-xl px-3 py-2 text-center">
-        <p className="text-[10px] text-indigo-300">🎯 JEE 2028 · Keep pushing, Arjun.</p>
+        <p className="text-[10px] text-indigo-300">JEE 2028 · Keep going, Arjun.</p>
       </motion.div>
     </div>
   );
@@ -287,7 +290,7 @@ function ShowcasePanel() {
             </div>
             <div className="flex-1 mx-2">
               <div className="bg-white/5 border border-white/8 rounded-md px-2.5 py-0.5 flex items-center gap-1.5 max-w-[180px] mx-auto">
-                <span className="text-emerald-400 text-[10px]">🔒</span>
+                <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-emerald-400"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                 <span className="text-[10px] text-white/25 font-mono">app.infizium.com</span>
               </div>
             </div>
@@ -352,7 +355,7 @@ export default function LoginPage() {
   async function resolveAndRedirect(authEmail: string) {
     const { data: profile, error: profileErr } = await supabase
       .from("users")
-      .select("id, name, role, school_id, schools(name)")
+      .select("id, name, role, school_id, is_super_admin, schools(name)")
       .eq("email", authEmail)
       .single();
 
@@ -360,7 +363,9 @@ export default function LoginPage() {
       setError("Account not found in Infizium. Contact infizium@outlook.com.");
       return;
     }
-    const dbRole = profile.role as UserRole;
+
+    const isSuperAdmin = profile.is_super_admin ?? false;
+    const dbRole = (isSuperAdmin ? "super_admin" : profile.role) as UserRole;
     const schoolsRaw = profile.schools as unknown;
     const schoolName = Array.isArray(schoolsRaw)
       ? (schoolsRaw[0]?.name ?? "")
@@ -371,6 +376,7 @@ export default function LoginPage() {
       name: profile.name,
       schoolId: profile.school_id,
       schoolName,
+      isSuperAdmin,
     });
     router.push(ROLE_DASHBOARD[dbRole]);
   }
@@ -468,19 +474,33 @@ export default function LoginPage() {
                   <p className="text-sm text-white/35">Select your role to continue</p>
                 </div>
                 <div className="grid grid-cols-2 gap-2.5 mb-5">
-                  {roles.map(r => (
-                    <motion.button key={r.id} onClick={() => setSelectedRole(r.id)} whileTap={{ scale: 0.97 }}
-                      className="rounded-2xl border-2 p-4 text-left transition-all duration-200"
-                      style={selectedRole === r.id ? {
-                        borderColor: r.accent,
-                        background: `${r.accent}10`,
-                        boxShadow: `0 0 0 1px ${r.accent}30`,
-                      } : { borderColor: `${r.accent}30`, background: "rgba(255,255,255,0.02)" }}>
-                      <div className="text-2xl mb-2">{r.icon}</div>
-                      <p className="font-semibold text-sm text-white">{r.label}</p>
-                      <p className="text-[11px] text-white/35 mt-0.5 leading-snug">{r.desc}</p>
-                    </motion.button>
-                  ))}
+                  {roles.map(r => {
+                    const selected = selectedRole === r.id;
+                    return (
+                      <motion.button key={r.id} onClick={() => setSelectedRole(r.id)} whileTap={{ scale: 0.97 }}
+                        className="relative rounded-2xl border-2 p-4 text-left transition-all duration-200"
+                        style={selected ? {
+                          borderColor: r.accent,
+                          background: `${r.accent}10`,
+                          boxShadow: `0 0 0 1px ${r.accent}30`,
+                        } : { borderColor: "rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.02)" }}>
+                        <div className="absolute top-3 right-3">
+                          {selected ? (
+                            <motion.div initial={{ scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.15 }}
+                              className="w-4 h-4 rounded-full flex items-center justify-center" style={{ background: r.accent }}>
+                              <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
+                                <path d="M1.5 4L3 5.5L6.5 2" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                              </svg>
+                            </motion.div>
+                          ) : (
+                            <div className="w-4 h-4 rounded-full border border-white/15" />
+                          )}
+                        </div>
+                        <p className="font-semibold text-sm text-white mb-1 pr-5">{r.label}</p>
+                        <p className="text-[11px] text-white/35 leading-snug">{r.desc}</p>
+                      </motion.button>
+                    );
+                  })}
                 </div>
                 <AnimatePresence>
                   {selectedRole && (
@@ -488,8 +508,7 @@ export default function LoginPage() {
                       <motion.button onClick={() => setStep("email_check")} whileTap={{ scale: 0.99 }}
                         className="w-full py-3.5 rounded-xl font-semibold text-sm text-white"
                         style={{ background: role?.accent }}>
-                        Continue as {role?.label} →
-                      </motion.button>
+                        Continue as {role?.label}                      </motion.button>
                       <button onClick={demoLogin}
                         className="w-full py-2.5 rounded-xl text-xs text-white/25 hover:text-white/50 transition-colors">
                         Skip login · demo mode
@@ -504,8 +523,8 @@ export default function LoginPage() {
             {step === "email_check" && (
               <motion.div key="email_check" initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }}>
                 <div className="mb-7">
-                  <button onClick={() => setStep("role")} className="text-xs text-white/30 hover:text-white/60 mb-3 flex items-center gap-1 transition-colors">← Back</button>
-                  <h1 className="text-2xl font-bold text-white mb-1">{role?.icon} {role?.label}</h1>
+                  <button onClick={() => setStep("role")} className="text-xs text-white/30 hover:text-white/60 mb-3 flex items-center gap-1 transition-colors">Back</button>
+                  <h1 className="text-2xl font-bold text-white mb-1">{role?.label}</h1>
                   <p className="text-sm text-white/35">Enter your email to sign in or request access</p>
                 </div>
                 <div className="space-y-3.5">
@@ -529,7 +548,7 @@ export default function LoginPage() {
             {step === "signin" && (
               <motion.div key="signin" initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }}>
                 <div className="mb-7">
-                  <button onClick={() => setStep("email_check")} className="text-xs text-white/30 hover:text-white/60 mb-3 flex items-center gap-1 transition-colors">← Back</button>
+                  <button onClick={() => setStep("email_check")} className="text-xs text-white/30 hover:text-white/60 mb-3 flex items-center gap-1 transition-colors">Back</button>
                   <h1 className="text-2xl font-bold text-white mb-1">Welcome back</h1>
                   <p className="text-sm text-white/35">{email}</p>
                 </div>
@@ -557,10 +576,10 @@ export default function LoginPage() {
             {step === "request" && (
               <motion.div key="request" initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }}>
                 <div className="mb-6">
-                  <button onClick={() => setStep("email_check")} className="text-xs text-white/30 hover:text-white/60 mb-3 flex items-center gap-1 transition-colors">← Back</button>
+                  <button onClick={() => setStep("email_check")} className="text-xs text-white/30 hover:text-white/60 mb-3 flex items-center gap-1 transition-colors">Back</button>
                   <h1 className="text-2xl font-bold text-white mb-1">Request access</h1>
                   <p className="text-sm text-white/35">
-                    No account found for <span className="text-white/60">{email}</span>. Tell us who you are — the admin will review and approve.
+                    No account found for <span className="text-white/60">{email}</span>. Tell us who you are and the school admin will review your request.
                   </p>
                 </div>
 
@@ -607,9 +626,12 @@ export default function LoginPage() {
               <motion.div key="pending" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }}>
                 <div className="text-center py-6">
                   <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", delay: 0.1 }}
-                    className="w-16 h-16 rounded-full flex items-center justify-center text-3xl mx-auto mb-5"
+                    className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5"
                     style={{ background: `${role?.accent}18`, border: `1px solid ${role?.accent}35` }}>
-                    📬
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={role?.accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                      <polyline points="22,6 12,13 2,6"/>
+                    </svg>
                   </motion.div>
                   <h2 className="text-xl font-bold text-white mb-2">Request sent</h2>
                   <p className="text-sm text-white/40 leading-relaxed mb-6">
@@ -619,12 +641,12 @@ export default function LoginPage() {
                     style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
                     <p className="text-xs text-white/30">What happens next</p>
                     <p className="text-xs text-white/50">1. Admin reviews your request</p>
-                    <p className="text-xs text-white/50">2. You get an email — approved or denied</p>
+                    <p className="text-xs text-white/50">2. You get an email with the decision</p>
                     <p className="text-xs text-white/50">3. Approved: click the link to set your password</p>
                   </div>
                   <Link href="/"
                     className="text-sm text-white/30 hover:text-white/60 transition-colors">
-                    ← Back to home
+                    Back to home
                   </Link>
                 </div>
               </motion.div>
@@ -634,7 +656,7 @@ export default function LoginPage() {
             {step === "otp" && (
               <motion.div key="otp" initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }}>
                 <div className="mb-7">
-                  <button onClick={() => setStep("signin")} className="text-xs text-white/30 hover:text-white/60 mb-3 flex items-center gap-1 transition-colors">← Back</button>
+                  <button onClick={() => setStep("signin")} className="text-xs text-white/30 hover:text-white/60 mb-3 flex items-center gap-1 transition-colors">Back</button>
                   <h1 className="text-2xl font-bold text-white mb-1">Check your email</h1>
                   <p className="text-sm text-white/35">Code sent to {email}</p>
                 </div>

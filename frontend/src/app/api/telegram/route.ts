@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { Telegraf } from "telegraf";
 import { createClient } from "@supabase/supabase-js";
 import Anthropic from "@anthropic-ai/sdk";
+import { toE164 } from "@/lib/phone";
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN!);
 
@@ -158,7 +159,8 @@ bot.start(async (ctx) => {
 bot.command("register", async (ctx) => {
   const phone = ctx.message.text.split(" ")[1];
   if (!phone) { await ctx.reply("Usage: /register <phone>\nExample: /register 9985401894"); return; }
-  const normalised = phone.startsWith("+") ? phone : `+91${phone}`;
+  const normalised = toE164(phone);
+  if (!normalised) { await ctx.reply("That doesn't look like a valid number. Include your country code, e.g. /register +18329417456"); return; }
   const { data: user } = await supabase.from("users").select("id, name, role").eq("phone", normalised).single();
   if (!user) { await ctx.reply(`No user found with phone ${phone}. Ask your admin to add you first.`); return; }
   await supabase.from("users").update({ whatsapp_id: `tg:${ctx.from.id}` }).eq("id", user.id);

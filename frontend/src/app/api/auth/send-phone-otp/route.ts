@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { toE164, localDigits } from "@/lib/phone";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -8,16 +9,9 @@ const supabase = createClient(
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN!;
 
-function e164(raw: string) {
-  const digits = raw.replace(/\D/g, "");
-  if (digits.startsWith("91") && digits.length === 12) return `+${digits}`;
-  if (digits.length === 10) return `+91${digits}`;
-  return `+${digits}`;
-}
-
-function normalisePhone(raw: string) {
-  return raw.replace(/\D/g, "").slice(-10);
-}
+// Rate limit: max codes per phone within the window.
+const RATE_WINDOW_MIN = 15;
+const RATE_MAX = 5;
 
 async function sendTelegram(chatId: string, text: string) {
   const res = await fetch(
@@ -36,24 +30,38 @@ export async function POST(req: NextRequest) {
     const { phone } = await req.json();
     if (!phone) return NextResponse.json({ error: "Phone number required." }, { status: 400 });
 
-    const norm = normalisePhone(phone);
-    if (norm.length !== 10) {
-      return NextResponse.json({ error: "Enter a valid 10-digit Indian mobile number." }, { status: 400 });
+    const e164 = toE164(phone);
+    if (!e164) {
+      return NextResponse.json({ error: "Enter a valid mobile number with country code." }, { status: 400 });
+    }
+
+    // Rate limit: count recent codes for this phone.
+    const since = new Date(Date.now() - RATE_WINDOW_MIN * 60_000).toISOString();
+    const { count } = await supabase
+      .from("phone_verifications")
+      .select("id", { count: "exact", head: true })
+      .eq("phone", e164)
+      .gte("created_at", since);
+    if ((count ?? 0) >= RATE_MAX) {
+      return NextResponse.json(
+        { error: `Too many code requests. Try again in ${RATE_WINDOW_MIN} minutes.` },
+        { status: 429 }
+      );
     }
 
     // Generate 6-digit OTP
     const code = String(Math.floor(100000 + Math.random() * 900000));
 
-    // Store in phone_verifications (invalidate any prior unused codes for this phone)
+    // Invalidate any prior unused codes for this phone, then store the new one (E.164).
     await supabase
       .from("phone_verifications")
       .update({ used: true })
-      .eq("phone", norm)
+      .eq("phone", e164)
       .eq("used", false);
 
     const { error: insertErr } = await supabase
       .from("phone_verifications")
-      .insert({ phone: norm, code });
+      .insert({ phone: e164, code });
 
     if (insertErr) {
       console.error("[send-phone-otp] insert:", insertErr);
@@ -64,7 +72,7 @@ export async function POST(req: NextRequest) {
     const { data: user } = await supabase
       .from("users")
       .select("id, name, whatsapp_id")
-      .eq("phone", norm)
+      .eq("phone", e164)
       .maybeSingle();
 
     const telegramChatId = user?.whatsapp_id?.startsWith("tg:")
@@ -79,15 +87,15 @@ export async function POST(req: NextRequest) {
       if (!sent) {
         return NextResponse.json({ error: "Could not reach your Telegram. Make sure you have started @InfiziumBot." }, { status: 503 });
       }
-      return NextResponse.json({ ok: true, method: "telegram", masked: `Telegram linked to +91${norm}` });
+      return NextResponse.json({ ok: true, method: "telegram", masked: `Telegram linked to ${e164}` });
     }
 
     // Phone not linked to Telegram yet — return instructions
     return NextResponse.json({
       ok: false,
       method: "not_linked",
-      instructions: `Open Telegram, search @InfiziumBot, and send:\n/register ${norm}\n\nThen come back and tap Resend.`,
-      norm,
+      instructions: `Open Telegram, search @InfiziumBot, and send:\n/register ${localDigits(e164)}\n\nThen come back and tap Resend.`,
+      norm: e164,
     });
   } catch (err) {
     console.error("[send-phone-otp]", err);

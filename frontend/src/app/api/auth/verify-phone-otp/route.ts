@@ -1,14 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { toE164 } from "@/lib/phone";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
-
-function normalisePhone(raw: string) {
-  return raw.replace(/\D/g, "").slice(-10);
-}
 
 export async function POST(req: NextRequest) {
   try {
@@ -17,7 +14,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Phone and code required." }, { status: 400 });
     }
 
-    const norm = normalisePhone(phone);
+    const norm = toE164(phone);
+    if (!norm) {
+      return NextResponse.json({ error: "Invalid phone number." }, { status: 400 });
+    }
 
     const { data: record, error } = await supabase
       .from("phone_verifications")
